@@ -3,11 +3,13 @@ import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:task_management_app/Theme/app_theme.dart';
 import 'package:task_management_app/View/Screens/home_screen.dart';
 import 'package:task_management_app/Services/noti_service.dart';
 import 'package:task_management_app/View/Screens/Auth/login_screen.dart';
 import 'package:task_management_app/View/Screens/Auth/reset_pass_screen.dart';
 import 'package:task_management_app/View/Screens/Auth/signup_screen.dart';
+import 'package:task_management_app/View/Screens/main_screen.dart';
 import 'package:task_management_app/View/Screens/splash_screen.dart';
 import 'package:task_management_app/View/Screens/task_screen.dart';
 import 'package:task_management_app/ViewModel/locale_provider.dart';
@@ -41,7 +43,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final locale = Provider.of<LocaleProvider>(context).locale;
     return ScreenUtilInit(
-      designSize: Size(360, 800),
+      designSize: Size(390, 884),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         locale: locale,
@@ -52,13 +54,9 @@ class MyApp extends StatelessWidget {
           GlobalCupertinoLocalizations.delegate,
         ],
         supportedLocales: S.delegate.supportedLocales,
-        theme: ThemeData(
-          textSelectionTheme: TextSelectionThemeData(
-            selectionHandleColor: Colors.white,
-            cursorColor: Colors.white,
-            selectionColor: Colors.grey,
-          ),
-        ),
+        theme: AppTheme.lightTheme,
+        darkTheme: AppTheme.darkTheme,
+        themeMode: ThemeMode.system,
         routes: {
           '/login': (context) => LoginScreen(),
           '/signup': (context) => SignupScreen(),
@@ -66,9 +64,10 @@ class MyApp extends StatelessWidget {
           '/resetPassword': (context) => ResetPassScreen(),
           '/splash': (context) => SplashScreen(),
           '/task': (context) => TaskScreen(),
+          '/main': (context) => MainScreen(),
         },
 
-        initialRoute: '/splash',
+        initialRoute: '/main',
       ),
     );
   }

@@ -111,9 +111,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                 ),
                                 SizedBox(height: 10.h),
-                                AuthTxtFormField(
+                                AuthTxtField(
                                   controller: emailController,
                                   hintText: "hello@example.com",
+                                  suffixIcon: Icon(Icons.email_outlined),
                                   isPassword: false,
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
@@ -135,9 +136,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                 ),
                                 SizedBox(height: 10.h),
-                                AuthTxtFormField(
+                                AuthTxtField(
                                   controller: passwordController,
                                   hintText: S.of(context).password,
+                                  suffixIcon: Icon(Icons.lock_outline_rounded),
                                   isPassword: true,
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {

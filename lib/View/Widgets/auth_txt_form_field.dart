@@ -1,65 +1,100 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class AuthTxtFormField extends StatefulWidget {
-  const AuthTxtFormField({
+class AuthTxtField extends StatefulWidget {
+  const AuthTxtField({
     super.key,
-    required this.controller,
     required this.hintText,
-    required this.isPassword,
     this.validator,
+    required this.isPassword,
+    required this.controller,
+    required this.suffixIcon,
   });
   final TextEditingController controller;
-  final String hintText;
   final bool isPassword;
+  final String hintText;
   final String? Function(String?)? validator;
+  final Icon suffixIcon;
 
   @override
-  State<AuthTxtFormField> createState() => _AuthTxtFormFieldState();
+  State<AuthTxtField> createState() => _AuthTxtFieldState();
 }
 
-class _AuthTxtFormFieldState extends State<AuthTxtFormField> {
-  bool showPassword = false;
+class _AuthTxtFieldState extends State<AuthTxtField> {
+  bool showPassword = true;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      child: TextFormField(
-        validator: widget.validator,
-        controller: widget.controller,
-        obscureText: widget.isPassword && !showPassword,
-        style: TextStyle(color: Colors.white),
-        decoration: InputDecoration(
-          suffixIcon: widget.isPassword
-              ? IconButton(
-                  onPressed: () {
-                    setState(() {
-                      showPassword = !showPassword;
-                    });
-                  },
-                  icon: Icon(
-                    color: Colors.white,
-                    showPassword ? Icons.visibility : Icons.visibility_off,
-                  ),
-                )
-              : null,
-          hintText: widget.hintText,
-          hintStyle: TextStyle(color: Colors.grey),
-          contentPadding: const EdgeInsets.only(top: 15),
-          focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.white, width: 1.w),
+    return TextFormField(
+      cursorColor: Colors.grey,
+      controller: widget.controller,
+      obscureText: widget.isPassword && showPassword,
+      validator: widget.validator,
+      decoration: InputDecoration(
+        hintText: widget.hintText,
+        hintStyle: TextStyle(
+          color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.2),
+          fontSize: 16.sp,
+        ),
+        prefixIcon: widget.suffixIcon,
+        suffixIcon: widget.isPassword
+            ? IconButton(
+                onPressed: () {
+                  setState(() {
+                    showPassword = !showPassword;
+                  });
+                },
+                icon: Icon(
+                  showPassword
+                      ? Icons.visibility_outlined
+                      : Icons.visibility_off_outlined,
+                ),
+              )
+            : null,
+        border: OutlineInputBorder(
+          borderSide: BorderSide(
+            width: 2.w,
+            color: Theme.of(
+              context,
+            ).inputDecorationTheme.border!.borderSide.color,
           ),
-          enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.white, width: 1.w),
+          borderRadius: BorderRadius.circular(12.r),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            width: 2.w,
+            color: Theme.of(
+              context,
+            ).inputDecorationTheme.enabledBorder!.borderSide.color,
           ),
-          errorBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.red, width: 1.w),
+          borderRadius: BorderRadius.circular(12.r),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            width: 2.w,
+            color: Theme.of(
+              context,
+            ).inputDecorationTheme.focusedBorder!.borderSide.color,
           ),
-          focusedErrorBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.red, width: 1.w),
+          borderRadius: BorderRadius.circular(12.r),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            width: 2.w,
+            color: Theme.of(
+              context,
+            ).inputDecorationTheme.errorBorder!.borderSide.color,
           ),
-          errorStyle: TextStyle(color: Colors.red),
+          borderRadius: BorderRadius.circular(12.r),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            width: 2.w,
+            color: Theme.of(
+              context,
+            ).inputDecorationTheme.focusedErrorBorder!.borderSide.color,
+          ),
+          borderRadius: BorderRadius.circular(12.r),
         ),
       ),
     );
