@@ -14,15 +14,17 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmePassController = TextEditingController();
 
   final GlobalKey<FormState> _formkey = GlobalKey();
   String? authError;
 
-  Future<void> login() async {
+  Future<void> signup() async {
     if (_formkey.currentState!.validate()) {
-      final error = await AuthServices().login(
+      final error = await AuthServices().signup(
         emailController.text,
         passwordController.text,
       );
@@ -33,10 +35,7 @@ class _MainScreenState extends State<MainScreen> {
         });
       } else {
         if (mounted) {
-          context.read<TaskProvider>().listenToTasks(
-            FirebaseAuth.instance.currentUser!.uid,
-          );
-          Navigator.pushReplacementNamed(context, "/home");
+          Navigator.pushReplacementNamed(context, "/login");
         }
       }
     }
@@ -44,6 +43,7 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   void dispose() {
+    nameController.dispose();
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
@@ -56,279 +56,285 @@ class _MainScreenState extends State<MainScreen> {
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: Padding(
-          padding: EdgeInsets.all(24),
+          padding: const EdgeInsets.all(24),
           child: SingleChildScrollView(
             child: Form(
               key: _formkey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 80.h),
-                  Center(
-                    child: Column(
-                      children: [
-                        Container(
-                          height: 55.h,
-                          width: 55.w,
-                          decoration: BoxDecoration(
-                            color: Theme.of(context).colorScheme.primary,
-                            borderRadius: BorderRadius.circular(12.r),
-                            boxShadow: [
-                              BoxShadow(
-                                offset: Offset(0, 1),
-                                blurRadius: 2,
-                                color: Color(
-                                  0xff000000,
-                                ).withValues(alpha: 0.05),
-                              ),
-                            ],
-                          ),
-                          child: Icon(
-                            Icons.check_circle_outline_outlined,
-                            size: 33.sp,
-                            color: Theme.of(context).colorScheme.secondary,
-                          ),
-                        ),
-
-                        SizedBox(height: 16.h),
-                        Text(
-                          "TaskFlow",
-                          style: TextStyle(
-                            fontSize: 30.sp,
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
-                        ),
-                        SizedBox(height: 8.h),
-                        Text(
-                          "Simplify your productivity",
-                          style: TextStyle(
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w400,
-                            color: Theme.of(
-                              context,
-                            ).colorScheme.primary.withValues(alpha: 0.6),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 65.h),
-                  Text(
-                    "EMAIL ADDRESS",
-                    style: TextStyle(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.bold,
-                      color: Theme.of(
-                        context,
-                      ).colorScheme.primary.withValues(alpha: 0.8),
-                    ),
-                  ),
-                  SizedBox(height: 8.h),
-                  AuthTxtField(
-                    controller: emailController,
-                    hintText: "name@example.com",
-                    isPassword: false,
-                    suffixIcon: Icon(
-                      Icons.email_outlined,
-                      color: Theme.of(
-                        context,
-                      ).colorScheme.primary.withValues(alpha: 0.4),
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "Email can't be empty";
-                      } else if (value.contains("@") == false) {
-                        return "Enter a valid email";
-                      } else {
-                        return null;
-                      }
-                    },
-                  ),
-                  SizedBox(height: 24.h),
-                  Text(
-                    "PASSWORD",
-                    style: TextStyle(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.bold,
-                      color: Theme.of(
-                        context,
-                      ).colorScheme.primary.withValues(alpha: 0.8),
-                    ),
-                  ),
-                  SizedBox(height: 8.h),
-                  AuthTxtField(
-                    controller: passwordController,
-                    hintText: "********",
-                    isPassword: true,
-                    suffixIcon: Icon(
-                      Icons.lock_outline_rounded,
-                      color: Theme.of(
-                        context,
-                      ).colorScheme.primary.withValues(alpha: 0.4),
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "Password can't be empty";
-                      } else if (value.length < 8) {
-                        return "Password must be at least 8 characters";
-                      } else {
-                        return null;
-                      }
-                    },
-                  ),
-                  SizedBox(height: 20.h),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: GestureDetector(
-                      onTap: () {},
-                      child: Text(
-                        'Forgot Password?',
-                        style: TextStyle(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.bold,
+                  SizedBox(height: 30.h),
+                  Row(
+                    children: [
+                      IconButton(
+                        onPressed: () => Navigator.pop(context),
+                        icon: Icon(
+                          Icons.arrow_back_ios,
+                          size: 25.sp,
                           color: Theme.of(context).colorScheme.primary,
                         ),
                       ),
-                    ),
-                  ),
-                  SizedBox(height: 32.h),
-                  MaterialButton(
-                    onPressed: () => login(),
-                    minWidth: double.infinity,
-                    height: 58.h,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12.r),
-                    ),
-                    color: Theme.of(context).colorScheme.primary,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Log In",
-                          style: TextStyle(
-                            color: Theme.of(context).colorScheme.secondary,
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.bold,
-                          ),
+                      SizedBox(width: 6.w),
+                      Container(
+                        width: 40.w,
+                        height: 40.h,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8.r),
+                          color: Theme.of(context).colorScheme.primary,
                         ),
-                        SizedBox(width: 8.w),
-                        Icon(
-                          Icons.arrow_forward,
-                          size: 22.sp,
+                        child: Icon(
+                          Icons.check_circle_outline_rounded,
+                          size: 25.sp,
                           color: Theme.of(context).colorScheme.secondary,
                         ),
-                      ],
-                    ),
-                  ),
-                  authError != null
-                      ? Column(
-                          children: [
-                            SizedBox(height: 10.h),
-                            Text(
-                              authError!,
-                              style: TextStyle(color: Colors.red),
-                            ),
-                          ],
-                        )
-                      : Container(),
-                  SizedBox(height: 40.h),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Divider(
-                          thickness: 1.h,
-                          color: Theme.of(
-                            context,
-                          ).colorScheme.primary.withValues(alpha: 0.2),
-                        ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 16.w),
-                        child: Text(
-                          "OR CONTINUE WITH",
-                          style: TextStyle(
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(
-                              context,
-                            ).colorScheme.primary.withValues(alpha: 0.2),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Divider(
-                          thickness: 1.h,
-                          color: Theme.of(
-                            context,
-                          ).colorScheme.primary.withValues(alpha: 0.2),
+                      SizedBox(width: 12.w),
+                      Text(
+                        "TaskFlow",
+                        style: TextStyle(
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.w900,
+                          color: Theme.of(context).colorScheme.primary,
                         ),
                       ),
                     ],
                   ),
                   SizedBox(height: 30.h),
-                  Container(
-                    width: 345.w,
-                    height: 58.h,
-                    decoration: BoxDecoration(
+                  Text(
+                    "Create Account",
+                    style: TextStyle(
+                      fontSize: 30.sp,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
+                  SizedBox(height: 8.h),
+                  Text(
+                    "Join TaskFlow and stay organized effortlessly.",
+                    style: TextStyle(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w400,
                       color: Theme.of(
                         context,
-                      ).colorScheme.primary.withValues(alpha: 0.05),
-                      border: Border.all(
-                        color: Theme.of(
-                          context,
-                        ).colorScheme.primary.withValues(alpha: 0.1),
+                      ).colorScheme.primary.withValues(alpha: 0.6),
+                    ),
+                  ),
+                  SizedBox(height: 25.h),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Full Name",
+                        style: TextStyle(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w500,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
                       ),
+                      SizedBox(height: 8.h),
+                      AuthTxtField(
+                        hintText: "Enter your name",
+                        isPassword: false,
+                        controller: nameController,
+                        prefixIcon: Icon(
+                          Icons.person_outline,
+                          color: Theme.of(
+                            context,
+                          ).colorScheme.primary.withValues(alpha: 0.4),
+                        ),
+                      ),
+                      SizedBox(height: 15.h),
+                      Text(
+                        "Email Address",
+                        style: TextStyle(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w500,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
+                      SizedBox(height: 8.h),
+                      AuthTxtField(
+                        hintText: "Enter your email",
+                        isPassword: false,
+                        controller: emailController,
+                        prefixIcon: Icon(
+                          Icons.email_outlined,
+                          color: Theme.of(
+                            context,
+                          ).colorScheme.primary.withValues(alpha: 0.4),
+                        ),
+                      ),
+                      SizedBox(height: 15.h),
+                      Text(
+                        "Password",
+                        style: TextStyle(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w500,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
+                      SizedBox(height: 8.h),
+                      AuthTxtField(
+                        hintText: "********",
+                        isPassword: true,
+                        controller: passwordController,
+                        prefixIcon: Icon(
+                          Icons.lock_outlined,
+                          color: Theme.of(
+                            context,
+                          ).colorScheme.primary.withValues(alpha: 0.4),
+                        ),
+                      ),
+                      SizedBox(height: 15.h),
+                      Text(
+                        "Confirm Password",
+                        style: TextStyle(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w500,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
+                      SizedBox(height: 8.h),
+                      AuthTxtField(
+                        hintText: "********",
+                        isPassword: true,
+                        controller: confirmePassController,
+                        prefixIcon: Icon(
+                          Icons.shield_outlined,
+                          color: Theme.of(
+                            context,
+                          ).colorScheme.primary.withValues(alpha: 0.4),
+                        ),
+                      ),
+                      SizedBox(height: 20.h),
+                    ],
+                  ),
+                  SizedBox(height: 20.h),
+                  MaterialButton(
+                    onPressed: () {
+                      signup();
+                    },
+                    minWidth: double.infinity,
+                    height: 55.h,
+                    color: Theme.of(context).colorScheme.primary,
+                    shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12.r),
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image.asset(
-                          "assets/images/google.png",
-                          height: 24.h,
-                          width: 24.w,
-                        ),
-                        SizedBox(width: 12.w),
                         Text(
-                          "Google",
+                          "Sign Up",
                           style: TextStyle(
+                            color: Theme.of(context).colorScheme.secondary,
                             fontSize: 16.sp,
-                            color: Theme.of(context).colorScheme.primary,
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.bold,
                           ),
+                        ),
+                        authError != null
+                            ? Column(
+                                children: [
+                                  SizedBox(height: 10.h),
+                                  Text(
+                                    authError!,
+                                    style: TextStyle(color: Colors.red),
+                                  ),
+                                ],
+                              )
+                            : Container(),
+                        SizedBox(width: 8.w),
+                        Icon(
+                          Icons.arrow_forward,
+                          color: Theme.of(context).colorScheme.secondary,
+                          size: 22.sp,
                         ),
                       ],
                     ),
                   ),
-                  SizedBox(height: 33.h),
+                  SizedBox(height: 30.h),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        "Don't have an account? ",
-                        style: TextStyle(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w400,
+                      Expanded(
+                        child: Divider(
+                          thickness: 1,
                           color: Theme.of(
                             context,
-                          ).colorScheme.primary.withValues(alpha: 0.5),
+                          ).colorScheme.primary.withValues(alpha: 0.4),
                         ),
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pushReplacementNamed(context, '/signup');
-                        },
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: Text(
-                          "Sign Up",
+                          "OR SIGN UP WITH",
                           style: TextStyle(
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context).colorScheme.primary,
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.primary.withValues(alpha: 0.4),
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
                       ),
+                      Expanded(
+                        child: Divider(
+                          thickness: 1,
+                          color: Theme.of(
+                            context,
+                          ).colorScheme.primary.withValues(alpha: 0.4),
+                        ),
+                      ),
                     ],
+                  ),
+                  SizedBox(height: 20.h),
+                  GestureDetector(
+                    onTap: () async {
+                      final error = await AuthServices().signinWithGoogle();
+                      if (error != null) {
+                        setState(() {
+                          authError = error;
+                        });
+                      } else {
+                        if (mounted) {
+                          context.read<TaskProvider>().listenToTasks(
+                            FirebaseAuth.instance.currentUser!.uid,
+                          );
+                          Navigator.pushReplacementNamed(context, "/home");
+                        }
+                      }
+                    },
+                    child: Container(
+                      width: 345.w,
+                      height: 58.h,
+                      decoration: BoxDecoration(
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.primary.withValues(alpha: 0.05),
+                        border: Border.all(
+                          color: Theme.of(
+                            context,
+                          ).colorScheme.primary.withValues(alpha: 0.1),
+                        ),
+                        borderRadius: BorderRadius.circular(12.r),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            "assets/images/google.png",
+                            height: 24.h,
+                            width: 24.w,
+                          ),
+                          SizedBox(width: 12.w),
+                          Text(
+                            "Google",
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              color: Theme.of(context).colorScheme.primary,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ],
               ),

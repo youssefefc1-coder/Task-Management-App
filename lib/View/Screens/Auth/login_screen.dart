@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:task_management_app/Services/Authentication/auth_services.dart';
 import 'package:task_management_app/View/Widgets/auth_txt_form_field.dart';
 import 'package:task_management_app/ViewModel/task_provider.dart';
-import 'package:task_management_app/generated/l10n.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -15,9 +14,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final TextEditingController emailController = TextEditingController();
-
-  final TextEditingController passwordController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   final GlobalKey<FormState> _formkey = GlobalKey();
   String? authError;
@@ -53,271 +51,284 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isRTL = Directionality.of(context) == TextDirection.rtl;
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(25),
-            child: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(24),
+          child: SingleChildScrollView(
+            child: Form(
+              key: _formkey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 30.h),
-                  Text(
-                    S.of(context).login,
-                    style: TextStyle(
-                      color: Color(0xff021526),
-                      fontSize: 40.sp,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  SizedBox(height: 5.h),
-                  Text(
-                    S.of(context).welcome_back,
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 25.sp,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                  SizedBox(height: 15.h),
-                  Container(
-                    width: double.infinity,
-                    height: 580.h,
-                    decoration: BoxDecoration(
-                      color: Color(0xff021526),
-                      borderRadius: BorderRadius.circular(35.r),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: Form(
-                        key: _formkey,
-                        child: SingleChildScrollView(
-                          child: Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(height: 13.h),
-                                Text(
-                                  S.of(context).email,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20.sp,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                                SizedBox(height: 10.h),
-                                AuthTxtField(
-                                  controller: emailController,
-                                  hintText: "hello@example.com",
-                                  suffixIcon: Icon(Icons.email_outlined),
-                                  isPassword: false,
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return S.of(context).field_cant_be_empty;
-                                    } else if (value.contains("@") == false) {
-                                      return S.of(context).enter_valid_email;
-                                    } else {
-                                      return null;
-                                    }
-                                  },
-                                ),
-                                SizedBox(height: 15.h),
-                                Text(
-                                  S.of(context).password,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20.sp,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                                SizedBox(height: 10.h),
-                                AuthTxtField(
-                                  controller: passwordController,
-                                  hintText: S.of(context).password,
-                                  suffixIcon: Icon(Icons.lock_outline_rounded),
-                                  isPassword: true,
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return S.of(context).field_cant_be_empty;
-                                    } else if (value.length < 8) {
-                                      return S.of(context).password_too_short;
-                                    } else {
-                                      return null;
-                                    }
-                                  },
-                                ),
-                                SizedBox(height: 10.h),
-                                Align(
-                                  alignment: isRTL
-                                      ? Alignment.centerLeft
-                                      : Alignment.centerRight,
-                                  child: InkWell(
-                                    onTap: () {
-                                      Navigator.pushNamed(
-                                        context,
-                                        "/resetPassword",
-                                      );
-                                    },
-                                    child: Text(
-                                      S.of(context).forgot_password,
-                                      style: TextStyle(
-                                        color: Colors.lightBlueAccent,
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(height: 35.h),
-                                MaterialButton(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(25.r),
-                                  ),
-                                  color: Colors.white,
-                                  height: 50.h,
-                                  minWidth: double.infinity,
-                                  onPressed: () {
-                                    login();
-                                  },
-                                  child: Text(
-                                    S.of(context).login,
-                                    style: TextStyle(
-                                      color: Color(0xff021526),
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 15.sp,
-                                    ),
-                                  ),
-                                ),
-                                authError != null
-                                    ? Column(
-                                        children: [
-                                          SizedBox(height: 10.h),
-                                          Text(
-                                            authError!,
-                                            style: TextStyle(color: Colors.red),
-                                          ),
-                                        ],
-                                      )
-                                    : Container(),
-
-                                SizedBox(height: 35.h),
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: Divider(
-                                        thickness: 1,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding:
-                                          const EdgeInsetsDirectional.symmetric(
-                                            horizontal: 8,
-                                          ),
-                                      child: Text(
-                                        S.of(context).or_login,
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Divider(
-                                        thickness: 1,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(height: 30.h),
-                                MaterialButton(
-                                  height: 50.h,
-                                  minWidth: double.infinity,
-                                  color: Colors.white,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadiusGeometry.circular(
-                                      25.r,
-                                    ),
-                                  ),
-                                  onPressed: () async {
-                                    final error = await AuthServices()
-                                        .signinWithGoogle();
-                                    if (error != null) {
-                                      setState(() {
-                                        authError = error;
-                                      });
-                                    } else {
-                                      if (mounted) {
-                                        context
-                                            .read<TaskProvider>()
-                                            .listenToTasks(
-                                              FirebaseAuth
-                                                  .instance
-                                                  .currentUser!
-                                                  .uid,
-                                            );
-                                        Navigator.pushReplacementNamed(
-                                          context,
-                                          "/home",
-                                        );
-                                      }
-                                    }
-                                  },
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Image.asset(
-                                        'assets/images/google.png',
-                                        height: 25.h,
-                                        width: 25.w,
-                                      ),
-                                      SizedBox(width: 8.w),
-                                      Text(S.of(context).login_with_google),
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(height: 40.h),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      S.of(context).dont_have_account,
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 15.sp,
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    ),
-                                    InkWell(
-                                      onTap: () {
-                                        Navigator.pushReplacementNamed(
-                                          context,
-                                          '/signup',
-                                        );
-                                      },
-                                      child: Text(
-                                        " ${S.of(context).signup}",
-                                        style: TextStyle(
-                                          color: Colors.lightBlueAccent,
-                                          fontSize: 15.sp,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
+                  SizedBox(height: 80.h),
+                  Center(
+                    child: Column(
+                      children: [
+                        Container(
+                          height: 55.h,
+                          width: 55.w,
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.primary,
+                            borderRadius: BorderRadius.circular(12.r),
+                            boxShadow: [
+                              BoxShadow(
+                                offset: Offset(0, 1),
+                                blurRadius: 2,
+                                color: Color(
+                                  0xff000000,
+                                ).withValues(alpha: 0.05),
+                              ),
+                            ],
                           ),
+                          child: Icon(
+                            Icons.check_circle_outline_outlined,
+                            size: 33.sp,
+                            color: Theme.of(context).colorScheme.secondary,
+                          ),
+                        ),
+
+                        SizedBox(height: 16.h),
+                        Text(
+                          "TaskFlow",
+                          style: TextStyle(
+                            fontSize: 30.sp,
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                        ),
+                        SizedBox(height: 8.h),
+                        Text(
+                          "Simplify your productivity",
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w400,
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.primary.withValues(alpha: 0.6),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 65.h),
+                  Text(
+                    "EMAIL ADDRESS",
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.primary.withValues(alpha: 0.8),
+                    ),
+                  ),
+                  SizedBox(height: 8.h),
+                  AuthTxtField(
+                    controller: emailController,
+                    hintText: "name@example.com",
+                    isPassword: false,
+                    prefixIcon: Icon(
+                      Icons.email_outlined,
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.primary.withValues(alpha: 0.4),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Email can't be empty";
+                      } else if (value.contains("@") == false) {
+                        return "Enter a valid email";
+                      } else {
+                        return null;
+                      }
+                    },
+                  ),
+                  SizedBox(height: 24.h),
+                  Text(
+                    "PASSWORD",
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.primary.withValues(alpha: 0.8),
+                    ),
+                  ),
+                  SizedBox(height: 8.h),
+                  AuthTxtField(
+                    controller: passwordController,
+                    hintText: "********",
+                    isPassword: true,
+                    prefixIcon: Icon(
+                      Icons.lock_outline_rounded,
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.primary.withValues(alpha: 0.4),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Password can't be empty";
+                      } else if (value.length < 8) {
+                        return "Password must be at least 8 characters";
+                      } else {
+                        return null;
+                      }
+                    },
+                  ),
+                  SizedBox(height: 20.h),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: GestureDetector(
+                      onTap: () {},
+                      child: Text(
+                        'Forgot Password?',
+                        style: TextStyle(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).colorScheme.primary,
                         ),
                       ),
                     ),
+                  ),
+                  SizedBox(height: 32.h),
+                  MaterialButton(
+                    onPressed: () => login(),
+                    minWidth: double.infinity,
+                    height: 58.h,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.r),
+                    ),
+                    color: Theme.of(context).colorScheme.primary,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Log In",
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.secondary,
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(width: 8.w),
+                        Icon(
+                          Icons.arrow_forward,
+                          size: 22.sp,
+                          color: Theme.of(context).colorScheme.secondary,
+                        ),
+                      ],
+                    ),
+                  ),
+                  authError != null
+                      ? Column(
+                          children: [
+                            SizedBox(height: 10.h),
+                            Text(
+                              authError!,
+                              style: TextStyle(color: Colors.red),
+                            ),
+                          ],
+                        )
+                      : Container(),
+                  SizedBox(height: 40.h),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Divider(
+                          thickness: 1.h,
+                          color: Theme.of(
+                            context,
+                          ).colorScheme.primary.withValues(alpha: 0.2),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16.w),
+                        child: Text(
+                          "OR CONTINUE WITH",
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.primary.withValues(alpha: 0.2),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Divider(
+                          thickness: 1.h,
+                          color: Theme.of(
+                            context,
+                          ).colorScheme.primary.withValues(alpha: 0.2),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 30.h),
+                  Container(
+                    width: 345.w,
+                    height: 58.h,
+                    decoration: BoxDecoration(
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.primary.withValues(alpha: 0.05),
+                      border: Border.all(
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.primary.withValues(alpha: 0.1),
+                      ),
+                      borderRadius: BorderRadius.circular(12.r),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          "assets/images/google.png",
+                          height: 24.h,
+                          width: 24.w,
+                        ),
+                        SizedBox(width: 12.w),
+                        Text(
+                          "Google",
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            color: Theme.of(context).colorScheme.primary,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 33.h),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Don't have an account? ",
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w400,
+                          color: Theme.of(
+                            context,
+                          ).colorScheme.primary.withValues(alpha: 0.5),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pushReplacementNamed(context, '/signup');
+                        },
+                        child: Text(
+                          "Sign Up",
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),

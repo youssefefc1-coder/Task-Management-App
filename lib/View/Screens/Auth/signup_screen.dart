@@ -103,7 +103,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                 SizedBox(height: 20.h),
 
                                 AuthTxtField(
-                                  suffixIcon: Icon(Icons.person),
+                                  prefixIcon: Icon(Icons.person),
                                   controller: nameController,
                                   hintText: S.of(context).name,
                                   isPassword: false,
@@ -118,7 +118,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                 SizedBox(height: 25.h),
 
                                 AuthTxtField(
-                                  suffixIcon: Icon(Icons.email),
+                                  prefixIcon: Icon(Icons.email),
                                   controller: emailController,
                                   hintText: "hello@example.com",
                                   isPassword: false,
@@ -135,7 +135,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
                                 SizedBox(height: 25.h),
                                 AuthTxtField(
-                                  suffixIcon: Icon(Icons.lock),
+                                  prefixIcon: Icon(Icons.lock),
                                   controller: passwordController,
                                   hintText: S.of(context).password,
                                   isPassword: true,

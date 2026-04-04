@@ -8,13 +8,13 @@ class AuthTxtField extends StatefulWidget {
     this.validator,
     required this.isPassword,
     required this.controller,
-    required this.suffixIcon,
+    required this.prefixIcon,
   });
   final TextEditingController controller;
   final bool isPassword;
   final String hintText;
   final String? Function(String?)? validator;
-  final Icon suffixIcon;
+  final Icon prefixIcon;
 
   @override
   State<AuthTxtField> createState() => _AuthTxtFieldState();
@@ -36,7 +36,7 @@ class _AuthTxtFieldState extends State<AuthTxtField> {
           color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.2),
           fontSize: 16.sp,
         ),
-        prefixIcon: widget.suffixIcon,
+        prefixIcon: widget.prefixIcon,
         suffixIcon: widget.isPassword
             ? IconButton(
                 onPressed: () {
