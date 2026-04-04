@@ -181,7 +181,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   Align(
                     alignment: Alignment.centerRight,
                     child: GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pushNamed(context, "/resetPassword");
+                      },
                       child: Text(
                         'Forgot Password?',
                         style: TextStyle(
@@ -193,32 +195,34 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   SizedBox(height: 32.h),
-                  MaterialButton(
-                    onPressed: () => login(),
-                    minWidth: double.infinity,
-                    height: 58.h,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12.r),
-                    ),
-                    color: Theme.of(context).colorScheme.primary,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Log In",
-                          style: TextStyle(
-                            color: Theme.of(context).colorScheme.secondary,
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.bold,
+                  GestureDetector(
+                    onTap: () => login(),
+                    child: Container(
+                      width: double.infinity,
+                      height: 58.h,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12.r),
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Log In",
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.secondary,
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                        SizedBox(width: 8.w),
-                        Icon(
-                          Icons.arrow_forward,
-                          size: 22.sp,
-                          color: Theme.of(context).colorScheme.secondary,
-                        ),
-                      ],
+                          SizedBox(width: 8.w),
+                          Icon(
+                            Icons.arrow_forward,
+                            size: 22.sp,
+                            color: Theme.of(context).colorScheme.secondary,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   authError != null
@@ -267,38 +271,55 @@ class _LoginScreenState extends State<LoginScreen> {
                     ],
                   ),
                   SizedBox(height: 30.h),
-                  Container(
-                    width: 345.w,
-                    height: 58.h,
-                    decoration: BoxDecoration(
-                      color: Theme.of(
-                        context,
-                      ).colorScheme.primary.withValues(alpha: 0.05),
-                      border: Border.all(
+                  GestureDetector(
+                    onTap: () async {
+                      final error = await AuthServices().signinWithGoogle();
+                      if (error != null) {
+                        setState(() {
+                          authError = error;
+                        });
+                      } else {
+                        if (mounted) {
+                          context.read<TaskProvider>().listenToTasks(
+                            FirebaseAuth.instance.currentUser!.uid,
+                          );
+                          Navigator.pushReplacementNamed(context, "/home");
+                        }
+                      }
+                    },
+                    child: Container(
+                      width: 345.w,
+                      height: 58.h,
+                      decoration: BoxDecoration(
                         color: Theme.of(
                           context,
-                        ).colorScheme.primary.withValues(alpha: 0.1),
+                        ).colorScheme.primary.withValues(alpha: 0.05),
+                        border: Border.all(
+                          color: Theme.of(
+                            context,
+                          ).colorScheme.primary.withValues(alpha: 0.1),
+                        ),
+                        borderRadius: BorderRadius.circular(12.r),
                       ),
-                      borderRadius: BorderRadius.circular(12.r),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          "assets/images/google.png",
-                          height: 24.h,
-                          width: 24.w,
-                        ),
-                        SizedBox(width: 12.w),
-                        Text(
-                          "Google",
-                          style: TextStyle(
-                            fontSize: 16.sp,
-                            color: Theme.of(context).colorScheme.primary,
-                            fontWeight: FontWeight.w500,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            "assets/images/google.png",
+                            height: 24.h,
+                            width: 24.w,
                           ),
-                        ),
-                      ],
+                          SizedBox(width: 12.w),
+                          Text(
+                            "Google",
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              color: Theme.of(context).colorScheme.primary,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   SizedBox(height: 33.h),
@@ -317,7 +338,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Navigator.pushReplacementNamed(context, '/signup');
+                          Navigator.pushNamed(context, '/signup');
                         },
                         child: Text(
                           "Sign Up",

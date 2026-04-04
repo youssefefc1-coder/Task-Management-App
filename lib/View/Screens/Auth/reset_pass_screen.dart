@@ -23,16 +23,21 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).colorScheme.secondary,
+        leadingWidth: 90.w,
         leading: Padding(
           padding: const EdgeInsets.all(10),
           child: IconButton(
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: Icon(Icons.arrow_back, color: Colors.black, size: 35.sp),
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: Theme.of(context).colorScheme.primary,
+              size: 26.sp,
+            ),
           ),
         ),
       ),
@@ -49,7 +54,7 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
                 style: TextStyle(
                   fontSize: 25.sp,
                   fontWeight: FontWeight.w700,
-                  color: Colors.black,
+                  color: Theme.of(context).colorScheme.primary,
                 ),
               ),
               SizedBox(height: 10.h),
@@ -67,7 +72,7 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
                 style: TextStyle(
                   fontSize: 20.sp,
                   fontWeight: FontWeight.w500,
-                  color: Colors.black,
+                  color: Theme.of(context).colorScheme.primary,
                 ),
               ),
               SizedBox(height: 15.h),
@@ -75,11 +80,17 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
                 decoration: InputDecoration(
                   hintText: S.of(context).enter_email,
                   border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Color(0xff021526), width: 1),
+                    borderSide: BorderSide(
+                      color: Theme.of(context).colorScheme.primary,
+                      width: 1,
+                    ),
                     borderRadius: BorderRadius.circular(15),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Color(0xff021526), width: 1),
+                    borderSide: BorderSide(
+                      color: Theme.of(context).colorScheme.primary,
+                      width: 1,
+                    ),
                     borderRadius: BorderRadius.circular(15),
                   ),
                   errorBorder: OutlineInputBorder(
@@ -91,7 +102,10 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
                     borderRadius: BorderRadius.circular(15),
                   ),
                   enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Color(0xff021526), width: 1),
+                    borderSide: BorderSide(
+                      color: Theme.of(context).colorScheme.primary,
+                      width: 1,
+                    ),
                     borderRadius: BorderRadius.circular(15),
                   ),
                 ),
@@ -106,22 +120,30 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
                   }
                 },
               ),
-              SizedBox(height: 30.h),
-              MaterialButton(
-                color: Color(0xff021526),
-                minWidth: double.infinity,
-                height: 50.h,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                onPressed: () {
+              SizedBox(height: 350.h),
+              GestureDetector(
+                onTap: () {
                   if (_formkey.currentState!.validate()) {
                     AuthServices().resetPassword(emailController.text);
                   }
                 },
-                child: Text(
-                  S.of(context).reset_password,
-                  style: TextStyle(color: Colors.white),
+                child: Container(
+                  width: double.infinity,
+                  height: 55.h,
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.primary,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+
+                  child: Center(
+                    child: Text(
+                      "Send Reset Link",
+                      style: TextStyle(
+                        fontSize: 16.sp,
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ],
