@@ -1,8 +1,8 @@
 class TaskModel {
+  final String? id;
   final String title;
   final String? description;
   final bool isDone;
-  final String? id;
   final DateTime? deadline;
 
   TaskModel({
@@ -15,10 +15,10 @@ class TaskModel {
 
   factory TaskModel.fromFirestore(Map<String, dynamic> data, String id) {
     return TaskModel(
+      id: id,
       title: data['title'],
       description: data['description'],
       isDone: data['isDone'],
-      id: id,
       deadline: data['deadline']?.toDate(),
     );
   }

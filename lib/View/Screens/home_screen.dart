@@ -139,7 +139,7 @@ class HomeScreen extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: EdgeInsetsDirectional.all(10.0),
-                      child: MyListTile(taskModel: task.filteredTasks[index]),
+                      child: MyListTile(),
                     );
                   },
                 ),
