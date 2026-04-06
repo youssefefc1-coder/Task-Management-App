@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:task_management_app/Model/task_model.dart';
-import 'package:task_management_app/View/Widgets/my_list_tile.dart';
+import 'package:task_management_app/View/Widgets/custom_list_tile.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -40,7 +39,10 @@ class MainScreen extends StatelessWidget {
                   ],
                 ),
                 Spacer(),
-                CircleAvatar(radius: 26.r),
+                IconButton(
+                  onPressed: () {},
+                  icon: Icon(Icons.settings, size: 30.sp),
+                ),
               ],
             ),
             SizedBox(height: 35.h),
@@ -165,12 +167,30 @@ class MainScreen extends StatelessWidget {
               ],
             ),
             SizedBox(height: 16.h),
-            MyListTile(),
+            CustomListTile(),
             SizedBox(height: 14.h),
-            MyListTile(),
+            CustomListTile(),
           ],
         ),
       ),
+
+      floatingActionButton: Container(
+        height: 70.h,
+        width: 70.w,
+        margin: EdgeInsets.only(bottom: 35),
+        child: FloatingActionButton(
+          onPressed: () {},
+          shape: const CircleBorder(),
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          child: Icon(
+            Icons.add,
+            color: Theme.of(context).colorScheme.secondary,
+            size: 34.sp,
+          ),
+        ),
+      ),
+
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }

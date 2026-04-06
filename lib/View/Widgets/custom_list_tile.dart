@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class MyListTile extends StatelessWidget {
-  const MyListTile({super.key});
+class CustomListTile extends StatelessWidget {
+  const CustomListTile({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class MyListTile extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12.r),
         border: Border.all(
-          color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.05),
+          color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.2),
         ),
         color: Theme.of(context).colorScheme.secondary,
         boxShadow: [
@@ -39,9 +39,7 @@ class MyListTile extends StatelessWidget {
                 },
                 shape: CircleBorder(),
                 side: BorderSide(
-                  color: Theme.of(
-                    context,
-                  ).colorScheme.primary.withValues(alpha: 0.2),
+                  color: Theme.of(context).colorScheme.primary,
                   width: 2.w,
                 ),
               ),
@@ -81,15 +79,34 @@ class MyListTile extends StatelessWidget {
                 ),
               ],
             ),
+            SizedBox(width: 25.w),
+            Container(
+              height: 22.h,
+              width: 40.w,
+              decoration: BoxDecoration(
+                color: Colors.yellow,
+                borderRadius: BorderRadius.circular(4.r),
+              ),
+              child: Center(
+                child: Text(
+                  "HIGH",
+                  style: TextStyle(
+                    fontSize: 10.sp,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.orange,
+                  ),
+                ),
+              ),
+            ),
             Spacer(),
             IconButton(
               onPressed: () {},
               icon: Icon(
                 Icons.more_vert,
-                size: 26,
+                size: 26.sp,
                 color: Theme.of(
                   context,
-                ).colorScheme.primary.withValues(alpha: 0.2),
+                ).colorScheme.primary.withValues(alpha: 0.6),
               ),
             ),
           ],

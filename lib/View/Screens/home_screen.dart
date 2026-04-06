@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_management_app/View/Widgets/my_drawer.dart';
-import 'package:task_management_app/View/Widgets/my_floating_action_button.dart';
-import 'package:task_management_app/View/Widgets/my_list_tile.dart';
+import 'package:task_management_app/View/Widgets/custom_list_tile.dart';
 import 'package:task_management_app/ViewModel/task_provider.dart';
 import 'package:task_management_app/generated/l10n.dart';
 
@@ -19,7 +18,7 @@ class HomeScreen extends StatelessWidget {
           backgroundColor: Color(0xffFFFFFF),
           floatingActionButton: Padding(
             padding: const EdgeInsets.only(left: 10, bottom: 20),
-            child: MyFloatingActionButton(),
+            // child: MyFloatingActionButton(),
           ),
           appBar: AppBar(
             title: Text(
@@ -139,7 +138,7 @@ class HomeScreen extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: EdgeInsetsDirectional.all(10.0),
-                      child: MyListTile(),
+                      child: CustomListTile(),
                     );
                   },
                 ),
