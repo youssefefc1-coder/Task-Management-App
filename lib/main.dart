@@ -10,6 +10,7 @@ import 'package:task_management_app/View/Screens/Auth/login_screen.dart';
 import 'package:task_management_app/View/Screens/Auth/reset_pass_screen.dart';
 import 'package:task_management_app/View/Screens/Auth/signup_screen.dart';
 import 'package:task_management_app/View/Screens/main_screen.dart';
+import 'package:task_management_app/View/Screens/settings_screen.dart';
 import 'package:task_management_app/View/Screens/splash_screen.dart';
 import 'package:task_management_app/View/Screens/task_screen.dart';
 import 'package:task_management_app/ViewModel/locale_provider.dart';
@@ -65,6 +66,7 @@ class MyApp extends StatelessWidget {
           '/splash': (context) => SplashScreen(),
           '/task': (context) => TaskScreen(),
           '/main': (context) => MainScreen(),
+          '/settings': (context) => SettingsScreen(),
         },
 
         initialRoute: '/main',

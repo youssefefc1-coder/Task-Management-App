@@ -40,8 +40,10 @@ class MainScreen extends StatelessWidget {
                 ),
                 Spacer(),
                 IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.settings, size: 30.sp),
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/settings');
+                  },
+                  icon: Icon(Icons.settings, size: 28.sp),
                 ),
               ],
             ),
@@ -185,7 +187,7 @@ class MainScreen extends StatelessWidget {
           child: Icon(
             Icons.add,
             color: Theme.of(context).colorScheme.secondary,
-            size: 34.sp,
+            size: 38.sp,
           ),
         ),
       ),
