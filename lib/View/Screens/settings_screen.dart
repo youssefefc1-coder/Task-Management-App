@@ -76,7 +76,7 @@ class SettingsScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Icon(
-                      Icons.email,
+                      Icons.email_outlined,
                       color: Theme.of(context).colorScheme.primary,
                       size: 25.sp,
                     ),
@@ -107,7 +107,7 @@ class SettingsScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 16.h),
+            SizedBox(height: 18.h),
             Text(
               "Language",
               style: TextStyle(
@@ -116,7 +116,7 @@ class SettingsScreen extends StatelessWidget {
                 color: Theme.of(context).colorScheme.primary,
               ),
             ),
-            SizedBox(height: 16.h),
+            SizedBox(height: 12.h),
             Container(
               height: 60.h,
               width: double.infinity,
@@ -168,7 +168,7 @@ class SettingsScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 16.h),
+            SizedBox(height: 18.h),
             Text(
               "Appearance",
               style: TextStyle(

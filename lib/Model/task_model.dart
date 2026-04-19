@@ -2,6 +2,8 @@ class TaskModel {
   final String? id;
   final String title;
   final String? description;
+  final String priority;
+  final String category;
   final bool isDone;
   final DateTime? deadline;
 
@@ -11,6 +13,8 @@ class TaskModel {
     this.isDone = false,
     this.id,
     this.deadline,
+    this.priority = 'Low',
+    this.category = 'General',
   });
 
   factory TaskModel.fromFirestore(Map<String, dynamic> data, String id) {
@@ -20,6 +24,8 @@ class TaskModel {
       description: data['description'],
       isDone: data['isDone'],
       deadline: data['deadline']?.toDate(),
+      priority: data['priority'],
+      category: data['category'],
     );
   }
 
@@ -29,6 +35,8 @@ class TaskModel {
       "description": description,
       "isDone": isDone,
       "deadline": deadline,
+      "priority": priority,
+      "category": category,
     };
   }
 }

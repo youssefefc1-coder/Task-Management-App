@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:task_management_app/Theme/app_theme.dart';
+import 'package:task_management_app/View/Screens/add_task_screen.dart';
 import 'package:task_management_app/View/Screens/home_screen.dart';
 import 'package:task_management_app/Services/noti_service.dart';
 import 'package:task_management_app/View/Screens/Auth/login_screen.dart';
@@ -46,6 +47,7 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: Size(390, 884),
       child: MaterialApp(
+        title: "Task Management App",
         debugShowCheckedModeBanner: false,
         locale: locale,
         localizationsDelegates: [
@@ -65,6 +67,7 @@ class MyApp extends StatelessWidget {
           '/resetPassword': (context) => ResetPassScreen(),
           '/splash': (context) => SplashScreen(),
           '/task': (context) => TaskScreen(),
+          '/add_task': (context) => AddTaskScreen(),
           '/main': (context) => MainScreen(),
           '/settings': (context) => SettingsScreen(),
         },

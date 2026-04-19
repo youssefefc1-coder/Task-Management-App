@@ -181,7 +181,9 @@ class MainScreen extends StatelessWidget {
         width: 70.w,
         margin: EdgeInsets.only(bottom: 35),
         child: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, '/add_task');
+          },
           shape: const CircleBorder(),
           backgroundColor: Theme.of(context).colorScheme.primary,
           child: Icon(
