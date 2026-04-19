@@ -5,6 +5,12 @@ class AppTheme {
     brightness: Brightness.light,
     scaffoldBackgroundColor: Colors.white,
 
+    textSelectionTheme: TextSelectionThemeData(
+      cursorColor: Color(0xff021526),
+      selectionColor: Color(0xff021526),
+      selectionHandleColor: Color(0xff021526),
+    ),
+
     colorScheme: ColorScheme.light(
       primary: Color(0xff021526),
       secondary: Color(0xffFFFFFF),
@@ -37,7 +43,7 @@ class AppTheme {
         if (state.contains(WidgetState.selected)) {
           return Color(0xff021526);
         } else {
-          return Colors.white;
+          return Colors.transparent;
         }
       }),
       dayForegroundColor: WidgetStateProperty.resolveWith((state) {
@@ -51,11 +57,39 @@ class AppTheme {
 
     timePickerTheme: TimePickerThemeData(
       backgroundColor: Colors.white,
-      hourMinuteTextColor: Color(0xff021526),
-      hourMinuteColor: Color(0xff021526),
+      cancelButtonStyle: ButtonStyle(
+        textStyle: WidgetStatePropertyAll(TextStyle(color: Color(0xff021526))),
+      ),
+      confirmButtonStyle: ButtonStyle(
+        textStyle: WidgetStatePropertyAll(TextStyle(color: Color(0xff021526))),
+      ),
+      hourMinuteTextColor: WidgetStateColor.resolveWith((state) {
+        if (state.contains(WidgetState.selected)) {
+          return Colors.white;
+        } else {
+          return Color(0xff021526);
+        }
+      }),
+      hourMinuteColor: WidgetStateColor.resolveWith((state) {
+        if (state.contains(WidgetState.selected)) {
+          return Color(0xff021526);
+        } else {
+          return Colors.white;
+        }
+      }),
+      hourMinuteShape: RoundedRectangleBorder(
+        borderRadius: BorderRadiusGeometry.circular(10),
+        side: BorderSide(color: Color(0xff021526), width: 1.5),
+      ),
       dialBackgroundColor: Colors.white,
       dialHandColor: Color(0xff021526),
-      dialTextColor: Color(0xff021526),
+      dialTextColor: WidgetStateColor.resolveWith((state) {
+        if (state.contains(WidgetState.selected)) {
+          return Colors.white;
+        } else {
+          return Color(0xff021526);
+        }
+      }),
       dayPeriodColor: WidgetStateColor.resolveWith((state) {
         if (state.contains(WidgetState.selected)) {
           return Color(0xff021526);
@@ -77,6 +111,11 @@ class AppTheme {
   static final darkTheme = ThemeData(
     brightness: Brightness.dark,
     scaffoldBackgroundColor: Color(0xff021526),
+    textSelectionTheme: TextSelectionThemeData(
+      cursorColor: Colors.white,
+      selectionColor: Colors.white,
+      selectionHandleColor: Colors.white,
+    ),
 
     colorScheme: ColorScheme.dark(
       primary: Color(0xffFFFFFF),
@@ -114,6 +153,58 @@ class AppTheme {
         }
       }),
       dayForegroundColor: WidgetStateProperty.resolveWith((state) {
+        if (state.contains(WidgetState.selected)) {
+          return Color(0xff021526);
+        } else {
+          return Colors.white;
+        }
+      }),
+    ),
+
+    timePickerTheme: TimePickerThemeData(
+      backgroundColor: Color(0xff021526),
+      cancelButtonStyle: ButtonStyle(
+        textStyle: WidgetStatePropertyAll(TextStyle(color: Colors.white)),
+      ),
+      confirmButtonStyle: ButtonStyle(
+        textStyle: WidgetStatePropertyAll(TextStyle(color: Colors.white)),
+      ),
+      hourMinuteTextColor: WidgetStateColor.resolveWith((state) {
+        if (state.contains(WidgetState.selected)) {
+          return Color(0xff021526);
+        } else {
+          return Colors.white;
+        }
+      }),
+      hourMinuteColor: WidgetStateColor.resolveWith((state) {
+        if (state.contains(WidgetState.selected)) {
+          return Colors.white;
+        } else {
+          return Color(0xff021526);
+        }
+      }),
+      hourMinuteShape: RoundedRectangleBorder(
+        borderRadius: BorderRadiusGeometry.circular(10),
+        side: BorderSide(color: Colors.white, width: 1.5),
+      ),
+      dialBackgroundColor: Color(0xff021526),
+      dialHandColor: Colors.white,
+      dialTextColor: WidgetStateColor.resolveWith((state) {
+        if (state.contains(WidgetState.selected)) {
+          return Color(0xff021526);
+        } else {
+          return Colors.white;
+        }
+      }),
+      dayPeriodColor: WidgetStateColor.resolveWith((state) {
+        if (state.contains(WidgetState.selected)) {
+          return Colors.white;
+        } else {
+          return Color(0xff021526);
+        }
+      }),
+
+      dayPeriodTextColor: WidgetStateColor.resolveWith((state) {
         if (state.contains(WidgetState.selected)) {
           return Color(0xff021526);
         } else {
