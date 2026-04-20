@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:task_management_app/Model/task_model.dart';
+import 'package:task_management_app/View/Widgets/category_selector.dart';
+import 'package:task_management_app/View/Widgets/priority_selector.dart';
 
 class AddTaskScreen extends StatefulWidget {
   const AddTaskScreen({super.key});
@@ -16,6 +19,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
 
   DateTime? selectedDate;
   TimeOfDay? selectedTime;
+  TaskPriority _selectedPriority = TaskPriority.Medium;
+  Category _selectedCategory = Category.General;
 
   Future<void> _pickDate(BuildContext context) async {
     DateTime? date = await showDatePicker(
@@ -367,6 +372,75 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                       ).colorScheme.primary.withValues(alpha: 0.8),
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  SizedBox(height: 12.h),
+                  PrioritySelector(
+                    selectedPriority: _selectedPriority,
+                    onChange: (value) {
+                      setState(() {
+                        _selectedPriority = value;
+                      });
+                    },
+                  ),
+                  SizedBox(height: 24.h),
+                  Text(
+                    "CATEGORY",
+                    style: TextStyle(
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.primary.withValues(alpha: 0.8),
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  SizedBox(height: 12.h),
+                  CategorySelector(
+                    selectedCategory: _selectedCategory,
+                    onChange: (value) {
+                      setState(() {
+                        _selectedCategory = value;
+                      });
+                    },
+                  ),
+                  SizedBox(height: 30.h),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      height: 60.h,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.primary,
+                        borderRadius: BorderRadius.circular(12.r),
+                        boxShadow: [
+                          BoxShadow(
+                            offset: Offset(0, 10),
+                            blurRadius: 8,
+                            spreadRadius: -3,
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.primary.withValues(alpha: 0.1),
+                          ),
+                          BoxShadow(
+                            offset: Offset(0, 4),
+                            blurRadius: 6,
+                            spreadRadius: -4,
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.primary.withValues(alpha: 0.1),
+                          ),
+                        ],
+                      ),
+                      child: Center(
+                        child: Text(
+                          "Create Task",
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.secondary,
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ],

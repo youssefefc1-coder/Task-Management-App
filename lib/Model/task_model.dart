@@ -1,9 +1,22 @@
+enum TaskPriority { Low, Medium, High }
+
+enum Category {
+  General,
+  Personal,
+  Work,
+  Urgent,
+  Health,
+  Sport,
+  Study,
+  Shopping,
+}
+
 class TaskModel {
   final String? id;
   final String title;
   final String? description;
-  final String priority;
-  final String category;
+  final TaskPriority priority;
+  final Category category;
   final bool isDone;
   final DateTime? deadline;
 
@@ -13,8 +26,8 @@ class TaskModel {
     this.isDone = false,
     this.id,
     this.deadline,
-    this.priority = 'Low',
-    this.category = 'General',
+    this.priority = TaskPriority.Medium,
+    this.category = Category.General,
   });
 
   factory TaskModel.fromFirestore(Map<String, dynamic> data, String id) {
@@ -24,8 +37,8 @@ class TaskModel {
       description: data['description'],
       isDone: data['isDone'],
       deadline: data['deadline']?.toDate(),
-      priority: data['priority'],
-      category: data['category'],
+      priority: TaskPriority.values.byName(data['priority']),
+      category: Category.values.byName(data['category']),
     );
   }
 
@@ -35,8 +48,8 @@ class TaskModel {
       "description": description,
       "isDone": isDone,
       "deadline": deadline,
-      "priority": priority,
-      "category": category,
+      "priority": priority.name,
+      "category": category.name,
     };
   }
 }
