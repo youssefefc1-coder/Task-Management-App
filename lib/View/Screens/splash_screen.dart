@@ -26,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
     if (mounted) {
       if (user != null) {
         context.read<TaskProvider>().listenToTasks(user.uid);
-        Navigator.pushReplacementNamed(context, "/home");
+        Navigator.pushReplacementNamed(context, "/main");
       } else {
         Navigator.pushReplacementNamed(context, "/login");
       }

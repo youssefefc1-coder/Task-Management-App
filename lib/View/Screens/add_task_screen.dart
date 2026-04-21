@@ -1,8 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:task_management_app/Model/task_model.dart';
+import 'package:task_management_app/Services/noti_service.dart';
 import 'package:task_management_app/View/Widgets/category_selector.dart';
 import 'package:task_management_app/View/Widgets/priority_selector.dart';
+import 'package:task_management_app/ViewModel/task_provider.dart';
 
 class AddTaskScreen extends StatefulWidget {
   const AddTaskScreen({super.key});
@@ -12,10 +16,10 @@ class AddTaskScreen extends StatefulWidget {
 }
 
 class _AddTaskScreenState extends State<AddTaskScreen> {
-  final GlobalKey<FormState> _formkey = .new();
+  final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
-  final TextEditingController titleController = .new();
-  final TextEditingController descriptionController = .new();
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
 
   DateTime? selectedDate;
   TimeOfDay? selectedTime;
@@ -101,19 +105,11 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                   ),
                   SizedBox(height: 8.h),
                   TextFormField(
-                    validator: (value) {
-                      if (value == null || value.trim().isEmpty) {
-                        return "Please enter task Name";
-                      } else {
-                        return null;
-                      }
-                    },
+                    validator: (value) => null,
                     maxLength: 15,
                     controller: titleController,
                     style: TextStyle(
-                      color: Theme.of(
-                        context,
-                      ).colorScheme.primary.withValues(alpha: 0.4),
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                     cursorColor: Theme.of(
                       context,
@@ -175,9 +171,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     minLines: 4,
                     controller: descriptionController,
                     style: TextStyle(
-                      color: Theme.of(
-                        context,
-                      ).colorScheme.primary.withValues(alpha: 0.4),
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                     cursorColor: Theme.of(
                       context,
@@ -405,7 +399,43 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                   ),
                   SizedBox(height: 30.h),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () async {
+                      var task = Provider.of<TaskProvider>(
+                        context,
+                        listen: false,
+                      );
+                      if (_formkey.currentState!.validate()) {
+                        DateTime? finalDeadline;
+                        if (selectedDate != null && selectedTime != null) {
+                          finalDeadline = DateTime(
+                            selectedDate!.year,
+                            selectedDate!.month,
+                            selectedDate!.day,
+                            selectedTime!.hour,
+                            selectedTime!.minute,
+                          );
+                        }
+
+                        final newTaskId = await task.addTask(
+                          FirebaseAuth.instance.currentUser!.uid,
+                          TaskModel(
+                            title: titleController.text,
+                            description: descriptionController.text,
+                            deadline: finalDeadline,
+                            priority: _selectedPriority,
+                            category: _selectedCategory,
+                          ),
+                        );
+                        await NotificationService.scheduleDeadlineAlert(
+                          TaskModel(
+                            id: newTaskId,
+                            title: titleController.text,
+                            deadline: finalDeadline,
+                          ),
+                        );
+                        Navigator.pop(context);
+                      }
+                    },
                     child: Container(
                       height: 60.h,
                       width: double.infinity,

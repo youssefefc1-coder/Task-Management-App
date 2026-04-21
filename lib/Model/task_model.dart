@@ -33,8 +33,8 @@ class TaskModel {
   factory TaskModel.fromFirestore(Map<String, dynamic> data, String id) {
     return TaskModel(
       id: id,
-      title: data['title'],
-      description: data['description'],
+      title: data['title'] ?? '',
+      description: data['description'] ?? '',
       isDone: data['isDone'],
       deadline: data['deadline']?.toDate(),
       priority: TaskPriority.values.byName(data['priority']),

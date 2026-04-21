@@ -283,7 +283,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           context.read<TaskProvider>().listenToTasks(
                             FirebaseAuth.instance.currentUser!.uid,
                           );
-                          Navigator.pushReplacementNamed(context, "/home");
+                          Navigator.pushReplacementNamed(context, "/main");
                         }
                       }
                     },
