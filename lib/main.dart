@@ -16,6 +16,7 @@ import 'package:task_management_app/View/Screens/splash_screen.dart';
 import 'package:task_management_app/View/Screens/task_screen.dart';
 import 'package:task_management_app/ViewModel/locale_provider.dart';
 import 'package:task_management_app/ViewModel/task_provider.dart';
+import 'package:task_management_app/ViewModel/user_data_provider.dart';
 import 'package:task_management_app/generated/l10n.dart';
 
 void main() async {
@@ -32,6 +33,7 @@ void main() async {
         ChangeNotifierProvider(
           create: (context) => LocaleProvider()..getLocale(),
         ),
+        ChangeNotifierProvider(create: (context) => UserDataProvider()),
       ],
       child: const MyApp(),
     ),

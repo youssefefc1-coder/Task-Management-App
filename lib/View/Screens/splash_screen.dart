@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:task_management_app/ViewModel/task_provider.dart';
+import 'package:task_management_app/ViewModel/user_data_provider.dart';
 import 'package:task_management_app/generated/l10n.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -26,6 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
     if (mounted) {
       if (user != null) {
         context.read<TaskProvider>().listenToTasks(user.uid);
+        await context.read<UserDataProvider>().getUser(user.uid);
         Navigator.pushReplacementNamed(context, "/main");
       } else {
         Navigator.pushReplacementNamed(context, "/login");

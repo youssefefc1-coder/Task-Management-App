@@ -1,12 +1,32 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import 'package:task_management_app/Model/user_model.dart';
 import 'package:task_management_app/View/Widgets/custom_list_tile.dart';
+import 'package:task_management_app/ViewModel/user_data_provider.dart';
 
-class MainScreen extends StatelessWidget {
+class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
 
   @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
+  @override
+  void initState() {
+    super.initState();
+    Future.microtask(
+      () => context.read<UserDataProvider>().getUser(
+        FirebaseAuth.instance.currentUser!.uid,
+      ),
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final UserModel? user = context.watch<UserDataProvider>().user;
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(24),
@@ -29,7 +49,7 @@ class MainScreen extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "Hello, Alex!",
+                      "Hello, ${user?.name ?? ''}!",
                       style: TextStyle(
                         color: Theme.of(context).colorScheme.primary,
                         fontWeight: FontWeight.bold,

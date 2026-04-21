@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:task_management_app/Services/Authentication/auth_services.dart';
 import 'package:task_management_app/View/Widgets/auth_txt_form_field.dart';
 import 'package:task_management_app/ViewModel/task_provider.dart';
+import 'package:task_management_app/ViewModel/user_data_provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -36,7 +37,11 @@ class _LoginScreenState extends State<LoginScreen> {
           context.read<TaskProvider>().listenToTasks(
             FirebaseAuth.instance.currentUser!.uid,
           );
-          Navigator.pushReplacementNamed(context, "/home");
+          await context.read<UserDataProvider>().getUser(
+            FirebaseAuth.instance.currentUser!.uid,
+          );
+
+          Navigator.pushReplacementNamed(context, "/main");
         }
       }
     }

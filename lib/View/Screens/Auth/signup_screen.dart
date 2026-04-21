@@ -2,7 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:task_management_app/Model/user_model.dart';
 import 'package:task_management_app/Services/Authentication/auth_services.dart';
+import 'package:task_management_app/Services/Database/user_services.dart';
 import 'package:task_management_app/View/Widgets/auth_txt_form_field.dart';
 import 'package:task_management_app/ViewModel/task_provider.dart';
 
@@ -35,6 +37,10 @@ class _SignupScreenState extends State<SignupScreen> {
         });
       } else {
         if (mounted) {
+          await UserServices().saveUser(
+            UserModel(name: nameController.text, email: emailController.text),
+            FirebaseAuth.instance.currentUser!.uid,
+          );
           Navigator.pushReplacementNamed(context, "/login");
         }
       }
