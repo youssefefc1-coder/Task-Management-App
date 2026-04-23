@@ -25,13 +25,13 @@ class CustomListTile extends StatelessWidget {
           ),
         ],
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            SizedBox(width: 10.w),
             Transform.scale(
-              scale: 1.6,
+              scale: 1.5,
               child: Checkbox(
                 value: status,
                 onChanged: (val) {
@@ -44,14 +44,15 @@ class CustomListTile extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(width: 16.w),
+            SizedBox(width: 10.w),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   "Finish Flutter Project",
                   style: TextStyle(
-                    fontSize: 14.sp,
+                    fontSize: 16.sp,
                     fontWeight: FontWeight.w500,
                     color: Theme.of(context).colorScheme.primary,
                   ),
@@ -79,7 +80,7 @@ class CustomListTile extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(width: 25.w),
+            SizedBox(width: 22.w),
             Container(
               height: 22.h,
               width: 40.w,
@@ -98,7 +99,7 @@ class CustomListTile extends StatelessWidget {
                 ),
               ),
             ),
-            Spacer(),
+            SizedBox(width: 3.w),
             IconButton(
               onPressed: () {},
               icon: Icon(

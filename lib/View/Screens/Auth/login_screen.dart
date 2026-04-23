@@ -2,7 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:task_management_app/Model/user_model.dart';
 import 'package:task_management_app/Services/Authentication/auth_services.dart';
+import 'package:task_management_app/Services/Database/user_services.dart';
 import 'package:task_management_app/View/Widgets/auth_txt_form_field.dart';
 import 'package:task_management_app/ViewModel/task_provider.dart';
 import 'package:task_management_app/ViewModel/user_data_provider.dart';
@@ -20,9 +22,14 @@ class _LoginScreenState extends State<LoginScreen> {
 
   final GlobalKey<FormState> _formkey = GlobalKey();
   String? authError;
+  bool googleLoading = false;
+  bool logInLoading = false;
 
   Future<void> login() async {
     if (_formkey.currentState!.validate()) {
+      setState(() {
+        logInLoading = true;
+      });
       final error = await AuthServices().login(
         emailController.text,
         passwordController.text,
@@ -30,10 +37,14 @@ class _LoginScreenState extends State<LoginScreen> {
 
       if (error != null) {
         setState(() {
+          logInLoading = false;
           authError = error;
         });
       } else {
         if (mounted) {
+          setState(() {
+            logInLoading = false;
+          });
           context.read<TaskProvider>().listenToTasks(
             FirebaseAuth.instance.currentUser!.uid,
           );
@@ -68,7 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 80.h),
+                  SizedBox(height: 60.h),
                   Center(
                     child: Column(
                       children: [
@@ -118,7 +129,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 65.h),
+                  SizedBox(height: 45.h),
                   Text(
                     "EMAIL ADDRESS",
                     style: TextStyle(
@@ -209,25 +220,42 @@ class _LoginScreenState extends State<LoginScreen> {
                         borderRadius: BorderRadius.circular(12.r),
                         color: Theme.of(context).colorScheme.primary,
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Log In",
-                            style: TextStyle(
-                              color: Theme.of(context).colorScheme.secondary,
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.bold,
+                      child: logInLoading
+                          ? Center(
+                              child: SizedBox(
+                                height: 24.h,
+                                width: 24.w,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 3.w,
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.secondary,
+                                ),
+                              ),
+                            )
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Log In",
+                                  style: TextStyle(
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.secondary,
+                                    fontSize: 16.sp,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                SizedBox(width: 8.w),
+                                Icon(
+                                  Icons.arrow_forward,
+                                  size: 22.sp,
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.secondary,
+                                ),
+                              ],
                             ),
-                          ),
-                          SizedBox(width: 8.w),
-                          Icon(
-                            Icons.arrow_forward,
-                            size: 22.sp,
-                            color: Theme.of(context).colorScheme.secondary,
-                          ),
-                        ],
-                      ),
                     ),
                   ),
                   authError != null
@@ -249,7 +277,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           thickness: 1.h,
                           color: Theme.of(
                             context,
-                          ).colorScheme.primary.withValues(alpha: 0.2),
+                          ).colorScheme.primary.withValues(alpha: 0.4),
                         ),
                       ),
                       Padding(
@@ -261,7 +289,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             fontWeight: FontWeight.bold,
                             color: Theme.of(
                               context,
-                            ).colorScheme.primary.withValues(alpha: 0.2),
+                            ).colorScheme.primary.withValues(alpha: 0.4),
                           ),
                         ),
                       ),
@@ -279,17 +307,41 @@ class _LoginScreenState extends State<LoginScreen> {
                   GestureDetector(
                     onTap: () async {
                       final error = await AuthServices().signinWithGoogle();
+                      setState(() {
+                        googleLoading = true;
+                      });
                       if (error != null) {
                         setState(() {
+                          googleLoading = false;
                           authError = error;
                         });
                       } else {
-                        if (mounted) {
-                          context.read<TaskProvider>().listenToTasks(
-                            FirebaseAuth.instance.currentUser!.uid,
+                        final uid = FirebaseAuth.instance.currentUser!.uid;
+
+                        final exists = await UserServices().userExists(uid);
+
+                        if (!exists) {
+                          await UserServices().saveUser(
+                            UserModel(
+                              name:
+                                  FirebaseAuth
+                                      .instance
+                                      .currentUser!
+                                      .displayName ??
+                                  'User',
+                              email:
+                                  FirebaseAuth.instance.currentUser!.email ??
+                                  '',
+                            ),
+                            uid,
                           );
-                          Navigator.pushReplacementNamed(context, "/main");
                         }
+                        setState(() {
+                          googleLoading = false;
+                        });
+                        context.read<UserDataProvider>().getUser(uid);
+                        context.read<TaskProvider>().listenToTasks(uid);
+                        Navigator.pushReplacementNamed(context, "/main");
                       }
                     },
                     child: Container(
@@ -306,25 +358,38 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         borderRadius: BorderRadius.circular(12.r),
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            "assets/images/google.png",
-                            height: 24.h,
-                            width: 24.w,
-                          ),
-                          SizedBox(width: 12.w),
-                          Text(
-                            "Google",
-                            style: TextStyle(
-                              fontSize: 16.sp,
-                              color: Theme.of(context).colorScheme.primary,
-                              fontWeight: FontWeight.w500,
+                      child: googleLoading
+                          ? Center(
+                              child: SizedBox(
+                                height: 24.h,
+                                width: 24.w,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 3.w,
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
+                              ),
+                            )
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  "assets/images/google.png",
+                                  height: 24.h,
+                                  width: 24.w,
+                                ),
+                                SizedBox(width: 12.w),
+                                Text(
+                                  "Google",
+                                  style: TextStyle(
+                                    fontSize: 16.sp,
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.primary,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                        ],
-                      ),
                     ),
                   ),
                   SizedBox(height: 33.h),

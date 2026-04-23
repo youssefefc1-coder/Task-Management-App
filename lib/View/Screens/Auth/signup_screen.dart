@@ -23,9 +23,13 @@ class _SignupScreenState extends State<SignupScreen> {
 
   final GlobalKey<FormState> _formkey = GlobalKey();
   String? authError;
-
+  bool googleLoading = false;
+  bool signUpLoading = false;
   Future<void> signup() async {
     if (_formkey.currentState!.validate()) {
+      setState(() {
+        signUpLoading = true;
+      });
       final error = await AuthServices().signup(
         emailController.text,
         passwordController.text,
@@ -33,10 +37,14 @@ class _SignupScreenState extends State<SignupScreen> {
 
       if (error != null) {
         setState(() {
+          signUpLoading = false;
           authError = error;
         });
       } else {
         if (mounted) {
+          setState(() {
+            signUpLoading = false;
+          });
           await UserServices().saveUser(
             UserModel(name: nameController.text, email: emailController.text),
             FirebaseAuth.instance.currentUser!.uid,
@@ -105,7 +113,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 30.h),
+                  SizedBox(height: 20.h),
                   Text(
                     "Create Account",
                     style: TextStyle(
@@ -257,25 +265,42 @@ class _SignupScreenState extends State<SignupScreen> {
                         borderRadius: BorderRadius.circular(12.r),
                         color: Theme.of(context).colorScheme.primary,
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Sign Up",
-                            style: TextStyle(
-                              color: Theme.of(context).colorScheme.secondary,
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.bold,
+                      child: signUpLoading
+                          ? Center(
+                              child: SizedBox(
+                                height: 24.h,
+                                width: 24.w,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 3.w,
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.secondary,
+                                ),
+                              ),
+                            )
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Sign Up",
+                                  style: TextStyle(
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.secondary,
+                                    fontSize: 16.sp,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                SizedBox(width: 8.w),
+                                Icon(
+                                  Icons.arrow_forward,
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.secondary,
+                                  size: 22.sp,
+                                ),
+                              ],
                             ),
-                          ),
-                          SizedBox(width: 8.w),
-                          Icon(
-                            Icons.arrow_forward,
-                            color: Theme.of(context).colorScheme.secondary,
-                            size: 22.sp,
-                          ),
-                        ],
-                      ),
                     ),
                   ),
                   authError != null
@@ -326,17 +351,42 @@ class _SignupScreenState extends State<SignupScreen> {
                   GestureDetector(
                     onTap: () async {
                       final error = await AuthServices().signinWithGoogle();
+                      setState(() {
+                        googleLoading = true;
+                      });
                       if (error != null) {
                         setState(() {
+                          googleLoading = false;
                           authError = error;
                         });
                       } else {
-                        if (mounted) {
-                          context.read<TaskProvider>().listenToTasks(
-                            FirebaseAuth.instance.currentUser!.uid,
+                        final uid = FirebaseAuth.instance.currentUser!.uid;
+
+                        final exists = await UserServices().userExists(uid);
+
+                        if (!exists) {
+                          await UserServices().saveUser(
+                            UserModel(
+                              name:
+                                  FirebaseAuth
+                                      .instance
+                                      .currentUser!
+                                      .displayName ??
+                                  'User',
+                              email:
+                                  FirebaseAuth.instance.currentUser!.email ??
+                                  '',
+                            ),
+                            uid,
                           );
-                          Navigator.pushReplacementNamed(context, "/home");
                         }
+                        setState(() {
+                          googleLoading = false;
+                        });
+                        context.read<TaskProvider>().listenToTasks(
+                          FirebaseAuth.instance.currentUser!.uid,
+                        );
+                        Navigator.pushReplacementNamed(context, "/main");
                       }
                     },
                     child: Container(
@@ -353,25 +403,38 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                         borderRadius: BorderRadius.circular(12.r),
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            "assets/images/google.png",
-                            height: 24.h,
-                            width: 24.w,
-                          ),
-                          SizedBox(width: 12.w),
-                          Text(
-                            "Google",
-                            style: TextStyle(
-                              fontSize: 16.sp,
-                              color: Theme.of(context).colorScheme.primary,
-                              fontWeight: FontWeight.w500,
+                      child: googleLoading
+                          ? Center(
+                              child: SizedBox(
+                                height: 24.h,
+                                width: 24.w,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 3.w,
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
+                              ),
+                            )
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  "assets/images/google.png",
+                                  height: 24.h,
+                                  width: 24.w,
+                                ),
+                                SizedBox(width: 12.w),
+                                Text(
+                                  "Google",
+                                  style: TextStyle(
+                                    fontSize: 16.sp,
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.primary,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                        ],
-                      ),
                     ),
                   ),
                 ],

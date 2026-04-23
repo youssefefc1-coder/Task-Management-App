@@ -45,108 +45,110 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
         child: Form(
           key: _formkey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: 30.h),
-              Text(
-                S.of(context).forgot_password,
-                style: TextStyle(
-                  fontSize: 25.sp,
-                  fontWeight: FontWeight.w700,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-              ),
-              SizedBox(height: 10.h),
-              Text(
-                S.of(context).forgot_password_msg,
-                style: TextStyle(
-                  fontSize: 15.sp,
-                  color: Colors.grey,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              SizedBox(height: 30.h),
-              Text(
-                S.of(context).email,
-                style: TextStyle(
-                  fontSize: 20.sp,
-                  fontWeight: FontWeight.w500,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-              ),
-              SizedBox(height: 15.h),
-              TextFormField(
-                decoration: InputDecoration(
-                  hintText: S.of(context).enter_email,
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Theme.of(context).colorScheme.primary,
-                      width: 1,
-                    ),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Theme.of(context).colorScheme.primary,
-                      width: 1,
-                    ),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  errorBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.red, width: 1),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  focusedErrorBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.red, width: 1),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Theme.of(context).colorScheme.primary,
-                      width: 1,
-                    ),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                ),
-                controller: emailController,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return S.of(context).field_cant_be_empty;
-                  } else if (value.contains("@") == false) {
-                    return S.of(context).enter_valid_email;
-                  } else {
-                    return null;
-                  }
-                },
-              ),
-              SizedBox(height: 350.h),
-              GestureDetector(
-                onTap: () {
-                  if (_formkey.currentState!.validate()) {
-                    AuthServices().resetPassword(emailController.text);
-                  }
-                },
-                child: Container(
-                  width: double.infinity,
-                  height: 55.h,
-                  decoration: BoxDecoration(
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 30.h),
+                Text(
+                  S.of(context).forgot_password,
+                  style: TextStyle(
+                    fontSize: 25.sp,
+                    fontWeight: FontWeight.w700,
                     color: Theme.of(context).colorScheme.primary,
-                    borderRadius: BorderRadius.circular(15),
                   ),
+                ),
+                SizedBox(height: 10.h),
+                Text(
+                  S.of(context).forgot_password_msg,
+                  style: TextStyle(
+                    fontSize: 15.sp,
+                    color: Colors.grey,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                SizedBox(height: 30.h),
+                Text(
+                  S.of(context).email,
+                  style: TextStyle(
+                    fontSize: 20.sp,
+                    fontWeight: FontWeight.w500,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
+                SizedBox(height: 15.h),
+                TextFormField(
+                  decoration: InputDecoration(
+                    hintText: S.of(context).enter_email,
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Theme.of(context).colorScheme.primary,
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Theme.of(context).colorScheme.primary,
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.red, width: 1),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.red, width: 1),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Theme.of(context).colorScheme.primary,
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                  ),
+                  controller: emailController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return S.of(context).field_cant_be_empty;
+                    } else if (value.contains("@") == false) {
+                      return S.of(context).enter_valid_email;
+                    } else {
+                      return null;
+                    }
+                  },
+                ),
+                SizedBox(height: 350.h),
+                GestureDetector(
+                  onTap: () {
+                    if (_formkey.currentState!.validate()) {
+                      AuthServices().resetPassword(emailController.text);
+                    }
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    height: 55.h,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.primary,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
 
-                  child: Center(
-                    child: Text(
-                      "Send Reset Link",
-                      style: TextStyle(
-                        fontSize: 16.sp,
-                        color: Theme.of(context).colorScheme.secondary,
+                    child: Center(
+                      child: Text(
+                        "Send Reset Link",
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                          color: Theme.of(context).colorScheme.secondary,
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
