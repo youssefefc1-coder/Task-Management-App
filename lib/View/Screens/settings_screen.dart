@@ -3,19 +3,43 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:task_management_app/Services/Authentication/auth_services.dart';
 import 'package:task_management_app/View/Widgets/custom_bottom_sheet.dart';
+import 'package:task_management_app/View/Widgets/language_alert_dialog.dart';
+import 'package:task_management_app/View/Widgets/theme_alert_dialog.dart';
+import 'package:task_management_app/ViewModel/locale_provider.dart';
+import 'package:task_management_app/ViewModel/theme_provider.dart';
 import 'package:task_management_app/ViewModel/user_data_provider.dart';
 
-class SettingsScreen extends StatefulWidget {
+class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 
   @override
-  State<SettingsScreen> createState() => _SettingsScreenState();
-}
-
-class _SettingsScreenState extends State<SettingsScreen> {
-  @override
   Widget build(BuildContext context) {
     final user = context.watch<UserDataProvider>().user;
+    final locale = context.watch<LocaleProvider>().locale;
+    final theme = context.watch<ThemeProvider>().themeMode;
+
+    String currentLocale() {
+      switch (locale?.languageCode) {
+        case 'en':
+          return 'English';
+        case 'ar':
+          return 'Arabic';
+        default:
+          return 'System';
+      }
+    }
+
+    String currentTheme() {
+      switch (theme) {
+        case ThemeMode.light:
+          return 'Light';
+        case ThemeMode.dark:
+          return 'Dark';
+        case ThemeMode.system:
+          return 'System';
+      }
+    }
+
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
@@ -81,7 +105,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ],
               ),
               child: Padding(
-                padding: const EdgeInsets.only(left: 14),
+                padding: const EdgeInsetsDirectional.only(start: 14),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -132,7 +156,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       icon: Icon(
                         Icons.edit,
                         color: Theme.of(context).colorScheme.primary,
-                        size: 25.sp,
+                        size: 24.sp,
                       ),
                     ),
                     SizedBox(width: 14.w),
@@ -162,7 +186,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ],
               ),
               child: Padding(
-                padding: const EdgeInsets.only(left: 14),
+                padding: const EdgeInsetsDirectional.only(start: 14),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -212,7 +236,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             SizedBox(height: 12.h),
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return LangAlertDialog();
+                  },
+                );
+              },
               child: Container(
                 height: 70.h,
                 width: double.infinity,
@@ -234,7 +265,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ],
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 14),
+                  padding: const EdgeInsetsDirectional.only(start: 14),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -258,7 +289,78 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           ),
                           SizedBox(height: 4.h),
                           Text(
-                            "English",
+                            currentLocale(),
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w500,
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.primary.withValues(alpha: 0.6),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 18.h),
+            GestureDetector(
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => ThemeAlertDialog(),
+                );
+              },
+              child: Container(
+                height: 70.h,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12.r),
+                  border: Border.all(
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.primary.withValues(alpha: 0.2),
+                  ),
+                  color: Theme.of(context).colorScheme.secondary,
+                  boxShadow: [
+                    BoxShadow(
+                      offset: Offset(0, 1),
+                      blurRadius: 2,
+                      spreadRadius: 2,
+                      color: Color(0xff000000).withValues(alpha: 0.05),
+                    ),
+                  ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.only(start: 14),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Icon(
+                        Theme.of(context).brightness == Brightness.dark
+                            ? Icons.dark_mode_outlined
+                            : Icons.light_mode_outlined,
+                        color: Theme.of(context).colorScheme.primary,
+                        size: 25.sp,
+                      ),
+                      SizedBox(width: 15.w),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Appearance",
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w500,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                          ),
+                          SizedBox(height: 4.h),
+                          Text(
+                            currentTheme(),
                             style: TextStyle(
                               fontSize: 14.sp,
                               fontWeight: FontWeight.w500,
@@ -298,42 +400,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ],
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 14),
+                  padding: const EdgeInsetsDirectional.only(start: 14),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Icon(
-                        Theme.of(context).brightness == Brightness.dark
-                            ? Icons.dark_mode_outlined
-                            : Icons.light_mode_outlined,
+                        Icons.notifications_active_outlined,
                         color: Theme.of(context).colorScheme.primary,
                         size: 25.sp,
                       ),
                       SizedBox(width: 15.w),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Appearance",
-                            style: TextStyle(
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w500,
-                              color: Theme.of(context).colorScheme.primary,
-                            ),
-                          ),
-                          SizedBox(height: 4.h),
-                          Text(
-                            "System (Default)",
-                            style: TextStyle(
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w500,
-                              color: Theme.of(
-                                context,
-                              ).colorScheme.primary.withValues(alpha: 0.6),
-                            ),
-                          ),
-                        ],
+                      Text(
+                        "Notifications",
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w500,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
                       ),
                     ],
                   ),

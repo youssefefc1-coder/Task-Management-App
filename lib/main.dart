@@ -16,6 +16,7 @@ import 'package:task_management_app/View/Screens/splash_screen.dart';
 import 'package:task_management_app/View/Screens/task_screen.dart';
 import 'package:task_management_app/ViewModel/locale_provider.dart';
 import 'package:task_management_app/ViewModel/task_provider.dart';
+import 'package:task_management_app/ViewModel/theme_provider.dart';
 import 'package:task_management_app/ViewModel/user_data_provider.dart';
 import 'package:task_management_app/generated/l10n.dart';
 
@@ -34,6 +35,9 @@ void main() async {
           create: (context) => LocaleProvider()..getLocale(),
         ),
         ChangeNotifierProvider(create: (context) => UserDataProvider()),
+        ChangeNotifierProvider(
+          create: (context) => ThemeProvider()..getTheme(),
+        ),
       ],
       child: const MyApp(),
     ),
@@ -46,6 +50,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final locale = Provider.of<LocaleProvider>(context).locale;
+    final theme = Provider.of<ThemeProvider>(context).themeMode;
     return ScreenUtilInit(
       designSize: Size(390, 884),
       child: MaterialApp(
@@ -61,7 +66,7 @@ class MyApp extends StatelessWidget {
         supportedLocales: S.delegate.supportedLocales,
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
-        themeMode: ThemeMode.system,
+        themeMode: theme,
         routes: {
           '/login': (context) => LoginScreen(),
           '/signup': (context) => SignupScreen(),

@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:task_management_app/ViewModel/locale_provider.dart';
-import 'package:task_management_app/generated/l10n.dart';
+import 'package:task_management_app/ViewModel/theme_provider.dart';
 
-class LangAlertDialog extends StatelessWidget {
-  const LangAlertDialog({super.key});
+class ThemeAlertDialog extends StatelessWidget {
+  const ThemeAlertDialog({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<LocaleProvider>(context);
+    final provider = Provider.of<ThemeProvider>(context);
     return AlertDialog(
       backgroundColor: Theme.of(context).colorScheme.secondary,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadiusGeometry.circular(10.r),
       ),
       title: Text(
-        S.of(context).choose_language,
+        "Choose Theme Mode",
         style: TextStyle(color: Theme.of(context).colorScheme.primary),
       ),
       content: Column(
@@ -25,33 +24,35 @@ class LangAlertDialog extends StatelessWidget {
           ListTile(
             tileColor: Theme.of(context).colorScheme.secondary,
             title: Text(
-              (S.of(context).system_default),
+              "System (Default)",
               style: TextStyle(color: Theme.of(context).colorScheme.primary),
             ),
             onTap: () {
-              provider.clearLocale();
+              provider.setTheme(ThemeMode.system);
               Navigator.pop(context);
             },
           ),
           ListTile(
             tileColor: Theme.of(context).colorScheme.secondary,
             title: Text(
-              S.of(context).english,
+              "Dark Mode",
               style: TextStyle(color: Theme.of(context).colorScheme.primary),
             ),
             onTap: () {
-              provider.setLocale(Locale("en"));
+              provider.setTheme(ThemeMode.dark);
+
               Navigator.pop(context);
             },
           ),
           ListTile(
             tileColor: Theme.of(context).colorScheme.secondary,
             title: Text(
-              S.of(context).arabic,
+              "Light Mode",
               style: TextStyle(color: Theme.of(context).colorScheme.primary),
             ),
             onTap: () {
-              provider.setLocale(Locale("ar"));
+              provider.setTheme(ThemeMode.light);
+
               Navigator.pop(context);
             },
           ),
@@ -63,7 +64,7 @@ class LangAlertDialog extends StatelessWidget {
             Navigator.pop(context);
           },
           child: Text(
-            S.of(context).cancel,
+            "cancel",
             style: TextStyle(color: Theme.of(context).colorScheme.primary),
           ),
         ),

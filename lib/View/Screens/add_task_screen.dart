@@ -58,7 +58,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         toolbarHeight: 65.h,
         leading: Padding(
-          padding: const EdgeInsets.only(left: 30),
+          padding: const EdgeInsetsDirectional.only(start: 30),
           child: GestureDetector(
             onTap: () => Navigator.pop(context),
             child: Icon(

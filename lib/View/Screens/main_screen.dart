@@ -71,59 +71,8 @@ class _MainScreenState extends State<MainScreen> {
             Row(
               children: [
                 Container(
-                  height: 102.h,
-                  width: 162.w,
-                  padding: EdgeInsets.only(top: 20, left: 20, right: 20),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primary,
-                    borderRadius: BorderRadius.circular(8.r),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "YOUR TASKS",
-                        style: TextStyle(
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w500,
-                          color: Theme.of(
-                            context,
-                          ).colorScheme.secondary.withValues(alpha: 0.7),
-                        ),
-                      ),
-                      SizedBox(height: 8.h),
-                      Row(
-                        textBaseline: TextBaseline.alphabetic,
-                        crossAxisAlignment: CrossAxisAlignment.baseline,
-                        children: [
-                          Text(
-                            "5",
-                            style: TextStyle(
-                              fontSize: 30.sp,
-                              fontWeight: FontWeight.bold,
-                              color: Theme.of(context).colorScheme.secondary,
-                            ),
-                          ),
-                          SizedBox(width: 8.w),
-                          Text(
-                            "Left",
-                            style: TextStyle(
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w500,
-                              color: Theme.of(
-                                context,
-                              ).colorScheme.secondary.withValues(alpha: 0.5),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(width: 16.w),
-                Container(
-                  height: 102.h,
-                  width: 162.w,
+                  height: 85.h,
+                  width: 102.w,
                   padding: EdgeInsets.only(top: 20, left: 20, right: 20),
                   decoration: BoxDecoration(
                     color: Theme.of(
@@ -140,7 +89,7 @@ class _MainScreenState extends State<MainScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "COMPLETED",
+                        "DONE",
                         style: TextStyle(
                           fontSize: 12.sp,
                           fontWeight: FontWeight.w500,
@@ -153,9 +102,84 @@ class _MainScreenState extends State<MainScreen> {
                       Text(
                         "12",
                         style: TextStyle(
-                          fontSize: 30.sp,
+                          fontSize: 20.sp,
                           fontWeight: FontWeight.bold,
                           color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(width: 16.w),
+                Container(
+                  height: 85.h,
+                  width: 102.w,
+                  padding: EdgeInsets.only(top: 20, left: 20, right: 20),
+                  decoration: BoxDecoration(
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.primary.withValues(alpha: 0.05),
+                    borderRadius: BorderRadius.circular(8.r),
+                    border: Border.all(
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.primary.withValues(alpha: 0.1),
+                    ),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "PENDING",
+                        style: TextStyle(
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w500,
+                          color: Theme.of(
+                            context,
+                          ).colorScheme.primary.withValues(alpha: 0.7),
+                        ),
+                      ),
+                      SizedBox(height: 8.h),
+                      Text(
+                        "5",
+                        style: TextStyle(
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(width: 16.w),
+                Container(
+                  height: 85.h,
+                  width: 102.w,
+                  padding: EdgeInsets.only(top: 20, left: 20, right: 20),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.primary,
+                    borderRadius: BorderRadius.circular(8.r),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "TOTAL",
+                        style: TextStyle(
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w500,
+                          color: Theme.of(
+                            context,
+                          ).colorScheme.secondary.withValues(alpha: 0.7),
+                        ),
+                      ),
+                      SizedBox(height: 8.h),
+                      Text(
+                        "17",
+                        style: TextStyle(
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).colorScheme.secondary,
                         ),
                       ),
                     ],

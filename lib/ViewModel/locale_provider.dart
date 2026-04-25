@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:task_management_app/Services/Database/local_helper.dart';
+import 'package:task_management_app/Services/Database/locale_helper.dart';
 
 class LocaleProvider extends ChangeNotifier {
   Locale? _locale;
