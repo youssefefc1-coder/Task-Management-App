@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_management_app/View/Widgets/my_drawer.dart';
-import 'package:task_management_app/View/Widgets/custom_list_tile.dart';
 import 'package:task_management_app/ViewModel/task_provider.dart';
 import 'package:task_management_app/generated/l10n.dart';
 
@@ -138,7 +137,7 @@ class HomeScreen extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: EdgeInsetsDirectional.all(10.0),
-                      child: CustomListTile(),
+                      // child: CustomListTile(),
                     );
                   },
                 ),

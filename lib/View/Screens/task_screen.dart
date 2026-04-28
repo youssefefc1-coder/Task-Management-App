@@ -1,99 +1,160 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'package:task_management_app/Model/task_model.dart';
-import 'package:task_management_app/generated/l10n.dart';
 
 class TaskScreen extends StatelessWidget {
   const TaskScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final isRTL = Directionality.of(context) == TextDirection.rtl;
-    final task = ModalRoute.of(context)!.settings.arguments as TaskModel;
+    TaskModel task = ModalRoute.of(context)!.settings.arguments as TaskModel;
+
     return Scaffold(
-      backgroundColor: Color(0xffffffff),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        leadingWidth: 60.w,
-        toolbarHeight: 75.h,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(15.r),
-            bottomRight: Radius.circular(15.r),
-          ),
-        ),
-        backgroundColor: Color(0xff021526),
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         leading: Padding(
-          padding: const EdgeInsetsDirectional.only(start: 15),
-          child: InkWell(
-            splashColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: Image.asset(
-              isRTL
-                  ? "assets/images/back_right.png"
-                  : "assets/images/back_left.png",
-              color: Color(0xffffffff),
-              width: 35.w,
-              height: 35.h,
+          padding: const EdgeInsets.only(left: 20),
+          child: GestureDetector(
+            onTap: () => Navigator.pop(context),
+            child: Icon(
+              Icons.arrow_back_ios,
+              color: Theme.of(context).colorScheme.primary,
+              size: 25.sp,
             ),
           ),
         ),
+        toolbarHeight: 65.h,
         title: Text(
           task.title,
           style: TextStyle(
-            color: Color(0xffffffff),
-            fontSize: 18.sp,
+            color: Theme.of(context).colorScheme.primary,
+            fontSize: 20.sp,
             fontWeight: FontWeight.bold,
           ),
         ),
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(height: 20.h),
-          Center(
-            child: CircleAvatar(
-              backgroundColor: Color(0xff021526),
-              radius: 80.r,
-              child: Image.asset(
-                task.isDone
-                    ? "assets/images/done.png"
-                    : "assets/images/cross.png",
-                height: 60.h,
-                width: 60.w,
-                color: Color(0xffffffff),
-              ),
-            ),
+        shape: RoundedRectangleBorder(
+          side: BorderSide(
+            color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
+            width: 1.w,
           ),
-          SizedBox(height: 25.h),
-          task.deadline != null
-              ? Padding(
-                  padding: const EdgeInsetsDirectional.all(10),
-                  child: Text(
-                    "${S.of(context).deadline}: ${task.deadline!.day}/${task.deadline!.month}/${task.deadline!.year}",
-                    style: TextStyle(
-                      color: Color(0xff021526),
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.w600,
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 12),
+                  height: 40.h,
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.secondary,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
-                )
-              : SizedBox(),
-          SizedBox(height: 25.h),
-          Padding(
-            padding: const EdgeInsetsDirectional.all(10),
-            child: Text(
-              task.description ?? "",
-              style: TextStyle(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w400,
-                color: Color(0xff021526),
-              ),
+                  child: Center(
+                    child: Text(
+                      task.category.name,
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 12),
+                  height: 40.h,
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.secondary,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
+                  child: Center(
+                    child: Text(
+                      task.deadline != null
+                          ? DateFormat(
+                              'h:mm MMM dd',
+                            ).format(task.deadline!).toString()
+                          : "No Deadline",
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ),
+
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 12),
+                  height: 40.h,
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.secondary,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
+                  child: Center(
+                    child: Text(
+                      task.priority.name,
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
+            SizedBox(height: 20.h),
+            task.description != ''
+                ? Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.secondary,
+                      border: Border.all(
+                        color: Theme.of(context).colorScheme.primary,
+                        width: 2.w,
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Text(
+                      task.description!,
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  )
+                : Column(
+                    children: [
+                      SizedBox(height: 50.h),
+                      Text(
+                        "No Description",
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.primary,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ],
+                  ),
+          ],
+        ),
       ),
     );
   }

@@ -14,6 +14,10 @@ class AppTheme {
     colorScheme: ColorScheme.light(
       primary: Color(0xff021526),
       secondary: Color(0xffFFFFFF),
+      onPrimary: Color(0xffFFEDD5),
+      onSecondary: Color(0xffC2410C),
+      tertiary: Color(0xffFBBF24),
+      onTertiary: Color(0xff78350F),
     ),
     inputDecorationTheme: InputDecorationTheme(
       prefixIconColor: Color(0xff021526).withValues(alpha: 0.4),
@@ -33,6 +37,7 @@ class AppTheme {
       focusedErrorBorder: OutlineInputBorder(
         borderSide: BorderSide(color: Colors.red),
       ),
+      errorStyle: TextStyle(color: Colors.red),
     ),
 
     datePickerTheme: DatePickerThemeData(
@@ -120,6 +125,8 @@ class AppTheme {
     colorScheme: ColorScheme.dark(
       primary: Color(0xffFFFFFF),
       secondary: Color(0xff021526),
+      tertiary: Color(0xffFBBF24),
+      onTertiary: Color(0xff78350F),
     ),
     inputDecorationTheme: InputDecorationTheme(
       prefixIconColor: Color(0xffFFFFFF).withValues(alpha: 0.4),
@@ -139,6 +146,7 @@ class AppTheme {
       focusedErrorBorder: OutlineInputBorder(
         borderSide: BorderSide(color: Colors.red),
       ),
+      errorStyle: TextStyle(color: Colors.red),
     ),
 
     datePickerTheme: DatePickerThemeData(

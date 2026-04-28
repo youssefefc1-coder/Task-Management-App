@@ -105,7 +105,12 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                   ),
                   SizedBox(height: 8.h),
                   TextFormField(
-                    validator: (value) => null,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Please enter task name";
+                      }
+                      return null;
+                    },
                     maxLength: 15,
                     controller: titleController,
                     style: TextStyle(
@@ -137,13 +142,27 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                       ),
                       errorBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12.r),
-                        borderSide: BorderSide(color: Colors.red),
+                        borderSide: BorderSide(
+                          color: Theme.of(
+                            context,
+                          ).inputDecorationTheme.border!.borderSide.color,
+                        ),
                       ),
                       focusedErrorBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12.r),
-                        borderSide: BorderSide(color: Colors.red),
+                        borderSide: BorderSide(
+                          color: Theme.of(context)
+                              .inputDecorationTheme
+                              .focusedErrorBorder!
+                              .borderSide
+                              .color,
+                        ),
                       ),
-                      errorStyle: TextStyle(color: Colors.red),
+                      errorStyle: TextStyle(
+                        color: Theme.of(
+                          context,
+                        ).inputDecorationTheme.errorStyle!.color,
+                      ),
                       hintText: "What needs to be done?",
                       hintStyle: TextStyle(
                         color: Theme.of(
