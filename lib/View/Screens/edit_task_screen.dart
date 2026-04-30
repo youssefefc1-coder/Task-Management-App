@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:task_management_app/Model/task_model.dart';
-import 'package:task_management_app/Services/noti_service.dart';
 import 'package:task_management_app/View/Widgets/category_selector.dart';
 import 'package:task_management_app/View/Widgets/priority_selector.dart';
 import 'package:task_management_app/ViewModel/task_provider.dart';
 
 class EditTaskScreen extends StatefulWidget {
-  const EditTaskScreen({super.key});
+  const EditTaskScreen({super.key, required this.task});
+
+  final TaskModel task;
 
   @override
   State<EditTaskScreen> createState() => _EditTaskScreenState();
@@ -18,13 +19,13 @@ class EditTaskScreen extends StatefulWidget {
 class _EditTaskScreenState extends State<EditTaskScreen> {
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
-  final TextEditingController titleController = TextEditingController();
-  final TextEditingController descriptionController = TextEditingController();
+  late TextEditingController titleController;
+  late TextEditingController descriptionController;
 
   DateTime? selectedDate;
   TimeOfDay? selectedTime;
-  TaskPriority _selectedPriority = TaskPriority.Medium;
-  Category _selectedCategory = Category.General;
+  late TaskPriority _selectedPriority;
+  late Category _selectedCategory;
 
   Future<void> _pickDate(BuildContext context) async {
     DateTime? date = await showDatePicker(
@@ -48,6 +49,21 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
     setState(() {
       selectedTime = time;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    titleController = TextEditingController(text: widget.task.title);
+    descriptionController = TextEditingController(
+      text: widget.task.description ?? '',
+    );
+    selectedDate = widget.task.deadline;
+    selectedTime = widget.task.deadline != null
+        ? TimeOfDay.fromDateTime(widget.task.deadline!)
+        : null;
+    _selectedCategory = widget.task.category;
+    _selectedPriority = widget.task.priority;
   }
 
   @override
@@ -75,7 +91,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
           ),
         ),
         title: Text(
-          "New Task",
+          "Edit Task",
           style: TextStyle(
             color: Theme.of(context).colorScheme.primary,
             fontSize: 20.sp,
@@ -435,23 +451,18 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                           );
                         }
 
-                        final newTaskId = await task.addTask(
+                        await task.updateTask(
                           FirebaseAuth.instance.currentUser!.uid,
-                          TaskModel(
-                            title: titleController.text,
-                            description: descriptionController.text,
-                            deadline: finalDeadline,
-                            priority: _selectedPriority,
-                            category: _selectedCategory,
-                          ),
+                          widget.task.id!,
+                          {
+                            'title': titleController.text,
+                            'description': descriptionController.text,
+                            'deadline': finalDeadline,
+                            'priority': _selectedPriority.name,
+                            'category': _selectedCategory.name,
+                          },
                         );
-                        await NotificationService.scheduleDeadlineAlert(
-                          TaskModel(
-                            id: newTaskId,
-                            title: titleController.text,
-                            deadline: finalDeadline,
-                          ),
-                        );
+
                         Navigator.pop(context);
                       }
                     },
@@ -482,7 +493,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                       ),
                       child: Center(
                         child: Text(
-                          "Create Task",
+                          "Update Task",
                           style: TextStyle(
                             color: Theme.of(context).colorScheme.secondary,
                             fontSize: 18.sp,

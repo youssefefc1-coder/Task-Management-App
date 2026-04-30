@@ -7,9 +7,7 @@ import 'package:task_management_app/Services/Database/task_services.dart';
 class TaskProvider extends ChangeNotifier {
   List<TaskModel> tasks = [];
 
-  List<Category> _selectedCategory = [];
-
-  List<Category> get selectedCategory => _selectedCategory;
+  List<Category> selectedCategory = [];
 
   List<TaskModel> get filteredTasks {
     if (selectedCategory.isEmpty) return tasks;

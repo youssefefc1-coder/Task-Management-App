@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:task_management_app/Model/task_model.dart';
+import 'package:task_management_app/View/Screens/edit_task_screen.dart';
 import 'package:task_management_app/ViewModel/task_provider.dart';
 
 class CustomListTile extends StatelessWidget {
@@ -155,7 +156,12 @@ class CustomListTile extends StatelessWidget {
               itemBuilder: (context) {
                 return <PopupMenuEntry>[
                   PopupMenuItem(
-                    onTap: () {},
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => EditTaskScreen(task: task),
+                      ),
+                    ),
                     child: Center(
                       child: Text(
                         "Edit",
@@ -173,12 +179,54 @@ class CustomListTile extends StatelessWidget {
                   ),
                   PopupMenuItem(
                     onTap: () {
-                      Provider.of<TaskProvider>(
-                        context,
-                        listen: false,
-                      ).deleteTask(
-                        FirebaseAuth.instance.currentUser!.uid,
-                        task.id!,
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            backgroundColor: Theme.of(
+                              context,
+                            ).colorScheme.secondary,
+                            title: Text(
+                              "Are You Sure?",
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
+                            ),
+                            actions: [
+                              TextButton(
+                                child: Text(
+                                  "Cancel",
+                                  style: TextStyle(
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.primary,
+                                  ),
+                                ),
+                                onPressed: () => Navigator.pop(context),
+                              ),
+                              TextButton(
+                                child: Text(
+                                  "Delete",
+                                  style: TextStyle(
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.primary,
+                                  ),
+                                ),
+                                onPressed: () {
+                                  Provider.of<TaskProvider>(
+                                    context,
+                                    listen: false,
+                                  ).deleteTask(
+                                    FirebaseAuth.instance.currentUser!.uid,
+                                    task.id!,
+                                  );
+                                  Navigator.pop(context);
+                                },
+                              ),
+                            ],
+                          );
+                        },
                       );
                     },
                     child: Center(
