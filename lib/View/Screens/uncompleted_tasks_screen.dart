@@ -4,15 +4,15 @@ import 'package:provider/provider.dart';
 import 'package:task_management_app/View/Widgets/custom_list_tile.dart';
 import 'package:task_management_app/ViewModel/task_provider.dart';
 
-class CompletedTasksScreen extends StatelessWidget {
-  const CompletedTasksScreen({super.key});
+class UncompletedTasksScreen extends StatelessWidget {
+  const UncompletedTasksScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     var tasks = context
         .watch<TaskProvider>()
         .tasks
-        .where((element) => element.isDone == true)
+        .where((element) => element.isDone == false)
         .toList();
     return Scaffold(
       appBar: AppBar(
@@ -29,7 +29,7 @@ class CompletedTasksScreen extends StatelessWidget {
           ),
         ),
         title: Text(
-          "Completed Tasks",
+          "Uncompleted Tasks",
           style: TextStyle(
             fontSize: 20.sp,
             fontWeight: FontWeight.bold,
@@ -47,7 +47,7 @@ class CompletedTasksScreen extends StatelessWidget {
       body: tasks.isEmpty
           ? Center(
               child: Text(
-                "No Completed Tasks",
+                "No Uncompleted Tasks",
                 style: TextStyle(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w400,
@@ -55,21 +55,21 @@ class CompletedTasksScreen extends StatelessWidget {
                 ),
               ),
             )
-          : ListView.builder(
-              shrinkWrap: true,
-              physics: BouncingScrollPhysics(),
-              itemCount: tasks.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(
-                    top: 12,
-                    bottom: 5,
-                    left: 24,
-                    right: 24,
-                  ),
-                  child: CustomListTile(task: tasks[index]),
-                );
-              },
+          : Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: SingleChildScrollView(
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  physics: BouncingScrollPhysics(),
+                  itemCount: tasks.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(top: 12, bottom: 5),
+                      child: CustomListTile(task: tasks[index]),
+                    );
+                  },
+                ),
+              ),
             ),
     );
   }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:task_management_app/Model/user_model.dart';
+import 'package:task_management_app/Model/task_model.dart';
 import 'package:task_management_app/View/Widgets/custom_list_tile.dart';
 import 'package:task_management_app/ViewModel/task_provider.dart';
 import 'package:task_management_app/ViewModel/user_data_provider.dart';
@@ -29,7 +30,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     final UserModel? user = context.watch<UserDataProvider>().user;
     return Consumer<TaskProvider>(
-      builder: (context, task, child) {
+      builder: (context, taskProvider, child) {
         return Scaffold(
           appBar: AppBar(
             surfaceTintColor: Colors.transparent,
@@ -73,213 +74,267 @@ class _MainScreenState extends State<MainScreen> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  task.filteredTasks.isEmpty
+                  taskProvider.tasks.isEmpty
                       ? SizedBox()
-                      : Column(
+                      : Row(
                           children: [
-                            Row(
-                              children: [
-                                GestureDetector(
-                                  onTap: () => Navigator.pushNamed(
+                            GestureDetector(
+                              onTap: () => Navigator.pushNamed(
+                                context,
+                                '/completed_tasks',
+                              ),
+                              child: Container(
+                                height: 85.h,
+                                width: 102.w,
+                                padding: EdgeInsets.only(
+                                  top: 20,
+                                  left: 20,
+                                  right: 20,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Theme.of(
                                     context,
-                                    '/completed_tasks',
+                                  ).colorScheme.primary.withValues(alpha: 0.05),
+                                  borderRadius: BorderRadius.circular(8.r),
+                                  border: Border.all(
+                                    color: Theme.of(context).colorScheme.primary
+                                        .withValues(alpha: 0.1),
                                   ),
-                                  child: Container(
-                                    height: 85.h,
-                                    width: 102.w,
-                                    padding: EdgeInsets.only(
-                                      top: 20,
-                                      left: 20,
-                                      right: 20,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .primary
-                                          .withValues(alpha: 0.05),
-                                      borderRadius: BorderRadius.circular(8.r),
-                                      border: Border.all(
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "DONE",
+                                      style: TextStyle(
+                                        fontSize: 12.sp,
+                                        fontWeight: FontWeight.w500,
                                         color: Theme.of(context)
                                             .colorScheme
                                             .primary
-                                            .withValues(alpha: 0.1),
+                                            .withValues(alpha: 0.7),
                                       ),
                                     ),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "DONE",
-                                          style: TextStyle(
-                                            fontSize: 12.sp,
-                                            fontWeight: FontWeight.w500,
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .primary
-                                                .withValues(alpha: 0.7),
-                                          ),
-                                        ),
-                                        SizedBox(height: 8.h),
-                                        Text(
-                                          task.filteredTasks
-                                              .where(
-                                                (element) =>
-                                                    element.isDone == true,
-                                              )
-                                              .length
-                                              .toString(),
-                                          style: TextStyle(
-                                            fontSize: 20.sp,
-                                            fontWeight: FontWeight.bold,
-                                            color: Theme.of(
-                                              context,
-                                            ).colorScheme.primary,
-                                          ),
-                                        ),
-                                      ],
+                                    SizedBox(height: 8.h),
+                                    Text(
+                                      taskProvider.tasks
+                                          .where(
+                                            (element) => element.isDone == true,
+                                          )
+                                          .length
+                                          .toString(),
+                                      style: TextStyle(
+                                        fontSize: 20.sp,
+                                        fontWeight: FontWeight.bold,
+                                        color: Theme.of(
+                                          context,
+                                        ).colorScheme.primary,
+                                      ),
                                     ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 16.w),
+                            GestureDetector(
+                              onTap: () => Navigator.pushNamed(
+                                context,
+                                '/uncompleted_tasks',
+                              ),
+                              child: Container(
+                                height: 85.h,
+                                width: 102.w,
+                                padding: EdgeInsets.only(
+                                  top: 20,
+                                  left: 20,
+                                  right: 20,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.primary.withValues(alpha: 0.05),
+                                  borderRadius: BorderRadius.circular(8.r),
+                                  border: Border.all(
+                                    color: Theme.of(context).colorScheme.primary
+                                        .withValues(alpha: 0.1),
                                   ),
                                 ),
-                                SizedBox(width: 16.w),
-                                Container(
-                                  height: 85.h,
-                                  width: 102.w,
-                                  padding: EdgeInsets.only(
-                                    top: 20,
-                                    left: 20,
-                                    right: 20,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: Theme.of(context).colorScheme.primary
-                                        .withValues(alpha: 0.05),
-                                    borderRadius: BorderRadius.circular(8.r),
-                                    border: Border.all(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "PENDING",
+                                      style: TextStyle(
+                                        fontSize: 12.sp,
+                                        fontWeight: FontWeight.w500,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary
+                                            .withValues(alpha: 0.7),
+                                      ),
+                                    ),
+                                    SizedBox(height: 8.h),
+                                    Text(
+                                      taskProvider.tasks
+                                          .where(
+                                            (element) =>
+                                                element.isDone == false,
+                                          )
+                                          .length
+                                          .toString(),
+                                      style: TextStyle(
+                                        fontSize: 20.sp,
+                                        fontWeight: FontWeight.bold,
+                                        color: Theme.of(
+                                          context,
+                                        ).colorScheme.primary,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 16.w),
+                            Container(
+                              height: 85.h,
+                              width: 102.w,
+                              padding: EdgeInsets.only(
+                                top: 20,
+                                left: 20,
+                                right: 20,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).colorScheme.primary,
+                                borderRadius: BorderRadius.circular(8.r),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "TOTAL",
+                                    style: TextStyle(
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.w500,
                                       color: Theme.of(context)
                                           .colorScheme
-                                          .primary
-                                          .withValues(alpha: 0.1),
+                                          .secondary
+                                          .withValues(alpha: 0.7),
                                     ),
                                   ),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "PENDING",
-                                        style: TextStyle(
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.w500,
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .primary
-                                              .withValues(alpha: 0.7),
-                                        ),
-                                      ),
-                                      SizedBox(height: 8.h),
-                                      Text(
-                                        task.filteredTasks
-                                            .where(
-                                              (element) =>
-                                                  element.isDone == false,
-                                            )
-                                            .length
-                                            .toString(),
-                                        style: TextStyle(
-                                          fontSize: 20.sp,
-                                          fontWeight: FontWeight.bold,
-                                          color: Theme.of(
-                                            context,
-                                          ).colorScheme.primary,
-                                        ),
-                                      ),
-                                    ],
+                                  SizedBox(height: 8.h),
+                                  Text(
+                                    taskProvider.tasks.length.toString(),
+                                    style: TextStyle(
+                                      fontSize: 20.sp,
+                                      fontWeight: FontWeight.bold,
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.secondary,
+                                    ),
                                   ),
-                                ),
-                                SizedBox(width: 16.w),
-                                Container(
-                                  height: 85.h,
-                                  width: 102.w,
-                                  padding: EdgeInsets.only(
-                                    top: 20,
-                                    left: 20,
-                                    right: 20,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: Theme.of(
-                                      context,
-                                    ).colorScheme.primary,
-                                    borderRadius: BorderRadius.circular(8.r),
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "TOTAL",
-                                        style: TextStyle(
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.w500,
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .secondary
-                                              .withValues(alpha: 0.7),
-                                        ),
-                                      ),
-                                      SizedBox(height: 8.h),
-                                      Text(
-                                        task.filteredTasks.length.toString(),
-                                        style: TextStyle(
-                                          fontSize: 20.sp,
-                                          fontWeight: FontWeight.bold,
-                                          color: Theme.of(
-                                            context,
-                                          ).colorScheme.secondary,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                            SizedBox(height: 32.h),
                           ],
                         ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Your Tasks",
-                        style: TextStyle(
-                          fontSize: 18.sp,
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
+                  SizedBox(height: 26.h),
+                  Align(
+                    alignment: AlignmentGeometry.centerLeft,
+                    child: Text(
+                      "Your Tasks",
+                      style: TextStyle(
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.primary,
                       ),
-                      Spacer(),
-                      GestureDetector(
-                        onTap: () {},
-                        child: Text(
-                          "View all",
-                          style: TextStyle(
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400,
-                            color: Theme.of(
-                              context,
-                            ).colorScheme.primary.withValues(alpha: 0.6),
-                          ),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
+                  SizedBox(height: 12.h),
+                  Align(
+                    alignment: AlignmentGeometry.centerLeft,
+                    child: SizedBox(
+                      height: 40.h,
+                      child: ListView.separated(
+                        shrinkWrap: true,
+                        physics: BouncingScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        separatorBuilder: (context, index) =>
+                            SizedBox(width: 10.w),
+                        itemCount: Category.values.length + 1,
+                        itemBuilder: (context, index) {
+                          final selectedCategories =
+                              taskProvider.selectedCategory;
+                          if (index == 0) {
+                            final isSelected = selectedCategories.isEmpty;
+                            return FilterChip(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadiusGeometry.circular(
+                                  24.r,
+                                ),
+                                side: BorderSide(
+                                  width: 2.w,
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
+                              ),
+                              selected: isSelected,
+                              showCheckmark: false,
+                              onSelected: (_) {
+                                taskProvider.clearAllCategories();
+                              },
+                              label: Text(
+                                "All",
+                                style: TextStyle(
+                                  color: isSelected
+                                      ? Theme.of(context).colorScheme.secondary
+                                      : Theme.of(context).colorScheme.primary,
+                                ),
+                              ),
+                            );
+                          }
+
+                          final category = Category.values[index - 1];
+                          final isSelected = selectedCategories.contains(
+                            category,
+                          );
+
+                          return FilterChip(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadiusGeometry.circular(24.r),
+                              side: BorderSide(
+                                width: 2.w,
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
+                            ),
+                            selected: isSelected,
+                            showCheckmark: false,
+                            onSelected: (_) {
+                              taskProvider.toggleCategory(category);
+                            },
+                            label: Text(
+                              category.name,
+                              style: TextStyle(
+                                color: isSelected
+                                    ? Theme.of(context).colorScheme.secondary
+                                    : Theme.of(context).colorScheme.primary,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 12.h),
+
                   ListView.builder(
                     shrinkWrap: true,
                     physics: BouncingScrollPhysics(),
-                    itemCount: task.filteredTasks.length,
+                    itemCount: taskProvider.filteredTasks.length,
                     itemBuilder: (context, index) {
                       return Padding(
                         padding: const EdgeInsets.only(top: 12, bottom: 5),
-                        child: CustomListTile(task: task.filteredTasks[index]),
+                        child: CustomListTile(
+                          task: taskProvider.filteredTasks[index],
+                        ),
                       );
                     },
                   ),

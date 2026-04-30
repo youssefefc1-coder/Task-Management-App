@@ -111,6 +111,11 @@ class AppTheme {
         }
       }),
     ),
+
+    chipTheme: ChipThemeData(
+      selectedColor: Color(0xff021526),
+      backgroundColor: Color(0xffFFFFFF),
+    ),
   );
 
   static final darkTheme = ThemeData(
@@ -125,6 +130,8 @@ class AppTheme {
     colorScheme: ColorScheme.dark(
       primary: Color(0xffFFFFFF),
       secondary: Color(0xff021526),
+      onPrimary: Color(0xffFFEDD5),
+      onSecondary: Color(0xffC2410C),
       tertiary: Color(0xffFBBF24),
       onTertiary: Color(0xff78350F),
     ),
@@ -219,6 +226,11 @@ class AppTheme {
           return Colors.white;
         }
       }),
+    ),
+
+    chipTheme: ChipThemeData(
+      selectedColor: Color(0xffFFFFFF),
+      backgroundColor: Color(0xff021526),
     ),
   );
 }

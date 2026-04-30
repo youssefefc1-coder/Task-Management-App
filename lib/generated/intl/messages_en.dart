@@ -80,7 +80,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "splash_phase": MessageLookupByLibrary.simpleMessage(
       "Organize Your Day, One Task at a Time",
     ),
-    "system_default": MessageLookupByLibrary.simpleMessage("System Default"),
+    "system_default": MessageLookupByLibrary.simpleMessage("System (Default)"),
     "tasks": MessageLookupByLibrary.simpleMessage("Tasks"),
     "time": MessageLookupByLibrary.simpleMessage("Time"),
     "title": MessageLookupByLibrary.simpleMessage("title"),

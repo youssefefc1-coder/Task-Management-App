@@ -107,13 +107,13 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ],
                 onSelected: (value) {
-                  if (value == 1) {
-                    task.setFilter("all");
-                  } else if (value == 2) {
-                    task.setFilter("done");
-                  } else if (value == 3) {
-                    task.setFilter("notDone");
-                  }
+                  // if (value == 1) {
+                  //   task.setFilter("all");
+                  // } else if (value == 2) {
+                  //   task.setFilter("done");
+                  // } else if (value == 3) {
+                  //   task.setFilter("notDone");
+                  // }
                 },
               ),
               SizedBox(width: 15.w),

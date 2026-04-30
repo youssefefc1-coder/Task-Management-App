@@ -43,7 +43,7 @@
     "settings" : "Settings",
     "app_language" : "App Language",
     "choose_language" : "Choose Language",
-    "system_default" : "System Default",
+    "system_default" : "System (Default)",
     "english" : "English",
     "arabic" : "Arabic",
     "cancel" : "Cancel",

@@ -6,20 +6,30 @@ import 'package:task_management_app/Services/Database/task_services.dart';
 
 class TaskProvider extends ChangeNotifier {
   List<TaskModel> tasks = [];
-  String _filter = "all";
+
+  List<Category> _selectedCategory = [];
+
+  List<Category> get selectedCategory => _selectedCategory;
 
   List<TaskModel> get filteredTasks {
-    if (_filter == "done") {
-      return tasks.where((element) => element.isDone == true).toList();
-    } else if (_filter == "notDone") {
-      return tasks.where((element) => element.isDone == false).toList();
-    } else {
-      return tasks;
-    }
+    if (selectedCategory.isEmpty) return tasks;
+
+    return tasks
+        .where((task) => selectedCategory.contains(task.category))
+        .toList();
   }
 
-  void setFilter(String filter) {
-    _filter = filter;
+  void toggleCategory(Category category) {
+    if (selectedCategory.contains(category)) {
+      selectedCategory.remove(category);
+    } else {
+      selectedCategory.add(category);
+    }
+    notifyListeners();
+  }
+
+  void clearAllCategories() {
+    selectedCategory.clear();
     notifyListeners();
   }
 

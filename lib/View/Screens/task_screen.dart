@@ -45,80 +45,6 @@ class TaskScreen extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 12),
-                  height: 40.h,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.secondary,
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                  ),
-                  child: Center(
-                    child: Text(
-                      task.category.name,
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.primary,
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 12),
-                  height: 40.h,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.secondary,
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                  ),
-                  child: Center(
-                    child: Text(
-                      task.deadline != null
-                          ? DateFormat(
-                              'h:mm MMM dd',
-                            ).format(task.deadline!).toString()
-                          : "No Deadline",
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.primary,
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                ),
-
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 12),
-                  height: 40.h,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.secondary,
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                  ),
-                  child: Center(
-                    child: Text(
-                      task.priority.name,
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.primary,
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 20.h),
             task.description != ''
                 ? Container(
                     width: double.infinity,
@@ -142,17 +68,109 @@ class TaskScreen extends StatelessWidget {
                   )
                 : Column(
                     children: [
-                      SizedBox(height: 50.h),
-                      Text(
-                        "No Description",
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w400,
+                      Container(
+                        width: double.infinity,
+                        height: 60.h,
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.secondary,
+                          border: Border.all(
+                            color: Theme.of(context).colorScheme.primary,
+                            width: 2.w,
+                          ),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Center(
+                          child: Text(
+                            "No Description",
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.primary,
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
                         ),
                       ),
                     ],
                   ),
+
+            SizedBox(height: 20.h),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 12),
+                  height: 40.h,
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.secondary,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: Theme.of(context).colorScheme.primary,
+                      width: 2.w,
+                    ),
+                  ),
+                  child: Center(
+                    child: Text(
+                      task.deadline != null
+                          ? DateFormat(
+                              'h:mm MMM dd',
+                            ).format(task.deadline!).toString()
+                          : "No Deadline",
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 12),
+                  height: 40.h,
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.secondary,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: Theme.of(context).colorScheme.primary,
+                      width: 2.w,
+                    ),
+                  ),
+                  child: Center(
+                    child: Text(
+                      task.category.name,
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ),
+
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 12),
+                  height: 40.h,
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.secondary,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: Theme.of(context).colorScheme.primary,
+                      width: 2.w,
+                    ),
+                  ),
+                  child: Center(
+                    child: Text(
+                      task.priority.name,
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),

@@ -384,10 +384,10 @@ class S {
     );
   }
 
-  /// `System Default`
+  /// `System (Default)`
   String get system_default {
     return Intl.message(
-      'System Default',
+      'System (Default)',
       name: 'system_default',
       desc: '',
       args: [],

@@ -8,14 +8,14 @@ import 'package:task_management_app/View/Widgets/category_selector.dart';
 import 'package:task_management_app/View/Widgets/priority_selector.dart';
 import 'package:task_management_app/ViewModel/task_provider.dart';
 
-class AddTaskScreen extends StatefulWidget {
-  const AddTaskScreen({super.key});
+class EditTaskScreen extends StatefulWidget {
+  const EditTaskScreen({super.key});
 
   @override
-  State<AddTaskScreen> createState() => _AddTaskScreenState();
+  State<EditTaskScreen> createState() => _EditTaskScreenState();
 }
 
-class _AddTaskScreenState extends State<AddTaskScreen> {
+class _EditTaskScreenState extends State<EditTaskScreen> {
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
   final TextEditingController titleController = TextEditingController();
