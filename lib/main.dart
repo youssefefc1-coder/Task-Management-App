@@ -6,8 +6,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:task_management_app/Theme/app_theme.dart';
 import 'package:task_management_app/View/Screens/add_task_screen.dart';
 import 'package:task_management_app/View/Screens/completed_tasks_screen.dart';
-import 'package:task_management_app/View/Screens/home_screen.dart';
-import 'package:task_management_app/Services/noti_service.dart';
+import 'package:task_management_app/Services/notification_service.dart';
 import 'package:task_management_app/View/Screens/Auth/login_screen.dart';
 import 'package:task_management_app/View/Screens/Auth/reset_pass_screen.dart';
 import 'package:task_management_app/View/Screens/Auth/signup_screen.dart';
@@ -17,6 +16,7 @@ import 'package:task_management_app/View/Screens/splash_screen.dart';
 import 'package:task_management_app/View/Screens/task_screen.dart';
 import 'package:task_management_app/View/Screens/uncompleted_tasks_screen.dart';
 import 'package:task_management_app/ViewModel/locale_provider.dart';
+import 'package:task_management_app/ViewModel/notification_provider.dart';
 import 'package:task_management_app/ViewModel/task_provider.dart';
 import 'package:task_management_app/ViewModel/theme_provider.dart';
 import 'package:task_management_app/ViewModel/user_data_provider.dart';
@@ -39,6 +39,9 @@ void main() async {
         ChangeNotifierProvider(create: (context) => UserDataProvider()),
         ChangeNotifierProvider(
           create: (context) => ThemeProvider()..getTheme(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => NotificationProvider()..loadNotificationState(),
         ),
       ],
       child: const MyApp(),
@@ -70,14 +73,13 @@ class MyApp extends StatelessWidget {
         darkTheme: AppTheme.darkTheme,
         themeMode: theme,
         routes: {
+          '/splash': (context) => SplashScreen(),
           '/login': (context) => LoginScreen(),
           '/signup': (context) => SignupScreen(),
-          '/home': (context) => HomeScreen(),
           '/resetPassword': (context) => ResetPassScreen(),
-          '/splash': (context) => SplashScreen(),
+          '/main': (context) => MainScreen(),
           '/task': (context) => TaskScreen(),
           '/add_task': (context) => AddTaskScreen(),
-          '/main': (context) => MainScreen(),
           '/settings': (context) => SettingsScreen(),
           '/completed_tasks': (context) => CompletedTasksScreen(),
           '/uncompleted_tasks': (context) => UncompletedTasksScreen(),

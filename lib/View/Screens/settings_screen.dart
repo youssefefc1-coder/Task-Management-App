@@ -6,6 +6,8 @@ import 'package:task_management_app/View/Widgets/custom_bottom_sheet.dart';
 import 'package:task_management_app/View/Widgets/language_alert_dialog.dart';
 import 'package:task_management_app/View/Widgets/theme_alert_dialog.dart';
 import 'package:task_management_app/ViewModel/locale_provider.dart';
+import 'package:task_management_app/ViewModel/notification_provider.dart';
+import 'package:task_management_app/ViewModel/task_provider.dart';
 import 'package:task_management_app/ViewModel/theme_provider.dart';
 import 'package:task_management_app/ViewModel/user_data_provider.dart';
 
@@ -418,6 +420,27 @@ class SettingsScreen extends StatelessWidget {
                           color: Theme.of(context).colorScheme.primary,
                         ),
                       ),
+                      Spacer(),
+                      Switch(
+                        activeTrackColor: Theme.of(context).colorScheme.primary,
+                        activeThumbColor: Theme.of(
+                          context,
+                        ).colorScheme.secondary,
+                        value: context.watch<NotificationProvider>().isEnabled,
+                        onChanged: (value) async {
+                          final tasks = context.read<TaskProvider>().tasks;
+                          if (value) {
+                            await context
+                                .read<NotificationProvider>()
+                                .enableNotification(tasks);
+                          } else {
+                            await context
+                                .read<NotificationProvider>()
+                                .disableNotification();
+                          }
+                        },
+                      ),
+                      SizedBox(width: 15.w),
                     ],
                   ),
                 ),

@@ -1,9 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl/intl.dart';
+import 'package:intl/intl.dart' show DateFormat;
 import 'package:provider/provider.dart';
 import 'package:task_management_app/Model/task_model.dart';
+import 'package:task_management_app/Services/notification_service.dart';
 import 'package:task_management_app/View/Screens/edit_task_screen.dart';
 import 'package:task_management_app/ViewModel/task_provider.dart';
 
@@ -13,6 +14,7 @@ class CustomListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isRTL = Directionality.of(context) == TextDirection.rtl;
     return GestureDetector(
       onTap: () => Navigator.pushNamed(context, '/task', arguments: task),
       child: Container(
@@ -49,6 +51,7 @@ class CustomListTile extends StatelessWidget {
                   task.id!,
                   {'isDone': !task.isDone},
                 );
+                NotificationService.cancelTaskNotifications(task.id!);
               },
               child: Container(
                 width: 32.w,
@@ -152,7 +155,7 @@ class CustomListTile extends StatelessWidget {
                 side: BorderSide(color: Theme.of(context).colorScheme.primary),
               ),
 
-              offset: Offset(-30, 20),
+              offset: isRTL ? Offset(30, 20) : Offset(-30, 20),
               itemBuilder: (context) {
                 return <PopupMenuEntry>[
                   PopupMenuItem(

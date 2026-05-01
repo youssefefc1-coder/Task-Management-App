@@ -19,7 +19,7 @@ class UncompletedTasksScreen extends StatelessWidget {
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         toolbarHeight: 65.h,
         leading: Padding(
-          padding: const EdgeInsets.only(left: 25),
+          padding: const EdgeInsetsDirectional.only(start: 25),
           child: IconButton(
             onPressed: () => Navigator.pop(context),
             icon: Icon(

@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:task_management_app/Model/task_model.dart';
+import 'package:task_management_app/Services/notification_service.dart';
 import 'package:task_management_app/View/Widgets/category_selector.dart';
 import 'package:task_management_app/View/Widgets/priority_selector.dart';
+import 'package:task_management_app/ViewModel/notification_provider.dart';
 import 'package:task_management_app/ViewModel/task_provider.dart';
 
 class EditTaskScreen extends StatefulWidget {
@@ -24,7 +26,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
 
   DateTime? selectedDate;
   TimeOfDay? selectedTime;
-  late TaskPriority _selectedPriority;
+  late Priority _selectedPriority;
   late Category _selectedCategory;
 
   Future<void> _pickDate(BuildContext context) async {
@@ -450,20 +452,43 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                             selectedTime!.minute,
                           );
                         }
+                        try {
+                          await task.updateTask(
+                            FirebaseAuth.instance.currentUser!.uid,
+                            widget.task.id!,
+                            {
+                              'title': titleController.text,
+                              'description': descriptionController.text,
+                              'deadline': finalDeadline,
+                              'priority': _selectedPriority.name,
+                              'category': _selectedCategory.name,
+                            },
+                          );
 
-                        await task.updateTask(
-                          FirebaseAuth.instance.currentUser!.uid,
-                          widget.task.id!,
-                          {
-                            'title': titleController.text,
-                            'description': descriptionController.text,
-                            'deadline': finalDeadline,
-                            'priority': _selectedPriority.name,
-                            'category': _selectedCategory.name,
-                          },
-                        );
+                          if (context.read<NotificationProvider>().isEnabled) {
+                            if (!widget.task.isDone) {
+                              await NotificationService.scheduleDeadlineAlert(
+                                TaskModel(
+                                  id: widget.task.id,
+                                  title: titleController.text,
+                                  deadline: finalDeadline,
+                                  category: _selectedCategory,
+                                  priority: _selectedPriority,
+                                ),
+                              );
+                            } else {
+                              await NotificationService.cancelTaskNotifications(
+                                widget.task.id!,
+                              );
+                            }
+                          }
 
-                        Navigator.pop(context);
+                          Navigator.pop(context);
+                        } catch (e) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text("Failed to update task")),
+                          );
+                        }
                       }
                     },
                     child: Container(

@@ -9,8 +9,8 @@ class PrioritySelector extends StatelessWidget {
     required this.onChange,
   });
 
-  final TaskPriority selectedPriority;
-  final ValueChanged<TaskPriority> onChange;
+  final Priority selectedPriority;
+  final ValueChanged<Priority> onChange;
 
   @override
   Widget build(BuildContext context) {
@@ -19,11 +19,11 @@ class PrioritySelector extends StatelessWidget {
       children: [
         MaterialButton(
           onPressed: () {
-            onChange(TaskPriority.Low);
+            onChange(Priority.Low);
           },
           height: 50.h,
           minWidth: 110.w,
-          color: selectedPriority == TaskPriority.Low
+          color: selectedPriority == Priority.Low
               ? Theme.of(context).colorScheme.primary
               : Theme.of(context).colorScheme.secondary,
           shape: RoundedRectangleBorder(
@@ -36,9 +36,9 @@ class PrioritySelector extends StatelessWidget {
           ),
           child: Center(
             child: Text(
-              TaskPriority.Low.name,
+              Priority.Low.name,
               style: TextStyle(
-                color: selectedPriority == TaskPriority.Low
+                color: selectedPriority == Priority.Low
                     ? Theme.of(context).colorScheme.secondary
                     : Theme.of(context).colorScheme.primary,
                 fontSize: 16.sp,
@@ -49,11 +49,11 @@ class PrioritySelector extends StatelessWidget {
         ),
         MaterialButton(
           onPressed: () {
-            onChange(TaskPriority.Medium);
+            onChange(Priority.Medium);
           },
           height: 50.h,
           minWidth: 110.w,
-          color: selectedPriority == TaskPriority.Medium
+          color: selectedPriority == Priority.Medium
               ? Theme.of(context).colorScheme.primary
               : Theme.of(context).colorScheme.secondary,
           shape: RoundedRectangleBorder(
@@ -66,9 +66,9 @@ class PrioritySelector extends StatelessWidget {
           ),
           child: Center(
             child: Text(
-              TaskPriority.Medium.name,
+              Priority.Medium.name,
               style: TextStyle(
-                color: selectedPriority == TaskPriority.Medium
+                color: selectedPriority == Priority.Medium
                     ? Theme.of(context).colorScheme.secondary
                     : Theme.of(context).colorScheme.primary,
                 fontSize: 16.sp,
@@ -79,11 +79,11 @@ class PrioritySelector extends StatelessWidget {
         ),
         MaterialButton(
           onPressed: () {
-            onChange(TaskPriority.High);
+            onChange(Priority.High);
           },
           height: 50.h,
           minWidth: 110.w,
-          color: selectedPriority == TaskPriority.High
+          color: selectedPriority == Priority.High
               ? Theme.of(context).colorScheme.primary
               : Theme.of(context).colorScheme.secondary,
           shape: RoundedRectangleBorder(
@@ -96,9 +96,9 @@ class PrioritySelector extends StatelessWidget {
           ),
           child: Center(
             child: Text(
-              TaskPriority.High.name,
+              Priority.High.name,
               style: TextStyle(
-                color: selectedPriority == TaskPriority.High
+                color: selectedPriority == Priority.High
                     ? Theme.of(context).colorScheme.secondary
                     : Theme.of(context).colorScheme.primary,
                 fontSize: 16.sp,

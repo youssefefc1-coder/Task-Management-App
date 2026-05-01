@@ -26,20 +26,38 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 
+  String getGreeting() {
+    int hour = DateTime.now().hour;
+    if (hour < 12) {
+      return "Good Morning";
+    } else if (hour < 17) {
+      return "Good Afternoon";
+    } else if (hour < 21) {
+      return "Good Evening";
+    } else {
+      return "Good Night";
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final UserModel? user = context.watch<UserDataProvider>().user;
+    final isRTL = Directionality.of(context) == TextDirection.rtl;
     return Consumer<TaskProvider>(
       builder: (context, taskProvider, child) {
+        taskProvider.filteredTasks.sort(
+          (a, b) => b.priority.index.compareTo(a.priority.index),
+        );
         return Scaffold(
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             surfaceTintColor: Colors.transparent,
             backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Good Morning",
+                  getGreeting(),
                   style: TextStyle(
                     color: Theme.of(
                       context,
@@ -239,7 +257,9 @@ class _MainScreenState extends State<MainScreen> {
                         ),
                   SizedBox(height: 26.h),
                   Align(
-                    alignment: AlignmentGeometry.centerLeft,
+                    alignment: isRTL
+                        ? AlignmentGeometry.centerRight
+                        : AlignmentGeometry.centerLeft,
                     child: Text(
                       "Your Tasks",
                       style: TextStyle(

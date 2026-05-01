@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:task_management_app/Model/task_model.dart';
-import 'package:task_management_app/Services/noti_service.dart';
+import 'package:task_management_app/Services/notification_service.dart';
 import 'package:task_management_app/View/Widgets/category_selector.dart';
 import 'package:task_management_app/View/Widgets/priority_selector.dart';
+import 'package:task_management_app/ViewModel/notification_provider.dart';
 import 'package:task_management_app/ViewModel/task_provider.dart';
 
 class AddTaskScreen extends StatefulWidget {
@@ -23,7 +24,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
 
   DateTime? selectedDate;
   TimeOfDay? selectedTime;
-  TaskPriority _selectedPriority = TaskPriority.Medium;
+  Priority _selectedPriority = Priority.Medium;
   Category _selectedCategory = Category.General;
 
   Future<void> _pickDate(BuildContext context) async {
@@ -445,13 +446,16 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                             category: _selectedCategory,
                           ),
                         );
-                        await NotificationService.scheduleDeadlineAlert(
-                          TaskModel(
-                            id: newTaskId,
-                            title: titleController.text,
-                            deadline: finalDeadline,
-                          ),
-                        );
+
+                        if (context.read<NotificationProvider>().isEnabled) {
+                          await NotificationService.scheduleDeadlineAlert(
+                            TaskModel(
+                              id: newTaskId,
+                              title: titleController.text,
+                              deadline: finalDeadline,
+                            ),
+                          );
+                        }
                         Navigator.pop(context);
                       }
                     },

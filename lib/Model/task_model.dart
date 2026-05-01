@@ -1,4 +1,4 @@
-enum TaskPriority { Low, Medium, High }
+enum Priority { Low, Medium, High }
 
 enum Category {
   General,
@@ -15,7 +15,7 @@ class TaskModel {
   final String? id;
   final String title;
   final String? description;
-  final TaskPriority priority;
+  final Priority priority;
   final Category category;
   final bool isDone;
   final DateTime? deadline;
@@ -26,7 +26,7 @@ class TaskModel {
     this.isDone = false,
     this.id,
     this.deadline,
-    this.priority = TaskPriority.Medium,
+    this.priority = Priority.Medium,
     this.category = Category.General,
   });
 
@@ -37,7 +37,7 @@ class TaskModel {
       description: data['description'] ?? '',
       isDone: data['isDone'],
       deadline: data['deadline']?.toDate(),
-      priority: TaskPriority.values.byName(data['priority']),
+      priority: Priority.values.byName(data['priority']),
       category: Category.values.byName(data['category']),
     );
   }

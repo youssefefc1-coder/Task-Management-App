@@ -1,10 +1,10 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:task_management_app/Model/task_model.dart';
+import 'package:task_management_app/Model/task_model.dart' hide Priority;
 import 'package:timezone/data/latest.dart' as tz_data;
 import 'package:timezone/timezone.dart' as tz;
 
 class NotificationService {
-  static final FlutterLocalNotificationsPlugin _plugin =
+  static final FlutterLocalNotificationsPlugin plugin =
       FlutterLocalNotificationsPlugin();
 
   static Future<void> init() async {
@@ -19,9 +19,9 @@ class NotificationService {
       android: androidSettings,
     );
 
-    await _plugin.initialize(settings: settings);
+    await plugin.initialize(settings: settings);
 
-    await _plugin
+    await plugin
         .resolvePlatformSpecificImplementation<
           AndroidFlutterLocalNotificationsPlugin
         >()
@@ -50,7 +50,7 @@ class NotificationService {
 
     if (alertTime.isBefore(DateTime.now())) return;
 
-    await _plugin.zonedSchedule(
+    await plugin.zonedSchedule(
       id: _deadlineNotifId(task.id!),
       title: '⏰ Deadline in 30 minutes',
       body: '"${task.title}" is due soon!',
@@ -64,12 +64,12 @@ class NotificationService {
   }
 
   static Future<void> cancelTaskNotifications(String taskId) async {
-    await _plugin.cancel(id: _deadlineNotifId(taskId));
-    await _plugin.cancel(id: _reminderNotifId(taskId));
+    await plugin.cancel(id: _deadlineNotifId(taskId));
+  }
+
+  static Future<void> cancelAllNotifications() async {
+    await plugin.cancelAll();
   }
 
   static int _deadlineNotifId(String taskId) => taskId.hashCode & 0x7FFFFFFF;
-
-  static int _reminderNotifId(String taskId) =>
-      ("$taskId _reminder").hashCode & 0x7FFFFFFF;
 }
