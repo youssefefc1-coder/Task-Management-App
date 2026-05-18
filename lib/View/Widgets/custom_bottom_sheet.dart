@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:task_management_app/ViewModel/user_data_provider.dart';
+import 'package:task_management_app/generated/l10n.dart';
 
 class CustomModalBottomSheet extends StatefulWidget {
   const CustomModalBottomSheet({super.key, required this.name});
@@ -45,7 +46,7 @@ class _CustomModalBottomSheetState extends State<CustomModalBottomSheet> {
                 child: Column(
                   children: [
                     Text(
-                      "Edit Name",
+                      S.of(context).edit_name,
                       style: TextStyle(
                         fontSize: 20.sp,
                         fontWeight: FontWeight.bold,
@@ -56,7 +57,7 @@ class _CustomModalBottomSheetState extends State<CustomModalBottomSheet> {
                     TextFormField(
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return "Name can't be empty";
+                          return S.of(context).field_cant_be_empty;
                         }
                         return null;
                       },
@@ -117,7 +118,7 @@ class _CustomModalBottomSheetState extends State<CustomModalBottomSheet> {
                                 .color,
                           ),
                         ),
-                        hintText: "Name",
+                        hintText: S.of(context).name,
                         hintStyle: TextStyle(
                           color: Theme.of(
                             context,
@@ -144,7 +145,7 @@ class _CustomModalBottomSheetState extends State<CustomModalBottomSheet> {
                         borderRadius: BorderRadiusGeometry.circular(12.r),
                       ),
                       child: Text(
-                        "Update Name",
+                        S.of(context).update_name,
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.secondary,
                           fontSize: 16.sp,

@@ -84,7 +84,6 @@ class MyApp extends StatelessWidget {
           '/completed_tasks': (context) => CompletedTasksScreen(),
           '/uncompleted_tasks': (context) => UncompletedTasksScreen(),
         },
-
         initialRoute: '/splash',
       ),
     );

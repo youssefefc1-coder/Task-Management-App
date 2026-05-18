@@ -1,9 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:task_management_app/Services/Authentication/auth_exception.dart';
+import 'package:task_management_app/generated/l10n.dart';
 
 class AuthServices {
-  Future<String?> signup(String email, String password) async {
+  Future<String?> signup(
+    String email,
+    String password,
+    BuildContext context,
+  ) async {
     try {
       UserCredential userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
@@ -21,7 +27,7 @@ class AuthServices {
       UserCredential userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
       if (!userCredential.user!.emailVerified) {
-        return "Please Verify your email before logging in.";
+        return S.current.verify_alert_message;
       }
       return null;
     } on FirebaseAuthException catch (e) {
@@ -48,7 +54,7 @@ class AuthServices {
 
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
-      if (googleUser == null) return "Sign in cancelled";
+      if (googleUser == null) return S.current.sign_in_cancel;
 
       final GoogleSignInAuthentication googleAuth =
           await googleUser.authentication;

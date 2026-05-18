@@ -8,6 +8,7 @@ import 'package:task_management_app/View/Widgets/category_selector.dart';
 import 'package:task_management_app/View/Widgets/priority_selector.dart';
 import 'package:task_management_app/ViewModel/notification_provider.dart';
 import 'package:task_management_app/ViewModel/task_provider.dart';
+import 'package:task_management_app/generated/l10n.dart';
 
 class AddTaskScreen extends StatefulWidget {
   const AddTaskScreen({super.key});
@@ -24,8 +25,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
 
   DateTime? selectedDate;
   TimeOfDay? selectedTime;
-  Priority _selectedPriority = Priority.Medium;
-  Category _selectedCategory = Category.General;
+  Priority _selectedPriority = Priority.medium;
+  Category _selectedCategory = Category.general;
 
   Future<void> _pickDate(BuildContext context) async {
     DateTime? date = await showDatePicker(
@@ -76,7 +77,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
           ),
         ),
         title: Text(
-          "New Task",
+          S.of(context).new_task,
           style: TextStyle(
             color: Theme.of(context).colorScheme.primary,
             fontSize: 20.sp,
@@ -95,7 +96,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "TASK NAME",
+                    S.of(context).task_name,
                     style: TextStyle(
                       fontSize: 14.sp,
                       color: Theme.of(
@@ -108,7 +109,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                   TextFormField(
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return "Please enter task name";
+                        return S.of(context).task_name_empty_er;
                       }
                       return null;
                     },
@@ -164,7 +165,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                           context,
                         ).inputDecorationTheme.errorStyle!.color,
                       ),
-                      hintText: "What needs to be done?",
+                      hintText: S.of(context).task_name_field_hint_text,
                       hintStyle: TextStyle(
                         color: Theme.of(
                           context,
@@ -176,7 +177,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                   ),
                   SizedBox(height: 8.h),
                   Text(
-                    "DESCRIPTION",
+                    S.of(context).description,
                     style: TextStyle(
                       fontSize: 14.sp,
                       color: Theme.of(
@@ -225,7 +226,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                         ),
                       ),
                       alignLabelWithHint: true,
-                      hintText: "Add more details about the task...",
+                      hintText: S.of(context).description_field_hint_text,
                       hintStyle: TextStyle(
                         color: Theme.of(
                           context,
@@ -241,7 +242,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                       Row(
                         children: [
                           Text(
-                            "DUE DATE",
+                            S.of(context).due_date,
                             style: TextStyle(
                               color: Theme.of(
                                 context,
@@ -252,7 +253,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                           ),
                           SizedBox(width: 120.w),
                           Text(
-                            "TIME",
+                            S.of(context).time,
                             style: TextStyle(
                               color: Theme.of(
                                 context,
@@ -289,7 +290,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                                       Text(
                                         selectedDate != null
                                             ? "${selectedDate!.day}/${selectedDate!.month.toString().padLeft(2, '0')}/${selectedDate!.year}"
-                                            : "select date",
+                                            : S.of(context).select_date,
                                         style: TextStyle(
                                           color: Theme.of(
                                             context,
@@ -343,7 +344,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                                       Text(
                                         selectedTime != null
                                             ? selectedTime!.format(context)
-                                            : "select time",
+                                            : S.of(context).select_time,
                                         style: TextStyle(
                                           color: Theme.of(
                                             context,
@@ -379,7 +380,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                   ),
                   SizedBox(height: 24.h),
                   Text(
-                    "PRIORITY LEVEL",
+                    S.of(context).priority_level,
                     style: TextStyle(
                       color: Theme.of(
                         context,
@@ -399,7 +400,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                   ),
                   SizedBox(height: 24.h),
                   Text(
-                    "CATEGORY",
+                    S.of(context).category,
                     style: TextStyle(
                       color: Theme.of(
                         context,
@@ -486,7 +487,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                       ),
                       child: Center(
                         child: Text(
-                          "Create Task",
+                          S.of(context).create_task,
                           style: TextStyle(
                             color: Theme.of(context).colorScheme.secondary,
                             fontSize: 18.sp,

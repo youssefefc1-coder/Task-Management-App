@@ -7,6 +7,7 @@ import 'package:task_management_app/Services/Authentication/auth_services.dart';
 import 'package:task_management_app/Services/Database/user_services.dart';
 import 'package:task_management_app/View/Widgets/auth_txt_form_field.dart';
 import 'package:task_management_app/ViewModel/task_provider.dart';
+import 'package:task_management_app/generated/l10n.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -33,6 +34,7 @@ class _SignupScreenState extends State<SignupScreen> {
       final error = await AuthServices().signup(
         emailController.text,
         passwordController.text,
+        context,
       );
 
       if (error != null) {
@@ -104,7 +106,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                       SizedBox(width: 12.w),
                       Text(
-                        "TaskFlow",
+                        "Tasky",
                         style: TextStyle(
                           fontSize: 20.sp,
                           fontWeight: FontWeight.w900,
@@ -115,7 +117,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                   SizedBox(height: 20.h),
                   Text(
-                    "Create Account",
+                    S.of(context).create_account,
                     style: TextStyle(
                       fontSize: 30.sp,
                       fontWeight: FontWeight.bold,
@@ -124,7 +126,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                   SizedBox(height: 8.h),
                   Text(
-                    "Join TaskFlow and stay organized effortlessly.",
+                    S.of(context).signup_phase,
                     style: TextStyle(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w400,
@@ -138,7 +140,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Full Name",
+                        S.of(context).your_name,
                         style: TextStyle(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w500,
@@ -147,7 +149,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                       SizedBox(height: 8.h),
                       AuthTxtField(
-                        hintText: "Enter your name",
+                        hintText: S.of(context).enter_your_email,
                         isPassword: false,
                         controller: nameController,
                         prefixIcon: Icon(
@@ -158,14 +160,14 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                         validator: (val) {
                           if (val == null || val.isEmpty) {
-                            return "Field Can't be Empty";
+                            return S.of(context).field_cant_be_empty;
                           }
                           return null;
                         },
                       ),
                       SizedBox(height: 15.h),
                       Text(
-                        "Email Address",
+                        S.of(context).email_address,
                         style: TextStyle(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w500,
@@ -174,7 +176,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                       SizedBox(height: 8.h),
                       AuthTxtField(
-                        hintText: "Enter your email",
+                        hintText: S.of(context).enter_your_email,
                         isPassword: false,
                         controller: emailController,
                         prefixIcon: Icon(
@@ -185,16 +187,16 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                         validator: (val) {
                           if (val == null || val.isEmpty) {
-                            return "Field Can't be Empty";
+                            return S.of(context).field_cant_be_empty;
                           } else if (val.contains("@") == false) {
-                            return "Invalid Email";
+                            return S.of(context).enter_valid_email;
                           }
                           return null;
                         },
                       ),
                       SizedBox(height: 15.h),
                       Text(
-                        "Password",
+                        S.of(context).password,
                         style: TextStyle(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w500,
@@ -214,16 +216,16 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                         validator: (val) {
                           if (val == null || val.isEmpty) {
-                            return "Field Can't be Empty";
+                            return S.of(context).field_cant_be_empty;
                           } else if (val.length < 8) {
-                            return "Password must be at least 8 characters";
+                            return S.of(context).password_too_short;
                           }
                           return null;
                         },
                       ),
                       SizedBox(height: 15.h),
                       Text(
-                        "Confirm Password",
+                        S.of(context).confirme_password,
                         style: TextStyle(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w500,
@@ -243,9 +245,9 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                         validator: (val) {
                           if (val == null || val.isEmpty) {
-                            return "Field Can't be Empty";
+                            return S.of(context).field_cant_be_empty;
                           } else if (val != passwordController.text) {
-                            return "Password and Confirm Password doesn't match";
+                            return S.of(context).passwords_dont_match;
                           }
                           return null;
                         },
@@ -282,7 +284,7 @@ class _SignupScreenState extends State<SignupScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  "Sign Up",
+                                  S.of(context).signup,
                                   style: TextStyle(
                                     color: Theme.of(
                                       context,
@@ -328,7 +330,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: Text(
-                          "OR SIGN UP WITH",
+                          S.of(context).or_continue_with,
                           style: TextStyle(
                             color: Theme.of(
                               context,
@@ -424,7 +426,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                 ),
                                 SizedBox(width: 12.w),
                                 Text(
-                                  "Google",
+                                  S.of(context).google,
                                   style: TextStyle(
                                     fontSize: 16.sp,
                                     color: Theme.of(

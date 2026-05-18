@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:task_management_app/View/Widgets/custom_list_tile.dart';
 import 'package:task_management_app/ViewModel/task_provider.dart';
+import 'package:task_management_app/generated/l10n.dart';
 
 class UncompletedTasksScreen extends StatelessWidget {
   const UncompletedTasksScreen({super.key});
@@ -20,16 +21,17 @@ class UncompletedTasksScreen extends StatelessWidget {
         toolbarHeight: 65.h,
         leading: Padding(
           padding: const EdgeInsetsDirectional.only(start: 25),
-          child: IconButton(
-            onPressed: () => Navigator.pop(context),
-            icon: Icon(
+          child: GestureDetector(
+            onTap: () => Navigator.pop(context),
+            child: Icon(
               Icons.arrow_back_ios,
               color: Theme.of(context).colorScheme.primary,
+              size: 25.sp,
             ),
           ),
         ),
         title: Text(
-          "Uncompleted Tasks",
+          S.of(context).uncompleted_tasks,
           style: TextStyle(
             fontSize: 20.sp,
             fontWeight: FontWeight.bold,
@@ -47,7 +49,7 @@ class UncompletedTasksScreen extends StatelessWidget {
       body: tasks.isEmpty
           ? Center(
               child: Text(
-                "No Uncompleted Tasks",
+                S.of(context).no_uncompleted_tasks,
                 style: TextStyle(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w400,

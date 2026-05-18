@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:task_management_app/View/Widgets/custom_list_tile.dart';
 import 'package:task_management_app/ViewModel/task_provider.dart';
+import 'package:task_management_app/generated/l10n.dart';
 
 class CompletedTasksScreen extends StatelessWidget {
   const CompletedTasksScreen({super.key});
@@ -29,7 +30,7 @@ class CompletedTasksScreen extends StatelessWidget {
           ),
         ),
         title: Text(
-          "Completed Tasks",
+          S.of(context).completed_tasks,
           style: TextStyle(
             fontSize: 20.sp,
             fontWeight: FontWeight.bold,
@@ -47,7 +48,7 @@ class CompletedTasksScreen extends StatelessWidget {
       body: tasks.isEmpty
           ? Center(
               child: Text(
-                "No Completed Tasks",
+                S.of(context).no_completed_tasks,
                 style: TextStyle(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w400,

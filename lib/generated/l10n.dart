@@ -64,64 +64,24 @@ class S {
     );
   }
 
-  /// `Login`
-  String get login {
-    return Intl.message('Login', name: 'login', desc: '', args: []);
-  }
-
-  /// `Welcome Back`
-  String get welcome_back {
+  /// `Simplify your productivity`
+  String get login_phase {
     return Intl.message(
-      'Welcome Back',
-      name: 'welcome_back',
+      'Simplify your productivity',
+      name: 'login_phase',
       desc: '',
       args: [],
     );
   }
 
-  /// `Welcome Friend`
-  String get welcome_friend {
+  /// `Email Address`
+  String get email_address {
     return Intl.message(
-      'Welcome Friend',
-      name: 'welcome_friend',
+      'Email Address',
+      name: 'email_address',
       desc: '',
       args: [],
     );
-  }
-
-  /// `Password`
-  String get password {
-    return Intl.message('Password', name: 'password', desc: '', args: []);
-  }
-
-  /// `Check your email to Verify your account`
-  String get verify_msg {
-    return Intl.message(
-      'Check your email to Verify your account',
-      name: 'verify_msg',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Logout`
-  String get logout {
-    return Intl.message('Logout', name: 'logout', desc: '', args: []);
-  }
-
-  /// `Sign Up`
-  String get signup {
-    return Intl.message('Sign Up', name: 'signup', desc: '', args: []);
-  }
-
-  /// `Email`
-  String get email {
-    return Intl.message('Email', name: 'email', desc: '', args: []);
-  }
-
-  /// `Name`
-  String get name {
-    return Intl.message('Name', name: 'name', desc: '', args: []);
   }
 
   /// `Field can't be empty`
@@ -144,6 +104,31 @@ class S {
     );
   }
 
+  /// `Password`
+  String get password {
+    return Intl.message('Password', name: 'password', desc: '', args: []);
+  }
+
+  /// `Confirm Password`
+  String get confirme_password {
+    return Intl.message(
+      'Confirm Password',
+      name: 'confirme_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password and Confirm Password doesn't match`
+  String get passwords_dont_match {
+    return Intl.message(
+      'Password and Confirm Password doesn\'t match',
+      name: 'passwords_dont_match',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Password must be at least 8 characters`
   String get password_too_short {
     return Intl.message(
@@ -152,6 +137,106 @@ class S {
       desc: '',
       args: [],
     );
+  }
+
+  /// `OR CONTINUE WITH`
+  String get or_continue_with {
+    return Intl.message(
+      'OR CONTINUE WITH',
+      name: 'or_continue_with',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Google`
+  String get google {
+    return Intl.message('Google', name: 'google', desc: '', args: []);
+  }
+
+  /// `Don't have an account? `
+  String get dont_have_account {
+    return Intl.message(
+      'Don\'t have an account? ',
+      name: 'dont_have_account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign Up`
+  String get signup {
+    return Intl.message('Sign Up', name: 'signup', desc: '', args: []);
+  }
+
+  /// `Email`
+  String get email {
+    return Intl.message('Email', name: 'email', desc: '', args: []);
+  }
+
+  /// `Enter your email`
+  String get enter_your_email {
+    return Intl.message(
+      'Enter your email',
+      name: 'enter_your_email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send Reset Link`
+  String get send_reset_link {
+    return Intl.message(
+      'Send Reset Link',
+      name: 'send_reset_link',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log In`
+  String get login {
+    return Intl.message('Log In', name: 'login', desc: '', args: []);
+  }
+
+  /// `Create Account`
+  String get create_account {
+    return Intl.message(
+      'Create Account',
+      name: 'create_account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Join Tasky and stay organized effortlessly.`
+  String get signup_phase {
+    return Intl.message(
+      'Join Tasky and stay organized effortlessly.',
+      name: 'signup_phase',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your Name`
+  String get your_name {
+    return Intl.message('Your Name', name: 'your_name', desc: '', args: []);
+  }
+
+  /// `Check your email to Verify your account`
+  String get verify_msg {
+    return Intl.message(
+      'Check your email to Verify your account',
+      name: 'verify_msg',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Logout`
+  String get logout {
+    return Intl.message('Logout', name: 'logout', desc: '', args: []);
   }
 
   /// `Forgot Password?`
@@ -174,44 +259,139 @@ class S {
     );
   }
 
-  /// `Reset Password`
-  String get reset_password {
+  /// `Good Morning`
+  String get good_morning {
     return Intl.message(
-      'Reset Password',
-      name: 'reset_password',
+      'Good Morning',
+      name: 'good_morning',
       desc: '',
       args: [],
     );
   }
 
-  /// `Your Email`
-  String get your_email {
-    return Intl.message('Your Email', name: 'your_email', desc: '', args: []);
-  }
-
-  /// `Or Login`
-  String get or_login {
-    return Intl.message('Or Login', name: 'or_login', desc: '', args: []);
-  }
-
-  /// `Or Sign up`
-  String get or_signup {
-    return Intl.message('Or Sign up', name: 'or_signup', desc: '', args: []);
-  }
-
-  /// `enter email`
-  String get enter_email {
-    return Intl.message('enter email', name: 'enter_email', desc: '', args: []);
-  }
-
-  /// `enter password`
-  String get enter_password {
+  /// `Good Afternoon`
+  String get good_afternoon {
     return Intl.message(
-      'enter password',
-      name: 'enter_password',
+      'Good Afternoon',
+      name: 'good_afternoon',
       desc: '',
       args: [],
     );
+  }
+
+  /// `Good Evening`
+  String get good_evening {
+    return Intl.message(
+      'Good Evening',
+      name: 'good_evening',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Good Night`
+  String get good_night {
+    return Intl.message('Good Night', name: 'good_night', desc: '', args: []);
+  }
+
+  /// `Hello`
+  String get hello {
+    return Intl.message('Hello', name: 'hello', desc: '', args: []);
+  }
+
+  /// `No Tasks Yet`
+  String get no_tasks {
+    return Intl.message('No Tasks Yet', name: 'no_tasks', desc: '', args: []);
+  }
+
+  /// `DONE`
+  String get done {
+    return Intl.message('DONE', name: 'done', desc: '', args: []);
+  }
+
+  /// `PENDING`
+  String get pending {
+    return Intl.message('PENDING', name: 'pending', desc: '', args: []);
+  }
+
+  /// `TOTAL`
+  String get total {
+    return Intl.message('TOTAL', name: 'total', desc: '', args: []);
+  }
+
+  /// `Your Tasks`
+  String get your_tasks {
+    return Intl.message('Your Tasks', name: 'your_tasks', desc: '', args: []);
+  }
+
+  /// `General`
+  String get general {
+    return Intl.message('General', name: 'general', desc: '', args: []);
+  }
+
+  /// `Work`
+  String get work {
+    return Intl.message('Work', name: 'work', desc: '', args: []);
+  }
+
+  /// `Personal`
+  String get personal {
+    return Intl.message('Personal', name: 'personal', desc: '', args: []);
+  }
+
+  /// `Urgent`
+  String get urgent {
+    return Intl.message('Urgent', name: 'urgent', desc: '', args: []);
+  }
+
+  /// `Health`
+  String get health {
+    return Intl.message('Health', name: 'health', desc: '', args: []);
+  }
+
+  /// `Sport`
+  String get sport {
+    return Intl.message('Sport', name: 'sport', desc: '', args: []);
+  }
+
+  /// `Study`
+  String get study {
+    return Intl.message('Study', name: 'study', desc: '', args: []);
+  }
+
+  /// `Shopping`
+  String get shopping {
+    return Intl.message('Shopping', name: 'shopping', desc: '', args: []);
+  }
+
+  /// `All`
+  String get all {
+    return Intl.message('All', name: 'all', desc: '', args: []);
+  }
+
+  /// `High`
+  String get high {
+    return Intl.message('High', name: 'high', desc: '', args: []);
+  }
+
+  /// `Medium`
+  String get medium {
+    return Intl.message('Medium', name: 'medium', desc: '', args: []);
+  }
+
+  /// `Low`
+  String get low {
+    return Intl.message('Low', name: 'low', desc: '', args: []);
+  }
+
+  /// `Edit`
+  String get edit {
+    return Intl.message('Edit', name: 'edit', desc: '', args: []);
+  }
+
+  /// `Delete`
+  String get delete {
+    return Intl.message('Delete', name: 'delete', desc: '', args: []);
   }
 
   /// `Are you sure?`
@@ -224,134 +404,149 @@ class S {
     );
   }
 
-  /// `Don't have an account?`
-  String get dont_have_account {
+  /// `Completed Tasks`
+  String get completed_tasks {
     return Intl.message(
-      'Don\'t have an account?',
-      name: 'dont_have_account',
+      'Completed Tasks',
+      name: 'completed_tasks',
       desc: '',
       args: [],
     );
   }
 
-  /// `Have an account?`
-  String get have_account {
+  /// `No Completed Tasks`
+  String get no_completed_tasks {
     return Intl.message(
-      'Have an account?',
-      name: 'have_account',
+      'No Completed Tasks',
+      name: 'no_completed_tasks',
       desc: '',
       args: [],
     );
   }
 
-  /// `Login with Google`
-  String get login_with_google {
+  /// `Uncompleted Tasks`
+  String get uncompleted_tasks {
     return Intl.message(
-      'Login with Google',
-      name: 'login_with_google',
+      'Uncompleted Tasks',
+      name: 'uncompleted_tasks',
       desc: '',
       args: [],
     );
   }
 
-  /// `Sign up with Google`
-  String get signup_with_google {
+  /// `No Uncompleted Tasks`
+  String get no_uncompleted_tasks {
     return Intl.message(
-      'Sign up with Google',
-      name: 'signup_with_google',
+      'No Uncompleted Tasks',
+      name: 'no_uncompleted_tasks',
       desc: '',
       args: [],
     );
   }
 
-  /// `No Tasks`
-  String get no_tasks {
-    return Intl.message('No Tasks', name: 'no_tasks', desc: '', args: []);
+  /// `No Deadline`
+  String get no_deadline {
+    return Intl.message('No Deadline', name: 'no_deadline', desc: '', args: []);
   }
 
-  /// `Tasks`
-  String get tasks {
-    return Intl.message('Tasks', name: 'tasks', desc: '', args: []);
-  }
-
-  /// `Open`
-  String get open {
-    return Intl.message('Open', name: 'open', desc: '', args: []);
-  }
-
-  /// `Update`
-  String get update {
-    return Intl.message('Update', name: 'update', desc: '', args: []);
-  }
-
-  /// `Delete`
-  String get delete {
-    return Intl.message('Delete', name: 'delete', desc: '', args: []);
-  }
-
-  /// `All Tasks`
-  String get all_tasks {
-    return Intl.message('All Tasks', name: 'all_tasks', desc: '', args: []);
-  }
-
-  /// `Completed`
-  String get completed {
-    return Intl.message('Completed', name: 'completed', desc: '', args: []);
-  }
-
-  /// `Not Completed`
-  String get not_completed {
+  /// `No Description`
+  String get no_description {
     return Intl.message(
-      'Not Completed',
-      name: 'not_completed',
+      'No Description',
+      name: 'no_description',
       desc: '',
       args: [],
     );
   }
 
-  /// `title`
-  String get title {
-    return Intl.message('title', name: 'title', desc: '', args: []);
+  /// `TASK NAME`
+  String get task_name {
+    return Intl.message('TASK NAME', name: 'task_name', desc: '', args: []);
   }
 
-  /// ` Description`
+  /// `DESCRIPTION`
   String get description {
+    return Intl.message('DESCRIPTION', name: 'description', desc: '', args: []);
+  }
+
+  /// `Task Name can't be Empty`
+  String get task_name_empty_er {
     return Intl.message(
-      ' Description',
-      name: 'description',
+      'Task Name can\'t be Empty',
+      name: 'task_name_empty_er',
       desc: '',
       args: [],
     );
   }
 
-  /// `Mark as Done`
-  String get mark_as_done {
+  /// `New Task`
+  String get new_task {
+    return Intl.message('New Task', name: 'new_task', desc: '', args: []);
+  }
+
+  /// `Edit Task`
+  String get edit_task {
+    return Intl.message('Edit Task', name: 'edit_task', desc: '', args: []);
+  }
+
+  /// `What need to be done?`
+  String get task_name_field_hint_text {
     return Intl.message(
-      'Mark as Done',
-      name: 'mark_as_done',
+      'What need to be done?',
+      name: 'task_name_field_hint_text',
       desc: '',
       args: [],
     );
   }
 
-  /// `Title can't be Empty`
-  String get title_empty_er {
+  /// `Add more details about the task...`
+  String get description_field_hint_text {
     return Intl.message(
-      'Title can\'t be Empty',
-      name: 'title_empty_er',
+      'Add more details about the task...',
+      name: 'description_field_hint_text',
       desc: '',
       args: [],
     );
   }
 
-  /// `Add`
-  String get add {
-    return Intl.message('Add', name: 'add', desc: '', args: []);
+  /// `DUE DATE`
+  String get due_date {
+    return Intl.message('DUE DATE', name: 'due_date', desc: '', args: []);
   }
 
-  /// `Add Task`
-  String get add_task {
-    return Intl.message('Add Task', name: 'add_task', desc: '', args: []);
+  /// `TIME`
+  String get time {
+    return Intl.message('TIME', name: 'time', desc: '', args: []);
+  }
+
+  /// `select Time`
+  String get select_time {
+    return Intl.message('select Time', name: 'select_time', desc: '', args: []);
+  }
+
+  /// `select Date`
+  String get select_date {
+    return Intl.message('select Date', name: 'select_date', desc: '', args: []);
+  }
+
+  /// `PRIORITY LEVEL`
+  String get priority_level {
+    return Intl.message(
+      'PRIORITY LEVEL',
+      name: 'priority_level',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `CATEGORY`
+  String get category {
+    return Intl.message('CATEGORY', name: 'category', desc: '', args: []);
+  }
+
+  /// `Create Task`
+  String get create_task {
+    return Intl.message('Create Task', name: 'create_task', desc: '', args: []);
   }
 
   /// `Update Task`
@@ -362,6 +557,31 @@ class S {
   /// `Settings`
   String get settings {
     return Intl.message('Settings', name: 'settings', desc: '', args: []);
+  }
+
+  /// `Account`
+  String get account {
+    return Intl.message('Account', name: 'account', desc: '', args: []);
+  }
+
+  /// `Name`
+  String get name {
+    return Intl.message('Name', name: 'name', desc: '', args: []);
+  }
+
+  /// `Edit Name`
+  String get edit_name {
+    return Intl.message('Edit Name', name: 'edit_name', desc: '', args: []);
+  }
+
+  /// `Update Name`
+  String get update_name {
+    return Intl.message('Update Name', name: 'update_name', desc: '', args: []);
+  }
+
+  /// `Language`
+  String get language {
+    return Intl.message('Language', name: 'language', desc: '', args: []);
   }
 
   /// `App Language`
@@ -409,29 +629,194 @@ class S {
     return Intl.message('Cancel', name: 'cancel', desc: '', args: []);
   }
 
-  /// `Time`
-  String get time {
-    return Intl.message('Time', name: 'time', desc: '', args: []);
+  /// `Appearance`
+  String get appearance {
+    return Intl.message('Appearance', name: 'appearance', desc: '', args: []);
   }
 
-  /// `Due Date`
-  String get Due_date {
-    return Intl.message('Due Date', name: 'Due_date', desc: '', args: []);
+  /// `Dark`
+  String get dark {
+    return Intl.message('Dark', name: 'dark', desc: '', args: []);
   }
 
-  /// `Deadline`
-  String get deadline {
-    return Intl.message('Deadline', name: 'deadline', desc: '', args: []);
+  /// `Light`
+  String get light {
+    return Intl.message('Light', name: 'light', desc: '', args: []);
   }
 
-  /// `Select Time`
-  String get select_time {
-    return Intl.message('Select Time', name: 'select_time', desc: '', args: []);
+  /// `Choose Theme Mode`
+  String get choose_theme_mode {
+    return Intl.message(
+      'Choose Theme Mode',
+      name: 'choose_theme_mode',
+      desc: '',
+      args: [],
+    );
   }
 
-  /// `Select Date`
-  String get select_date {
-    return Intl.message('Select Date', name: 'select_date', desc: '', args: []);
+  /// `Dark Mode`
+  String get dark_mode {
+    return Intl.message('Dark Mode', name: 'dark_mode', desc: '', args: []);
+  }
+
+  /// `Light Mode`
+  String get light_mode {
+    return Intl.message('Light Mode', name: 'light_mode', desc: '', args: []);
+  }
+
+  /// `System`
+  String get system {
+    return Intl.message('System', name: 'system', desc: '', args: []);
+  }
+
+  /// `Notification`
+  String get notification {
+    return Intl.message(
+      'Notification',
+      name: 'notification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to log out? You will need to sign back in to access your data.`
+  String get logout_message {
+    return Intl.message(
+      'Are you sure you want to log out? You will need to sign back in to access your data.',
+      name: 'logout_message',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password must be at least 6 characters.`
+  String get weak_password {
+    return Intl.message(
+      'Password must be at least 6 characters.',
+      name: 'weak_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This email is already in use.`
+  String get email_already_in_use {
+    return Intl.message(
+      'This email is already in use.',
+      name: 'email_already_in_use',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter a valid email.`
+  String get invalid_email {
+    return Intl.message(
+      'Please enter a valid email.',
+      name: 'invalid_email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No account found with this email.`
+  String get user_not_found {
+    return Intl.message(
+      'No account found with this email.',
+      name: 'user_not_found',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Incorrect password, please try again.`
+  String get wrong_password {
+    return Intl.message(
+      'Incorrect password, please try again.',
+      name: 'wrong_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Incorrect email or password.`
+  String get invalid_credential {
+    return Intl.message(
+      'Incorrect email or password.',
+      name: 'invalid_credential',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This account has been disabled.`
+  String get user_disabled {
+    return Intl.message(
+      'This account has been disabled.',
+      name: 'user_disabled',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Too many attempts, please try again later.`
+  String get too_many_requests {
+    return Intl.message(
+      'Too many attempts, please try again later.',
+      name: 'too_many_requests',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This sign in method is not enabled.`
+  String get operation_not_allowed {
+    return Intl.message(
+      'This sign in method is not enabled.',
+      name: 'operation_not_allowed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No internet connection, please check your network.`
+  String get network_request_failed {
+    return Intl.message(
+      'No internet connection, please check your network.',
+      name: 'network_request_failed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Something went wrong, please try again.`
+  String get something_went_wrong {
+    return Intl.message(
+      'Something went wrong, please try again.',
+      name: 'something_went_wrong',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please Verify your email before logging in.`
+  String get verify_alert_message {
+    return Intl.message(
+      'Please Verify your email before logging in.',
+      name: 'verify_alert_message',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign in cancelled`
+  String get sign_in_cancel {
+    return Intl.message(
+      'Sign in cancelled',
+      name: 'sign_in_cancel',
+      desc: '',
+      args: [],
+    );
   }
 }
 

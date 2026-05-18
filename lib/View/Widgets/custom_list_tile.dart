@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart' show DateFormat;
 import 'package:provider/provider.dart';
+import 'package:task_management_app/Extensions/priority_extension.dart';
 import 'package:task_management_app/Model/task_model.dart';
 import 'package:task_management_app/Services/notification_service.dart';
 import 'package:task_management_app/View/Screens/edit_task_screen.dart';
 import 'package:task_management_app/ViewModel/task_provider.dart';
+import 'package:task_management_app/generated/l10n.dart';
 
 class CustomListTile extends StatelessWidget {
   const CustomListTile({super.key, required this.task});
@@ -135,7 +137,7 @@ class CustomListTile extends StatelessWidget {
               ),
               child: Center(
                 child: Text(
-                  task.priority.name,
+                  task.priority.localizedName(context),
                   style: TextStyle(
                     fontSize: 12.sp,
                     fontWeight: FontWeight.bold,
@@ -167,7 +169,7 @@ class CustomListTile extends StatelessWidget {
                     ),
                     child: Center(
                       child: Text(
-                        "Edit",
+                        S.of(context).edit,
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.primary,
                           fontSize: 16.sp,
@@ -190,7 +192,7 @@ class CustomListTile extends StatelessWidget {
                               context,
                             ).colorScheme.secondary,
                             title: Text(
-                              "Are You Sure?",
+                              S.of(context).are_you_sure,
                               style: TextStyle(
                                 color: Theme.of(context).colorScheme.primary,
                               ),
@@ -198,7 +200,7 @@ class CustomListTile extends StatelessWidget {
                             actions: [
                               TextButton(
                                 child: Text(
-                                  "Cancel",
+                                  S.of(context).cancel,
                                   style: TextStyle(
                                     color: Theme.of(
                                       context,
@@ -209,7 +211,7 @@ class CustomListTile extends StatelessWidget {
                               ),
                               TextButton(
                                 child: Text(
-                                  "Delete",
+                                  S.of(context).delete,
                                   style: TextStyle(
                                     color: Theme.of(
                                       context,
@@ -234,7 +236,7 @@ class CustomListTile extends StatelessWidget {
                     },
                     child: Center(
                       child: Text(
-                        "Delete",
+                        S.of(context).delete,
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.primary,
                           fontSize: 16.sp,

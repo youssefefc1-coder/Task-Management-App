@@ -10,6 +10,7 @@ import 'package:task_management_app/ViewModel/notification_provider.dart';
 import 'package:task_management_app/ViewModel/task_provider.dart';
 import 'package:task_management_app/ViewModel/theme_provider.dart';
 import 'package:task_management_app/ViewModel/user_data_provider.dart';
+import 'package:task_management_app/generated/l10n.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -23,22 +24,22 @@ class SettingsScreen extends StatelessWidget {
     String currentLocale() {
       switch (locale?.languageCode) {
         case 'en':
-          return 'English';
+          return S.of(context).english;
         case 'ar':
-          return 'Arabic';
+          return S.of(context).arabic;
         default:
-          return 'System';
+          return S.of(context).system;
       }
     }
 
     String currentTheme() {
       switch (theme) {
         case ThemeMode.light:
-          return 'Light';
+          return S.of(context).light;
         case ThemeMode.dark:
-          return 'Dark';
+          return S.of(context).dark;
         case ThemeMode.system:
-          return 'System';
+          return S.of(context).system;
       }
     }
 
@@ -57,7 +58,7 @@ class SettingsScreen extends StatelessWidget {
         leadingWidth: 80.w,
         toolbarHeight: 65.h,
         title: Text(
-          "Settings",
+          S.of(context).settings,
           style: TextStyle(
             color: Theme.of(context).colorScheme.primary,
             fontSize: 20.sp,
@@ -78,7 +79,7 @@ class SettingsScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Account",
+              S.of(context).account,
               style: TextStyle(
                 fontSize: 16.sp,
                 fontWeight: FontWeight.bold,
@@ -122,7 +123,7 @@ class SettingsScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Name",
+                          S.of(context).name,
                           style: TextStyle(
                             fontSize: 16.sp,
                             fontWeight: FontWeight.w500,
@@ -203,7 +204,7 @@ class SettingsScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Email",
+                          S.of(context).email,
                           style: TextStyle(
                             fontSize: 16.sp,
                             fontWeight: FontWeight.w500,
@@ -229,7 +230,7 @@ class SettingsScreen extends StatelessWidget {
             ),
             SizedBox(height: 18.h),
             Text(
-              "General",
+              S.of(context).general,
               style: TextStyle(
                 fontSize: 16.sp,
                 fontWeight: FontWeight.bold,
@@ -282,7 +283,7 @@ class SettingsScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "Language",
+                            S.of(context).language,
                             style: TextStyle(
                               fontSize: 16.sp,
                               fontWeight: FontWeight.w500,
@@ -353,7 +354,7 @@ class SettingsScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "Appearance",
+                            S.of(context).appearance,
                             style: TextStyle(
                               fontSize: 16.sp,
                               fontWeight: FontWeight.w500,
@@ -413,7 +414,7 @@ class SettingsScreen extends StatelessWidget {
                       ),
                       SizedBox(width: 15.w),
                       Text(
-                        "Notifications",
+                        S.of(context).notification,
                         style: TextStyle(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.w500,
@@ -476,7 +477,7 @@ class SettingsScreen extends StatelessWidget {
                           ),
                           SizedBox(height: 24.h),
                           Text(
-                            "Logout",
+                            S.of(context).logout,
                             style: TextStyle(
                               color: Color(0xff0F172A),
                               fontSize: 20.sp,
@@ -486,7 +487,7 @@ class SettingsScreen extends StatelessWidget {
                           SizedBox(height: 8.h),
                           Center(
                             child: Text(
-                              "Are you sure you want to log out? You will need to sign back in to access your data.",
+                              S.of(context).logout_message,
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 color: Color(0xff64748B),
@@ -528,7 +529,7 @@ class SettingsScreen extends StatelessWidget {
                               ),
                               child: Center(
                                 child: Text(
-                                  "Log Out",
+                                  S.of(context).logout,
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 16.sp,
@@ -550,7 +551,7 @@ class SettingsScreen extends StatelessWidget {
                               ),
                               child: Center(
                                 child: Text(
-                                  "Cancel",
+                                  S.of(context).cancel,
                                   style: TextStyle(
                                     color: Color(0xff334155),
                                     fontSize: 16.sp,
@@ -582,7 +583,7 @@ class SettingsScreen extends StatelessWidget {
                   ),
                   SizedBox(width: 12.w),
                   Text(
-                    "Logout",
+                    S.of(context).logout,
                     style: TextStyle(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.bold,
