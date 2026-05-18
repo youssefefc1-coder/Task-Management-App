@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_management_app/Model/task_model.dart';
+import 'package:task_management_app/generated/l10n.dart';
 
 class CategorySelector extends StatelessWidget {
   const CategorySelector({
@@ -19,10 +20,10 @@ class CategorySelector extends StatelessWidget {
       children: [
         MaterialButton(
           onPressed: () {
-            onChange(Category.General);
+            onChange(Category.general);
           },
           height: 35.h,
-          color: selectedCategory == Category.General
+          color: selectedCategory == Category.general
               ? Theme.of(context).colorScheme.primary
               : Theme.of(context).colorScheme.secondary,
           shape: RoundedRectangleBorder(
@@ -35,10 +36,10 @@ class CategorySelector extends StatelessWidget {
             ),
           ),
           child: Text(
-            "General",
+            S.of(context).general,
             style: TextStyle(
               fontSize: 14.sp,
-              color: selectedCategory == Category.General
+              color: selectedCategory == Category.general
                   ? Theme.of(context).colorScheme.secondary
                   : Theme.of(context).colorScheme.primary,
             ),
@@ -46,10 +47,10 @@ class CategorySelector extends StatelessWidget {
         ),
         MaterialButton(
           onPressed: () {
-            onChange(Category.Work);
+            onChange(Category.work);
           },
           height: 35.h,
-          color: selectedCategory == Category.Work
+          color: selectedCategory == Category.work
               ? Theme.of(context).colorScheme.primary
               : Theme.of(context).colorScheme.secondary,
           shape: RoundedRectangleBorder(
@@ -62,10 +63,10 @@ class CategorySelector extends StatelessWidget {
             ),
           ),
           child: Text(
-            "Work",
+            S.of(context).work,
             style: TextStyle(
               fontSize: 14.sp,
-              color: selectedCategory == Category.Work
+              color: selectedCategory == Category.work
                   ? Theme.of(context).colorScheme.secondary
                   : Theme.of(context).colorScheme.primary,
             ),
@@ -73,10 +74,10 @@ class CategorySelector extends StatelessWidget {
         ),
         MaterialButton(
           onPressed: () {
-            onChange(Category.Urgent);
+            onChange(Category.urgent);
           },
           height: 35.h,
-          color: selectedCategory == Category.Urgent
+          color: selectedCategory == Category.urgent
               ? Theme.of(context).colorScheme.primary
               : Theme.of(context).colorScheme.secondary,
           shape: RoundedRectangleBorder(
@@ -89,10 +90,10 @@ class CategorySelector extends StatelessWidget {
             ),
           ),
           child: Text(
-            "Urgent",
+            S.of(context).urgent,
             style: TextStyle(
               fontSize: 14.sp,
-              color: selectedCategory == Category.Urgent
+              color: selectedCategory == Category.urgent
                   ? Theme.of(context).colorScheme.secondary
                   : Theme.of(context).colorScheme.primary,
             ),
@@ -100,10 +101,10 @@ class CategorySelector extends StatelessWidget {
         ),
         MaterialButton(
           onPressed: () {
-            onChange(Category.Sport);
+            onChange(Category.sport);
           },
           height: 35.h,
-          color: selectedCategory == Category.Sport
+          color: selectedCategory == Category.sport
               ? Theme.of(context).colorScheme.primary
               : Theme.of(context).colorScheme.secondary,
           shape: RoundedRectangleBorder(
@@ -116,10 +117,10 @@ class CategorySelector extends StatelessWidget {
             ),
           ),
           child: Text(
-            "Sport",
+            S.of(context).sport,
             style: TextStyle(
               fontSize: 14.sp,
-              color: selectedCategory == Category.Sport
+              color: selectedCategory == Category.sport
                   ? Theme.of(context).colorScheme.secondary
                   : Theme.of(context).colorScheme.primary,
             ),
@@ -127,10 +128,10 @@ class CategorySelector extends StatelessWidget {
         ),
         MaterialButton(
           onPressed: () {
-            onChange(Category.Personal);
+            onChange(Category.personal);
           },
           height: 35.h,
-          color: selectedCategory == Category.Personal
+          color: selectedCategory == Category.personal
               ? Theme.of(context).colorScheme.primary
               : Theme.of(context).colorScheme.secondary,
           shape: RoundedRectangleBorder(
@@ -143,10 +144,10 @@ class CategorySelector extends StatelessWidget {
             ),
           ),
           child: Text(
-            "Personal",
+            S.of(context).personal,
             style: TextStyle(
               fontSize: 14.sp,
-              color: selectedCategory == Category.Personal
+              color: selectedCategory == Category.personal
                   ? Theme.of(context).colorScheme.secondary
                   : Theme.of(context).colorScheme.primary,
             ),
@@ -154,10 +155,10 @@ class CategorySelector extends StatelessWidget {
         ),
         MaterialButton(
           onPressed: () {
-            onChange(Category.Health);
+            onChange(Category.health);
           },
           height: 35.h,
-          color: selectedCategory == Category.Health
+          color: selectedCategory == Category.health
               ? Theme.of(context).colorScheme.primary
               : Theme.of(context).colorScheme.secondary,
           shape: RoundedRectangleBorder(
@@ -170,10 +171,10 @@ class CategorySelector extends StatelessWidget {
             ),
           ),
           child: Text(
-            "Health",
+            S.of(context).health,
             style: TextStyle(
               fontSize: 14.sp,
-              color: selectedCategory == Category.Health
+              color: selectedCategory == Category.health
                   ? Theme.of(context).colorScheme.secondary
                   : Theme.of(context).colorScheme.primary,
             ),
@@ -181,10 +182,10 @@ class CategorySelector extends StatelessWidget {
         ),
         MaterialButton(
           onPressed: () {
-            onChange(Category.Study);
+            onChange(Category.study);
           },
           height: 35.h,
-          color: selectedCategory == Category.Study
+          color: selectedCategory == Category.study
               ? Theme.of(context).colorScheme.primary
               : Theme.of(context).colorScheme.secondary,
           shape: RoundedRectangleBorder(
@@ -197,10 +198,10 @@ class CategorySelector extends StatelessWidget {
             ),
           ),
           child: Text(
-            "Study",
+            S.of(context).study,
             style: TextStyle(
               fontSize: 14.sp,
-              color: selectedCategory == Category.Study
+              color: selectedCategory == Category.study
                   ? Theme.of(context).colorScheme.secondary
                   : Theme.of(context).colorScheme.primary,
             ),
@@ -208,10 +209,10 @@ class CategorySelector extends StatelessWidget {
         ),
         MaterialButton(
           onPressed: () {
-            onChange(Category.Shopping);
+            onChange(Category.shopping);
           },
           height: 35.h,
-          color: selectedCategory == Category.Shopping
+          color: selectedCategory == Category.shopping
               ? Theme.of(context).colorScheme.primary
               : Theme.of(context).colorScheme.secondary,
           shape: RoundedRectangleBorder(
@@ -224,10 +225,10 @@ class CategorySelector extends StatelessWidget {
             ),
           ),
           child: Text(
-            "Shopping",
+            S.of(context).shopping,
             style: TextStyle(
               fontSize: 14.sp,
-              color: selectedCategory == Category.Shopping
+              color: selectedCategory == Category.shopping
                   ? Theme.of(context).colorScheme.secondary
                   : Theme.of(context).colorScheme.primary,
             ),

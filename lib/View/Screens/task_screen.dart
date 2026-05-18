@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:task_management_app/Extensions/category_extension.dart';
+import 'package:task_management_app/Extensions/priority_extension.dart';
 import 'package:task_management_app/Model/task_model.dart';
+import 'package:task_management_app/generated/l10n.dart';
 
 class TaskScreen extends StatelessWidget {
   const TaskScreen({super.key});
@@ -14,8 +17,9 @@ class TaskScreen extends StatelessWidget {
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        toolbarHeight: 65.h,
         leading: Padding(
-          padding: const EdgeInsets.only(left: 20),
+          padding: const EdgeInsetsDirectional.only(start: 20),
           child: GestureDetector(
             onTap: () => Navigator.pop(context),
             child: Icon(
@@ -25,7 +29,6 @@ class TaskScreen extends StatelessWidget {
             ),
           ),
         ),
-        toolbarHeight: 65.h,
         title: Text(
           task.title,
           style: TextStyle(
@@ -81,7 +84,7 @@ class TaskScreen extends StatelessWidget {
                         ),
                         child: Center(
                           child: Text(
-                            "No Description",
+                            S.of(context).no_description,
                             style: TextStyle(
                               color: Theme.of(context).colorScheme.primary,
                               fontSize: 16.sp,
@@ -115,7 +118,7 @@ class TaskScreen extends StatelessWidget {
                           ? DateFormat(
                               'h:mm MMM dd',
                             ).format(task.deadline!).toString()
-                          : "No Deadline",
+                          : S.of(context).no_deadline,
                       style: TextStyle(
                         color: Theme.of(context).colorScheme.primary,
                         fontSize: 18.sp,
@@ -137,7 +140,7 @@ class TaskScreen extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      task.category.name,
+                      task.category.localizedName(context),
                       style: TextStyle(
                         color: Theme.of(context).colorScheme.primary,
                         fontSize: 18.sp,
@@ -160,7 +163,7 @@ class TaskScreen extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      task.priority.name,
+                      task.priority.localizedName(context),
                       style: TextStyle(
                         color: Theme.of(context).colorScheme.primary,
                         fontSize: 18.sp,

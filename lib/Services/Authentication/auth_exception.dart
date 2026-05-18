@@ -1,30 +1,31 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:task_management_app/generated/l10n.dart';
 
 class FirebaseExceptions {
   String handleFirebaseError(FirebaseAuthException e) {
     switch (e.code) {
       case 'weak-password':
-        return 'Password must be at least 6 characters.';
+        return S.current.weak_password;
       case 'email-already-in-use':
-        return 'This email is already registered.';
+        return S.current.email_already_in_use;
       case 'invalid-email':
-        return 'Please enter a valid email address.';
+        return S.current.invalid_email;
       case 'user-not-found':
-        return 'No account found with this email.';
+        return S.current.user_not_found;
       case 'wrong-password':
-        return 'Incorrect password, please try again.';
+        return S.current.wrong_password;
       case 'invalid-credential':
-        return 'Incorrect email or password.';
+        return S.current.invalid_credential;
       case 'user-disabled':
-        return 'This account has been disabled.';
+        return S.current.user_disabled;
       case 'too-many-requests':
-        return 'Too many attempts, please try again later.';
+        return S.current.too_many_requests;
       case 'operation-not-allowed':
-        return 'This sign in method is not enabled.';
+        return S.current.operation_not_allowed;
       case 'network-request-failed':
-        return 'No internet connection, please check your network.';
+        return S.current.network_request_failed;
       default:
-        return 'Something went wrong, please try again.';
+        return S.current.something_went_wrong;
     }
   }
 }

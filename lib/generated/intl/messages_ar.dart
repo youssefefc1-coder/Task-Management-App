@@ -22,82 +22,179 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-    "Due_date": MessageLookupByLibrary.simpleMessage("تاريخ الانتهاء"),
-    "add": MessageLookupByLibrary.simpleMessage("إضافة"),
-    "add_task": MessageLookupByLibrary.simpleMessage("إضافة مهمة"),
-    "all_tasks": MessageLookupByLibrary.simpleMessage("كل المهام"),
+    "account": MessageLookupByLibrary.simpleMessage("الحساب"),
+    "all": MessageLookupByLibrary.simpleMessage("الكل"),
     "app_language": MessageLookupByLibrary.simpleMessage("لغة التطبيق"),
+    "appearance": MessageLookupByLibrary.simpleMessage("المظهر"),
     "arabic": MessageLookupByLibrary.simpleMessage("العربية"),
-    "are_you_sure": MessageLookupByLibrary.simpleMessage("هل أنت متأكد؟"),
+    "are_you_sure": MessageLookupByLibrary.simpleMessage("هل انت متاكد؟"),
     "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
+    "category": MessageLookupByLibrary.simpleMessage("الفئة"),
     "choose_language": MessageLookupByLibrary.simpleMessage("اختر اللغة"),
-    "completed": MessageLookupByLibrary.simpleMessage("مكتملة"),
-    "deadline": MessageLookupByLibrary.simpleMessage("الموعد النهائي"),
+    "choose_theme_mode": MessageLookupByLibrary.simpleMessage(
+      "اختر وضع المظهر",
+    ),
+    "completed_tasks": MessageLookupByLibrary.simpleMessage("المهام المكتملة"),
+    "confirme_password": MessageLookupByLibrary.simpleMessage(
+      "تأكيد كلمة المرور",
+    ),
+    "create_account": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
+    "create_task": MessageLookupByLibrary.simpleMessage("إنشاء المهمة"),
+    "dark": MessageLookupByLibrary.simpleMessage("داكن"),
+    "dark_mode": MessageLookupByLibrary.simpleMessage("الوضع الداكن"),
     "delete": MessageLookupByLibrary.simpleMessage("حذف"),
     "description": MessageLookupByLibrary.simpleMessage("الوصف"),
-    "dont_have_account": MessageLookupByLibrary.simpleMessage("ليس لديك حساب؟"),
-    "email": MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
-    "english": MessageLookupByLibrary.simpleMessage("الإنجليزية"),
-    "enter_email": MessageLookupByLibrary.simpleMessage(
-      "أدخل البريد الإلكتروني",
+    "description_field_hint_text": MessageLookupByLibrary.simpleMessage(
+      "أضف المزيد من التفاصيل حول المهمة...",
     ),
-    "enter_password": MessageLookupByLibrary.simpleMessage("أدخل كلمة المرور"),
+    "done": MessageLookupByLibrary.simpleMessage("مكتملة"),
+    "dont_have_account": MessageLookupByLibrary.simpleMessage(
+      "ليس لديك حساب؟ ",
+    ),
+    "due_date": MessageLookupByLibrary.simpleMessage("تاريخ الانتهاء"),
+    "edit": MessageLookupByLibrary.simpleMessage("تعديل"),
+    "edit_name": MessageLookupByLibrary.simpleMessage("تعديل الاسم"),
+    "edit_task": MessageLookupByLibrary.simpleMessage("تعديل المهمة"),
+    "email": MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
+    "email_address": MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
+    "email_already_in_use": MessageLookupByLibrary.simpleMessage(
+      "هذا البريد الإلكتروني مسجل بالفعل.",
+    ),
+    "english": MessageLookupByLibrary.simpleMessage("الإنجليزية"),
     "enter_valid_email": MessageLookupByLibrary.simpleMessage(
-      "يرجى إدخال بريد إلكتروني صحيح",
+      "أدخل بريد إلكتروني صحيح",
+    ),
+    "enter_your_email": MessageLookupByLibrary.simpleMessage(
+      "أدخل بريدك الإلكتروني",
     ),
     "field_cant_be_empty": MessageLookupByLibrary.simpleMessage(
-      "لا يمكن ترك الحقل فارغاً",
+      "الحقل لا يمكن أن يكون فارغًا",
     ),
     "forgot_password": MessageLookupByLibrary.simpleMessage(
       "نسيت كلمة المرور؟",
     ),
     "forgot_password_msg": MessageLookupByLibrary.simpleMessage(
-      "لا تقلق، فقط أخبرنا ببريدك الإلكتروني وسنرسل لك رابطاً لإعادة تعيين كلمة المرور واختيار واحدة جديدة.",
+      "لا مشكلة. فقط أخبرنا بعنوان بريدك الإلكتروني وسنرسل لك رابطًا لإعادة تعيين كلمة المرور لتتمكن من اختيار كلمة مرور جديدة.",
     ),
-    "have_account": MessageLookupByLibrary.simpleMessage("لديك حساب بالفعل؟"),
+    "general": MessageLookupByLibrary.simpleMessage("عام"),
+    "good_afternoon": MessageLookupByLibrary.simpleMessage("مساء الخير"),
+    "good_evening": MessageLookupByLibrary.simpleMessage("مساء الخير"),
+    "good_morning": MessageLookupByLibrary.simpleMessage("صباح الخير"),
+    "good_night": MessageLookupByLibrary.simpleMessage("تصبح على خير"),
+    "google": MessageLookupByLibrary.simpleMessage("جوجل"),
+    "health": MessageLookupByLibrary.simpleMessage("الصحة"),
+    "hello": MessageLookupByLibrary.simpleMessage("مرحبًا"),
+    "high": MessageLookupByLibrary.simpleMessage("عالي"),
+    "invalid_credential": MessageLookupByLibrary.simpleMessage(
+      "البريد الإلكتروني أو كلمة المرور غير صحيحة.",
+    ),
+    "invalid_email": MessageLookupByLibrary.simpleMessage(
+      "يرجى إدخال بريد إلكتروني صحيح.",
+    ),
+    "language": MessageLookupByLibrary.simpleMessage("اللغة"),
+    "light": MessageLookupByLibrary.simpleMessage("فاتح"),
+    "light_mode": MessageLookupByLibrary.simpleMessage("الوضع الفاتح"),
     "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
-    "login_with_google": MessageLookupByLibrary.simpleMessage(
-      "الدخول بواسطة جوجل",
-    ),
+    "login_phase": MessageLookupByLibrary.simpleMessage("خلّي إنتاجيتك أسهل"),
     "logout": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
-    "mark_as_done": MessageLookupByLibrary.simpleMessage("تحديد كمكتمل"),
+    "logout_message": MessageLookupByLibrary.simpleMessage(
+      "هل أنت متأكد أنك تريد تسجيل الخروج؟ ستحتاج إلى تسجيل الدخول مرة أخرى للوصول إلى بياناتك.",
+    ),
+    "low": MessageLookupByLibrary.simpleMessage("منخفض"),
+    "medium": MessageLookupByLibrary.simpleMessage("متوسط"),
     "name": MessageLookupByLibrary.simpleMessage("الاسم"),
-    "no_tasks": MessageLookupByLibrary.simpleMessage("لا توجد مهام"),
-    "not_completed": MessageLookupByLibrary.simpleMessage("غير مكتملة"),
-    "open": MessageLookupByLibrary.simpleMessage("فتح"),
-    "or_login": MessageLookupByLibrary.simpleMessage("أو سجل دخولك"),
-    "or_signup": MessageLookupByLibrary.simpleMessage("أو أنشئ حساباً"),
+    "network_request_failed": MessageLookupByLibrary.simpleMessage(
+      "لا يوجد اتصال بالإنترنت، يرجى التحقق من الشبكة.",
+    ),
+    "new_task": MessageLookupByLibrary.simpleMessage("مهمة جديدة"),
+    "no_completed_tasks": MessageLookupByLibrary.simpleMessage(
+      "لا توجد مهام مكتملة",
+    ),
+    "no_deadline": MessageLookupByLibrary.simpleMessage("لا يوجد موعد انتهاء"),
+    "no_description": MessageLookupByLibrary.simpleMessage("لا يوجد وصف"),
+    "no_tasks": MessageLookupByLibrary.simpleMessage("لا توجد مهام بعد"),
+    "no_uncompleted_tasks": MessageLookupByLibrary.simpleMessage(
+      "لا توجد مهام غير مكتملة",
+    ),
+    "notification": MessageLookupByLibrary.simpleMessage("الإشعارات"),
+    "operation_not_allowed": MessageLookupByLibrary.simpleMessage(
+      "طريقة تسجيل الدخول هذه غير مفعلة.",
+    ),
+    "or_continue_with": MessageLookupByLibrary.simpleMessage(
+      "أو المتابعة باستخدام",
+    ),
     "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
     "password_too_short": MessageLookupByLibrary.simpleMessage(
-      "يجب أن تكون كلمة المرور مكونة من 8 أحرف على الأقل",
+      "يجب أن تكون كلمة المرور 8 أحرف على الأقل",
     ),
-    "reset_password": MessageLookupByLibrary.simpleMessage(
-      "إعادة تعيين كلمة المرور",
+    "passwords_dont_match": MessageLookupByLibrary.simpleMessage(
+      "كلمة المرور وتأكيد كلمة المرور غير متطابقين",
     ),
+    "pending": MessageLookupByLibrary.simpleMessage("قيد التنفيذ"),
+    "personal": MessageLookupByLibrary.simpleMessage("شخصي"),
+    "priority_level": MessageLookupByLibrary.simpleMessage("مستوى الأولوية"),
     "select_date": MessageLookupByLibrary.simpleMessage("اختر التاريخ"),
     "select_time": MessageLookupByLibrary.simpleMessage("اختر الوقت"),
+    "send_reset_link": MessageLookupByLibrary.simpleMessage(
+      "إرسال رابط إعادة التعيين",
+    ),
     "settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
+    "shopping": MessageLookupByLibrary.simpleMessage("التسوق"),
+    "sign_in_cancel": MessageLookupByLibrary.simpleMessage(
+      "تم الغاء تسجيل الدخول",
+    ),
     "signup": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
-    "signup_with_google": MessageLookupByLibrary.simpleMessage(
-      "التسجيل بواسطة جوجل",
+    "signup_phase": MessageLookupByLibrary.simpleMessage(
+      "انضم إلى Tasky ونظّم مهامك بسهولة.",
+    ),
+    "something_went_wrong": MessageLookupByLibrary.simpleMessage(
+      "حدث خطأ ما، يرجى المحاولة مرة أخرى.",
     ),
     "splash_phase": MessageLookupByLibrary.simpleMessage(
-      "نظّم يومك، مهمة تلو الأخرى",
+      "نظّم يومك، مهمة بمهمة",
     ),
-    "system_default": MessageLookupByLibrary.simpleMessage("لغة النظام"),
-    "tasks": MessageLookupByLibrary.simpleMessage("المهام"),
+    "sport": MessageLookupByLibrary.simpleMessage("الرياضة"),
+    "study": MessageLookupByLibrary.simpleMessage("الدراسة"),
+    "system": MessageLookupByLibrary.simpleMessage("النظام"),
+    "system_default": MessageLookupByLibrary.simpleMessage("النظام (افتراضي)"),
+    "task_name": MessageLookupByLibrary.simpleMessage("اسم المهمة"),
+    "task_name_empty_er": MessageLookupByLibrary.simpleMessage(
+      "اسم المهمة لا يمكن أن يكون فارغًا",
+    ),
+    "task_name_field_hint_text": MessageLookupByLibrary.simpleMessage(
+      "ما الذي يجب إنجازه؟",
+    ),
     "time": MessageLookupByLibrary.simpleMessage("الوقت"),
-    "title": MessageLookupByLibrary.simpleMessage("العنوان"),
-    "title_empty_er": MessageLookupByLibrary.simpleMessage(
-      "لا يمكن ترك العنوان فارغاً",
+    "too_many_requests": MessageLookupByLibrary.simpleMessage(
+      "عدد المحاولات كبير جدًا، يرجى المحاولة لاحقًا.",
     ),
-    "update": MessageLookupByLibrary.simpleMessage("تحديث"),
+    "total": MessageLookupByLibrary.simpleMessage("الإجمالي"),
+    "uncompleted_tasks": MessageLookupByLibrary.simpleMessage(
+      "المهام غير مكتملة",
+    ),
+    "update_name": MessageLookupByLibrary.simpleMessage("تحديث الاسم"),
     "update_task": MessageLookupByLibrary.simpleMessage("تحديث المهمة"),
-    "verify_msg": MessageLookupByLibrary.simpleMessage(
-      "تحقق من بريدك الإلكتروني لتفعيل حسابك",
+    "urgent": MessageLookupByLibrary.simpleMessage("عاجل"),
+    "user_disabled": MessageLookupByLibrary.simpleMessage(
+      "تم تعطيل هذا الحساب.",
     ),
-    "welcome_back": MessageLookupByLibrary.simpleMessage("مرحباً بعودتك"),
-    "welcome_friend": MessageLookupByLibrary.simpleMessage("أهلاً بك يا صديقي"),
-    "your_email": MessageLookupByLibrary.simpleMessage("بريدك الإلكتروني"),
+    "user_not_found": MessageLookupByLibrary.simpleMessage(
+      "لا يوجد حساب مرتبط بهذا البريد الإلكتروني.",
+    ),
+    "verify_alert_message": MessageLookupByLibrary.simpleMessage(
+      "يرجى التحقق من بريدك الإلكتروني قبل تسجيل الدخول.",
+    ),
+    "verify_msg": MessageLookupByLibrary.simpleMessage(
+      "تحقق من بريدك الإلكتروني لتأكيد حسابك",
+    ),
+    "weak_password": MessageLookupByLibrary.simpleMessage(
+      "يجب أن تكون كلمة المرور 6 أحرف على الأقل.",
+    ),
+    "work": MessageLookupByLibrary.simpleMessage("العمل"),
+    "wrong_password": MessageLookupByLibrary.simpleMessage(
+      "كلمة المرور غير صحيحة، حاول مرة أخرى.",
+    ),
+    "your_name": MessageLookupByLibrary.simpleMessage("اسمك"),
+    "your_tasks": MessageLookupByLibrary.simpleMessage("مهامك"),
   };
 }

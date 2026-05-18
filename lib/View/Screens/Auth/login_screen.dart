@@ -8,6 +8,7 @@ import 'package:task_management_app/Services/Database/user_services.dart';
 import 'package:task_management_app/View/Widgets/auth_txt_form_field.dart';
 import 'package:task_management_app/ViewModel/task_provider.dart';
 import 'package:task_management_app/ViewModel/user_data_provider.dart';
+import 'package:task_management_app/generated/l10n.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -108,7 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                         SizedBox(height: 16.h),
                         Text(
-                          "TaskFlow",
+                          "Tasky",
                           style: TextStyle(
                             fontSize: 30.sp,
                             fontWeight: FontWeight.bold,
@@ -117,7 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         SizedBox(height: 8.h),
                         Text(
-                          "Simplify your productivity",
+                          S.of(context).login_phase,
                           style: TextStyle(
                             fontSize: 16.sp,
                             fontWeight: FontWeight.w400,
@@ -131,7 +132,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   SizedBox(height: 45.h),
                   Text(
-                    "EMAIL ADDRESS",
+                    S.of(context).email_address,
                     style: TextStyle(
                       fontSize: 14.sp,
                       fontWeight: FontWeight.bold,
@@ -153,9 +154,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return "Email can't be empty";
+                        return S.of(context).field_cant_be_empty;
                       } else if (value.contains("@") == false) {
-                        return "Enter a valid email";
+                        return S.of(context).enter_valid_email;
                       } else {
                         return null;
                       }
@@ -163,7 +164,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   SizedBox(height: 24.h),
                   Text(
-                    "PASSWORD",
+                    S.of(context).password,
                     style: TextStyle(
                       fontSize: 14.sp,
                       fontWeight: FontWeight.bold,
@@ -185,9 +186,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return "Password can't be empty";
-                      } else if (value.length < 8) {
-                        return "Password must be at least 8 characters";
+                        return S.of(context).field_cant_be_empty;
+                      } else if (value.length < 6) {
+                        return S.of(context).password_too_short;
                       } else {
                         return null;
                       }
@@ -201,7 +202,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Navigator.pushNamed(context, "/resetPassword");
                       },
                       child: Text(
-                        'Forgot Password?',
+                        S.of(context).forgot_password,
                         style: TextStyle(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.bold,
@@ -237,7 +238,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  "Log In",
+                                  S.of(context).login,
                                   style: TextStyle(
                                     color: Theme.of(
                                       context,
@@ -283,7 +284,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 16.w),
                         child: Text(
-                          "OR CONTINUE WITH",
+                          S.of(context).or_continue_with,
                           style: TextStyle(
                             fontSize: 14.sp,
                             fontWeight: FontWeight.bold,
@@ -379,7 +380,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                                 SizedBox(width: 12.w),
                                 Text(
-                                  "Google",
+                                  S.of(context).google,
                                   style: TextStyle(
                                     fontSize: 16.sp,
                                     color: Theme.of(
@@ -397,7 +398,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Don't have an account? ",
+                        S.of(context).dont_have_account,
                         style: TextStyle(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.w400,
@@ -411,7 +412,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Navigator.pushNamed(context, '/signup');
                         },
                         child: Text(
-                          "Sign Up",
+                          S.of(context).signup,
                           style: TextStyle(
                             fontSize: 16.sp,
                             fontWeight: FontWeight.bold,

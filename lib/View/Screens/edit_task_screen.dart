@@ -8,6 +8,7 @@ import 'package:task_management_app/View/Widgets/category_selector.dart';
 import 'package:task_management_app/View/Widgets/priority_selector.dart';
 import 'package:task_management_app/ViewModel/notification_provider.dart';
 import 'package:task_management_app/ViewModel/task_provider.dart';
+import 'package:task_management_app/generated/l10n.dart';
 
 class EditTaskScreen extends StatefulWidget {
   const EditTaskScreen({super.key, required this.task});
@@ -93,7 +94,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
           ),
         ),
         title: Text(
-          "Edit Task",
+          S.of(context).edit_task,
           style: TextStyle(
             color: Theme.of(context).colorScheme.primary,
             fontSize: 20.sp,
@@ -112,7 +113,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "TASK NAME",
+                    S.of(context).task_name,
                     style: TextStyle(
                       fontSize: 14.sp,
                       color: Theme.of(
@@ -125,7 +126,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                   TextFormField(
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return "Please enter task name";
+                        return S.of(context).task_name_empty_er;
                       }
                       return null;
                     },
@@ -181,7 +182,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                           context,
                         ).inputDecorationTheme.errorStyle!.color,
                       ),
-                      hintText: "What needs to be done?",
+                      hintText: S.of(context).task_name_field_hint_text,
                       hintStyle: TextStyle(
                         color: Theme.of(
                           context,
@@ -193,7 +194,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                   ),
                   SizedBox(height: 8.h),
                   Text(
-                    "DESCRIPTION",
+                    S.of(context).description,
                     style: TextStyle(
                       fontSize: 14.sp,
                       color: Theme.of(
@@ -242,7 +243,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                         ),
                       ),
                       alignLabelWithHint: true,
-                      hintText: "Add more details about the task...",
+                      hintText: S.of(context).description_field_hint_text,
                       hintStyle: TextStyle(
                         color: Theme.of(
                           context,
@@ -258,7 +259,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                       Row(
                         children: [
                           Text(
-                            "DUE DATE",
+                            S.of(context).due_date,
                             style: TextStyle(
                               color: Theme.of(
                                 context,
@@ -269,7 +270,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                           ),
                           SizedBox(width: 120.w),
                           Text(
-                            "TIME",
+                            S.of(context).time,
                             style: TextStyle(
                               color: Theme.of(
                                 context,
@@ -306,7 +307,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                                       Text(
                                         selectedDate != null
                                             ? "${selectedDate!.day}/${selectedDate!.month.toString().padLeft(2, '0')}/${selectedDate!.year}"
-                                            : "select date",
+                                            : S.of(context).select_date,
                                         style: TextStyle(
                                           color: Theme.of(
                                             context,
@@ -360,7 +361,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                                       Text(
                                         selectedTime != null
                                             ? selectedTime!.format(context)
-                                            : "select time",
+                                            : S.of(context).select_time,
                                         style: TextStyle(
                                           color: Theme.of(
                                             context,
@@ -396,7 +397,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                   ),
                   SizedBox(height: 24.h),
                   Text(
-                    "PRIORITY LEVEL",
+                    S.of(context).priority_level,
                     style: TextStyle(
                       color: Theme.of(
                         context,
@@ -416,7 +417,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                   ),
                   SizedBox(height: 24.h),
                   Text(
-                    "CATEGORY",
+                    S.of(context).category,
                     style: TextStyle(
                       color: Theme.of(
                         context,
@@ -518,7 +519,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                       ),
                       child: Center(
                         child: Text(
-                          "Update Task",
+                          S.of(context).update_task,
                           style: TextStyle(
                             color: Theme.of(context).colorScheme.secondary,
                             fontSize: 18.sp,

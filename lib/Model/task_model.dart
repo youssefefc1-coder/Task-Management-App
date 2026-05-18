@@ -1,14 +1,14 @@
-enum Priority { Low, Medium, High }
+enum Priority { low, medium, high }
 
 enum Category {
-  General,
-  Personal,
-  Work,
-  Urgent,
-  Health,
-  Sport,
-  Study,
-  Shopping,
+  general,
+  personal,
+  work,
+  urgent,
+  health,
+  sport,
+  study,
+  shopping,
 }
 
 class TaskModel {
@@ -26,8 +26,8 @@ class TaskModel {
     this.isDone = false,
     this.id,
     this.deadline,
-    this.priority = Priority.Medium,
-    this.category = Category.General,
+    this.priority = Priority.medium,
+    this.category = Category.general,
   });
 
   factory TaskModel.fromFirestore(Map<String, dynamic> data, String id) {

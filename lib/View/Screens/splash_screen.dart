@@ -38,38 +38,43 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Scaffold(
-        backgroundColor: Color(0xffffffff),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(height: 250.h),
-              Image.asset('assets/images/note.png', height: 100.h),
-              SizedBox(height: 40.h),
-              Text(
-                "To-Do",
-                style: TextStyle(
-                  fontSize: 40.sp,
-                  fontWeight: FontWeight.w700,
-                  color: Color(0xff021526),
-                ),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(height: 320.h),
+            Image.asset(
+              'assets/images/note.png',
+              height: 100.h,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+            SizedBox(height: 25.h),
+            Text(
+              "Tasky",
+              style: TextStyle(
+                fontSize: 32.sp,
+                fontWeight: FontWeight.w700,
+                color: Theme.of(context).colorScheme.primary,
               ),
-              SizedBox(height: 30.h),
-              Text(
-                S.of(context).splash_phase,
-                style: TextStyle(
-                  fontSize: 12.sp,
-                  fontWeight: FontWeight.w400,
-                  color: Color.fromRGBO(2, 21, 38, 0.5),
-                ),
+            ),
+            SizedBox(height: 15.h),
+            Text(
+              S.of(context).splash_phase,
+              style: TextStyle(
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w400,
+                color: Theme.of(
+                  context,
+                ).colorScheme.primary.withValues(alpha: 0.6),
               ),
-              SizedBox(height: 185.h),
-              CircularProgressIndicator(color: Color(0xff021526)),
-              SizedBox(height: 10.h),
-            ],
-          ),
+            ),
+            Spacer(),
+            CircularProgressIndicator(
+              color: Theme.of(context).colorScheme.primary,
+            ),
+            SizedBox(height: 40.h),
+          ],
         ),
       ),
     );

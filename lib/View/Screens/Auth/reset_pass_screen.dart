@@ -79,7 +79,7 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
                 SizedBox(height: 15.h),
                 TextFormField(
                   decoration: InputDecoration(
-                    hintText: S.of(context).enter_email,
+                    hintText: S.of(context).enter_your_email,
                     border: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: Theme.of(context).colorScheme.primary,
@@ -121,7 +121,7 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
                     }
                   },
                 ),
-                SizedBox(height: 350.h),
+                SizedBox(height: 380.h),
                 GestureDetector(
                   onTap: () {
                     if (_formkey.currentState!.validate()) {
@@ -138,10 +138,11 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
 
                     child: Center(
                       child: Text(
-                        "Send Reset Link",
+                        S.of(context).send_reset_link,
                         style: TextStyle(
                           fontSize: 16.sp,
                           color: Theme.of(context).colorScheme.secondary,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     ),
