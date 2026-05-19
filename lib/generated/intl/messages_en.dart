@@ -133,6 +133,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "pending": MessageLookupByLibrary.simpleMessage("PENDING"),
     "personal": MessageLookupByLibrary.simpleMessage("Personal"),
     "priority_level": MessageLookupByLibrary.simpleMessage("PRIORITY LEVEL"),
+    "reset_link_sent": MessageLookupByLibrary.simpleMessage(
+      "Please check your email for password reset instructions.",
+    ),
     "select_date": MessageLookupByLibrary.simpleMessage("select Date"),
     "select_time": MessageLookupByLibrary.simpleMessage("select Time"),
     "send_reset_link": MessageLookupByLibrary.simpleMessage("Send Reset Link"),
@@ -160,6 +163,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "task_name_field_hint_text": MessageLookupByLibrary.simpleMessage(
       "What need to be done?",
     ),
+    "task_notification_body": MessageLookupByLibrary.simpleMessage(
+      "is due soon!",
+    ),
+    "task_notification_title": MessageLookupByLibrary.simpleMessage(
+      "⏰ Deadline in 1 hour",
+    ),
     "time": MessageLookupByLibrary.simpleMessage("TIME"),
     "too_many_requests": MessageLookupByLibrary.simpleMessage(
       "Too many attempts, please try again later.",
@@ -173,6 +182,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "urgent": MessageLookupByLibrary.simpleMessage("Urgent"),
     "user_disabled": MessageLookupByLibrary.simpleMessage(
       "This account has been disabled.",
+    ),
+    "user_dont_exist": MessageLookupByLibrary.simpleMessage(
+      "User does not exist",
     ),
     "user_not_found": MessageLookupByLibrary.simpleMessage(
       "No account found with this email.",

@@ -167,12 +167,17 @@ class AppTheme {
           return Color(0xff021526);
         }
       }),
+      todayForegroundColor: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.selected)) {
+          return const Color(0xff021526);
+        }
+        return Colors.white;
+      }),
       dayForegroundColor: WidgetStateProperty.resolveWith((state) {
         if (state.contains(WidgetState.selected)) {
           return Color(0xff021526);
-        } else {
-          return Colors.white;
         }
+        return Colors.white;
       }),
     ),
 

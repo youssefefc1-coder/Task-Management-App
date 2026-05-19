@@ -11,7 +11,7 @@ class NotificationProvider extends ChangeNotifier {
   bool get isEnabled => _isEnabled;
 
   Future<void> loadNotificationState() async {
-    final saveSate = await NotificationHelper().getNotificationSate() ?? true;
+    final saveSate = await NotificationHelper().getNotificationState() ?? true;
 
     final androidPlugin = NotificationService.plugin
         .resolvePlatformSpecificImplementation<

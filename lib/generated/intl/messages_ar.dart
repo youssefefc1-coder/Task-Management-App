@@ -133,6 +133,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "pending": MessageLookupByLibrary.simpleMessage("قيد التنفيذ"),
     "personal": MessageLookupByLibrary.simpleMessage("شخصي"),
     "priority_level": MessageLookupByLibrary.simpleMessage("مستوى الأولوية"),
+    "reset_link_sent": MessageLookupByLibrary.simpleMessage(
+      "يرجى التحقق من بريدك الإلكتروني لمعرفة تعليمات إعادة تعيين كلمة المرور.",
+    ),
     "select_date": MessageLookupByLibrary.simpleMessage("اختر التاريخ"),
     "select_time": MessageLookupByLibrary.simpleMessage("اختر الوقت"),
     "send_reset_link": MessageLookupByLibrary.simpleMessage(
@@ -164,6 +167,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "task_name_field_hint_text": MessageLookupByLibrary.simpleMessage(
       "ما الذي يجب إنجازه؟",
     ),
+    "task_notification_body": MessageLookupByLibrary.simpleMessage(
+      "موعد الانتهاء قريب!",
+    ),
+    "task_notification_title": MessageLookupByLibrary.simpleMessage(
+      "⏰ الموعد النهائي خلال ساعة واحدة",
+    ),
     "time": MessageLookupByLibrary.simpleMessage("الوقت"),
     "too_many_requests": MessageLookupByLibrary.simpleMessage(
       "عدد المحاولات كبير جدًا، يرجى المحاولة لاحقًا.",
@@ -177,6 +186,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "urgent": MessageLookupByLibrary.simpleMessage("عاجل"),
     "user_disabled": MessageLookupByLibrary.simpleMessage(
       "تم تعطيل هذا الحساب.",
+    ),
+    "user_dont_exist": MessageLookupByLibrary.simpleMessage(
+      "لا يوجد حساب مرتبط بهذا البريد الإلكتروني.",
     ),
     "user_not_found": MessageLookupByLibrary.simpleMessage(
       "لا يوجد حساب مرتبط بهذا البريد الإلكتروني.",

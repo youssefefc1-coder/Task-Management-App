@@ -102,5 +102,9 @@
     "network_request_failed": "No internet connection, please check your network.",
     "something_went_wrong": "Something went wrong, please try again.",
     "verify_alert_message" : "Please Verify your email before logging in.",
-    "sign_in_cancel" : "Sign in cancelled"
+    "sign_in_cancel" : "Sign in cancelled",
+    "user_dont_exist" : "User does not exist",
+    "reset_link_sent": "Please check your email for password reset instructions.",
+    "task_notification_title" : "⏰ Deadline in 1 hour",
+    "task_notification_body" : "is due soon!"
 }
