@@ -818,6 +818,46 @@ class S {
       args: [],
     );
   }
+
+  /// `User does not exist`
+  String get user_dont_exist {
+    return Intl.message(
+      'User does not exist',
+      name: 'user_dont_exist',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please check your email for password reset instructions.`
+  String get reset_link_sent {
+    return Intl.message(
+      'Please check your email for password reset instructions.',
+      name: 'reset_link_sent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `⏰ Deadline in 1 hour`
+  String get task_notification_title {
+    return Intl.message(
+      '⏰ Deadline in 1 hour',
+      name: 'task_notification_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `is due soon!`
+  String get task_notification_body {
+    return Intl.message(
+      'is due soon!',
+      name: 'task_notification_body',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

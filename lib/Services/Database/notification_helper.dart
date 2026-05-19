@@ -6,7 +6,7 @@ class NotificationHelper {
     prefs.setBool('notification', state);
   }
 
-  Future<bool?> getNotificationSate() async {
+  Future<bool?> getNotificationState() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getBool('notification');
   }

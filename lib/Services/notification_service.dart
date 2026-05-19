@@ -1,5 +1,6 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:task_management_app/Model/task_model.dart' hide Priority;
+import 'package:task_management_app/generated/l10n.dart';
 import 'package:timezone/data/latest.dart' as tz_data;
 import 'package:timezone/timezone.dart' as tz;
 
@@ -46,14 +47,14 @@ class NotificationService {
   static Future<void> scheduleDeadlineAlert(TaskModel task) async {
     if (task.deadline == null || task.id == null) return;
 
-    final alertTime = task.deadline!.subtract(const Duration(minutes: 30));
+    final alertTime = task.deadline!.subtract(const Duration(hours: 1));
 
     if (alertTime.isBefore(DateTime.now())) return;
 
     await plugin.zonedSchedule(
       id: _deadlineNotifId(task.id!),
-      title: '⏰ Deadline in 30 minutes',
-      body: '"${task.title}" is due soon!',
+      title: S.current.task_notification_title,
+      body: '"${task.title}" ${S.current.task_notification_body}',
       scheduledDate: tz.TZDateTime.from(alertTime, tz.local),
       notificationDetails: _notificationDetails(
         channelId: 'deadline_channel',

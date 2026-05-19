@@ -148,22 +148,84 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                       ),
                       SizedBox(height: 8.h),
-                      AuthTxtField(
-                        hintText: S.of(context).enter_your_email,
-                        isPassword: false,
+                      TextFormField(
                         controller: nameController,
-                        prefixIcon: Icon(
-                          Icons.person_outline,
-                          color: Theme.of(
-                            context,
-                          ).colorScheme.primary.withValues(alpha: 0.4),
-                        ),
+                        maxLength: 15,
                         validator: (val) {
                           if (val == null || val.isEmpty) {
                             return S.of(context).field_cant_be_empty;
                           }
                           return null;
                         },
+                        decoration: InputDecoration(
+                          counterText: '',
+                          prefixIcon: Icon(
+                            Icons.person_outline,
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.primary.withValues(alpha: 0.4),
+                          ),
+                          hintText: S.of(context).name,
+                          hintStyle: TextStyle(
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.primary.withValues(alpha: 0.2),
+                            fontSize: 16.sp,
+                          ),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 2.w,
+                              color: Theme.of(
+                                context,
+                              ).inputDecorationTheme.border!.borderSide.color,
+                            ),
+                            borderRadius: BorderRadius.circular(12.r),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 2.w,
+                              color: Theme.of(context)
+                                  .inputDecorationTheme
+                                  .enabledBorder!
+                                  .borderSide
+                                  .color,
+                            ),
+                            borderRadius: BorderRadius.circular(12.r),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 2.w,
+                              color: Theme.of(context)
+                                  .inputDecorationTheme
+                                  .focusedBorder!
+                                  .borderSide
+                                  .color,
+                            ),
+                            borderRadius: BorderRadius.circular(12.r),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 2.w,
+                              color: Theme.of(context)
+                                  .inputDecorationTheme
+                                  .errorBorder!
+                                  .borderSide
+                                  .color,
+                            ),
+                            borderRadius: BorderRadius.circular(12.r),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 2.w,
+                              color: Theme.of(context)
+                                  .inputDecorationTheme
+                                  .focusedErrorBorder!
+                                  .borderSide
+                                  .color,
+                            ),
+                            borderRadius: BorderRadius.circular(12.r),
+                          ),
+                        ),
                       ),
                       SizedBox(height: 15.h),
                       Text(
@@ -217,7 +279,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         validator: (val) {
                           if (val == null || val.isEmpty) {
                             return S.of(context).field_cant_be_empty;
-                          } else if (val.length < 8) {
+                          } else if (val.length < 6) {
                             return S.of(context).password_too_short;
                           }
                           return null;
@@ -315,7 +377,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             ),
                           ],
                         )
-                      : Container(),
+                      : SizedBox(),
                   SizedBox(height: 30.h),
                   Row(
                     children: [
