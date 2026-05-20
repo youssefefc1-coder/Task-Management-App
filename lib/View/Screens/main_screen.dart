@@ -2,10 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:task_management_app/Extensions/category_extension.dart';
 import 'package:task_management_app/Model/user_model.dart';
 import 'package:task_management_app/Model/task_model.dart';
+import 'package:task_management_app/View/Widgets/category_filter_chip.dart';
 import 'package:task_management_app/View/Widgets/custom_list_tile.dart';
+import 'package:task_management_app/View/Widgets/stat_card.dart';
 import 'package:task_management_app/ViewModel/task_provider.dart';
 import 'package:task_management_app/ViewModel/user_data_provider.dart';
 import 'package:task_management_app/generated/l10n.dart';
@@ -64,12 +65,12 @@ class _MainScreenState extends State<MainScreen> {
                     color: Theme.of(
                       context,
                     ).colorScheme.primary.withValues(alpha: 0.6),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 15.sp,
                   ),
                 ),
                 Text(
-                  "${S.of(context).hello}, ${user?.name ?? ''}!",
+                  "${S.of(context).hello} ${user?.name ?? ''}!",
                   style: TextStyle(
                     color: Theme.of(context).colorScheme.primary,
                     fontWeight: FontWeight.bold,
@@ -90,7 +91,7 @@ class _MainScreenState extends State<MainScreen> {
           ),
 
           body: Padding(
-            padding: const EdgeInsets.all(24),
+            padding: EdgeInsets.symmetric(horizontal: 24.h, vertical: 24.h),
             child: taskProvider.tasks.isEmpty
                 ? Center(
                     child: Text(
@@ -108,162 +109,47 @@ class _MainScreenState extends State<MainScreen> {
                     children: [
                       Row(
                         children: [
-                          GestureDetector(
-                            onTap: () => Navigator.pushNamed(
-                              context,
-                              '/completed_tasks',
-                            ),
-                            child: Container(
-                              height: 85.h,
-                              width: 102.w,
-                              padding: EdgeInsetsDirectional.only(
-                                top: 20,
-                                start: 20,
-                                end: 20,
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () => Navigator.pushNamed(
+                                context,
+                                '/completed_tasks',
                               ),
-                              decoration: BoxDecoration(
-                                color: Theme.of(
-                                  context,
-                                ).colorScheme.primary.withValues(alpha: 0.05),
-                                borderRadius: BorderRadius.circular(8.r),
-                                border: Border.all(
-                                  color: Theme.of(
-                                    context,
-                                  ).colorScheme.primary.withValues(alpha: 0.1),
-                                ),
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    S.of(context).done,
-                                    style: TextStyle(
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.w500,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .primary
-                                          .withValues(alpha: 0.7),
-                                    ),
-                                  ),
-                                  SizedBox(height: 8.h),
-                                  Text(
-                                    taskProvider.tasks
-                                        .where(
-                                          (element) => element.isDone == true,
-                                        )
-                                        .length
-                                        .toString(),
-                                    style: TextStyle(
-                                      fontSize: 20.sp,
-                                      fontWeight: FontWeight.bold,
-                                      color: Theme.of(
-                                        context,
-                                      ).colorScheme.primary,
-                                    ),
-                                  ),
-                                ],
+                              child: StatCard(
+                                label: S.of(context).done,
+                                value: taskProvider.tasks
+                                    .where((element) => element.isDone == true)
+                                    .length
+                                    .toString(),
+                                isTotal: false,
                               ),
                             ),
                           ),
                           SizedBox(width: 16.w),
-                          GestureDetector(
-                            onTap: () => Navigator.pushNamed(
-                              context,
-                              '/uncompleted_tasks',
-                            ),
-                            child: Container(
-                              height: 85.h,
-                              width: 102.w,
-                              padding: EdgeInsetsDirectional.only(
-                                top: 20,
-                                start: 20,
-                                end: 20,
+
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () => Navigator.pushNamed(
+                                context,
+                                '/uncompleted_tasks',
                               ),
-                              decoration: BoxDecoration(
-                                color: Theme.of(
-                                  context,
-                                ).colorScheme.primary.withValues(alpha: 0.05),
-                                borderRadius: BorderRadius.circular(8.r),
-                                border: Border.all(
-                                  color: Theme.of(
-                                    context,
-                                  ).colorScheme.primary.withValues(alpha: 0.1),
-                                ),
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    S.of(context).pending,
-                                    style: TextStyle(
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.w500,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .primary
-                                          .withValues(alpha: 0.7),
-                                    ),
-                                  ),
-                                  SizedBox(height: 8.h),
-                                  Text(
-                                    taskProvider.tasks
-                                        .where(
-                                          (element) => element.isDone == false,
-                                        )
-                                        .length
-                                        .toString(),
-                                    style: TextStyle(
-                                      fontSize: 20.sp,
-                                      fontWeight: FontWeight.bold,
-                                      color: Theme.of(
-                                        context,
-                                      ).colorScheme.primary,
-                                    ),
-                                  ),
-                                ],
+
+                              child: StatCard(
+                                label: S.of(context).pending,
+                                value: taskProvider.tasks
+                                    .where((element) => element.isDone == false)
+                                    .length
+                                    .toString(),
+                                isTotal: false,
                               ),
                             ),
                           ),
                           SizedBox(width: 16.w),
-                          Container(
-                            height: 85.h,
-                            width: 102.w,
-                            padding: EdgeInsetsDirectional.only(
-                              top: 20,
-                              start: 20,
-                              end: 20,
-                            ),
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.primary,
-                              borderRadius: BorderRadius.circular(8.r),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  S.of(context).total,
-                                  style: TextStyle(
-                                    fontSize: 12.sp,
-                                    fontWeight: FontWeight.w500,
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .secondary
-                                        .withValues(alpha: 0.7),
-                                  ),
-                                ),
-                                SizedBox(height: 8.h),
-                                Text(
-                                  taskProvider.tasks.length.toString(),
-                                  style: TextStyle(
-                                    fontSize: 20.sp,
-                                    fontWeight: FontWeight.bold,
-                                    color: Theme.of(
-                                      context,
-                                    ).colorScheme.secondary,
-                                  ),
-                                ),
-                              ],
+                          Expanded(
+                            child: StatCard(
+                              label: S.of(context).total,
+                              value: taskProvider.tasks.length.toString(),
+                              isTotal: true,
                             ),
                           ),
                         ],
@@ -282,11 +168,11 @@ class _MainScreenState extends State<MainScreen> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 12.h),
+                      SizedBox(height: 14.h),
                       Align(
                         alignment: AlignmentGeometry.centerLeft,
                         child: SizedBox(
-                          height: 40.h,
+                          height: 42.h,
                           child: ListView.separated(
                             shrinkWrap: true,
                             physics: BouncingScrollPhysics(),
@@ -299,35 +185,13 @@ class _MainScreenState extends State<MainScreen> {
                                   taskProvider.selectedCategory;
                               if (index == 0) {
                                 final isSelected = selectedCategories.isEmpty;
-                                return FilterChip(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadiusGeometry.circular(
-                                      24.r,
-                                    ),
-                                    side: BorderSide(
-                                      width: 2.w,
-                                      color: Theme.of(
-                                        context,
-                                      ).colorScheme.primary,
-                                    ),
-                                  ),
-                                  selected: isSelected,
-                                  showCheckmark: false,
-                                  onSelected: (_) {
+                                return CustomFilterChip(
+                                  isFirstIndex: true,
+                                  category: null,
+                                  onSelect: () {
                                     taskProvider.clearAllCategories();
                                   },
-                                  label: Text(
-                                    S.of(context).all,
-                                    style: TextStyle(
-                                      color: isSelected
-                                          ? Theme.of(
-                                              context,
-                                            ).colorScheme.secondary
-                                          : Theme.of(
-                                              context,
-                                            ).colorScheme.primary,
-                                    ),
-                                  ),
+                                  isSelected: isSelected,
                                 );
                               }
 
@@ -336,33 +200,13 @@ class _MainScreenState extends State<MainScreen> {
                                 category,
                               );
 
-                              return FilterChip(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadiusGeometry.circular(
-                                    24.r,
-                                  ),
-                                  side: BorderSide(
-                                    width: 2.w,
-                                    color: Theme.of(
-                                      context,
-                                    ).colorScheme.primary,
-                                  ),
-                                ),
-                                selected: isSelected,
-                                showCheckmark: false,
-                                onSelected: (_) {
+                              return CustomFilterChip(
+                                category: category,
+                                onSelect: () {
                                   taskProvider.toggleCategory(category);
                                 },
-                                label: Text(
-                                  category.localizedName(context),
-                                  style: TextStyle(
-                                    color: isSelected
-                                        ? Theme.of(
-                                            context,
-                                          ).colorScheme.secondary
-                                        : Theme.of(context).colorScheme.primary,
-                                  ),
-                                ),
+                                isSelected: isSelected,
+                                isFirstIndex: false,
                               );
                             },
                           ),
@@ -370,37 +214,40 @@ class _MainScreenState extends State<MainScreen> {
                       ),
                       SizedBox(height: 12.h),
 
-                      ListView.builder(
-                        shrinkWrap: true,
-                        physics: BouncingScrollPhysics(),
-                        itemCount: taskProvider.filteredTasks.length,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.only(top: 12, bottom: 5),
-                            child: CustomListTile(
-                              task: taskProvider.filteredTasks[index],
-                            ),
-                          );
-                        },
+                      Expanded(
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          physics: BouncingScrollPhysics(),
+                          itemCount: taskProvider.filteredTasks.length,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: EdgeInsets.only(top: 12.h, bottom: 5.h),
+                              child: CustomListTile(
+                                task: taskProvider.filteredTasks[index],
+                              ),
+                            );
+                          },
+                        ),
                       ),
                     ],
                   ),
           ),
 
-          floatingActionButton: Container(
-            height: 70.h,
-            width: 70.w,
-            margin: EdgeInsets.only(bottom: 35),
-            child: FloatingActionButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/add_task');
-              },
-              shape: const CircleBorder(),
-              backgroundColor: Theme.of(context).colorScheme.primary,
-              child: Icon(
-                Icons.add,
-                color: Theme.of(context).colorScheme.secondary,
-                size: 38.sp,
+          floatingActionButton: Padding(
+            padding: EdgeInsets.only(bottom: 40.h),
+            child: CircleAvatar(
+              radius: 32.r,
+              child: FloatingActionButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/add_task');
+                },
+                shape: const CircleBorder(),
+                backgroundColor: Theme.of(context).colorScheme.primary,
+                child: Icon(
+                  Icons.add,
+                  color: Theme.of(context).colorScheme.secondary,
+                  size: 38.sp,
+                ),
               ),
             ),
           ),

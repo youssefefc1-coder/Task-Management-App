@@ -140,7 +140,7 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
                     },
                     child: Container(
                       width: double.infinity,
-                      height: 55.h,
+                      padding: EdgeInsets.symmetric(vertical: 15.h),
                       decoration: BoxDecoration(
                         color: Theme.of(context).colorScheme.primary,
                         borderRadius: BorderRadius.circular(15.r),

@@ -35,14 +35,13 @@ class _CustomModalBottomSheetState extends State<CustomModalBottomSheet> {
           child: Form(
             key: _formKey,
             child: Container(
-              height: 300.h,
               width: double.infinity,
               decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.secondary,
                 borderRadius: BorderRadius.vertical(top: Radius.circular(18.r)),
               ),
               child: Padding(
-                padding: const EdgeInsets.all(24),
+                padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 24.h),
                 child: Column(
                   children: [
                     Text(
@@ -138,7 +137,7 @@ class _CustomModalBottomSheetState extends State<CustomModalBottomSheet> {
                           Navigator.pop(context);
                         }
                       },
-                      height: 50.h,
+                      padding: EdgeInsets.symmetric(vertical: 12.h),
                       minWidth: 150.w,
                       color: Theme.of(context).colorScheme.primary,
                       shape: RoundedRectangleBorder(
@@ -153,6 +152,7 @@ class _CustomModalBottomSheetState extends State<CustomModalBottomSheet> {
                         ),
                       ),
                     ),
+                    SizedBox(height: 50.h),
                   ],
                 ),
               ),

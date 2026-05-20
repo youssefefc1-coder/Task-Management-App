@@ -85,8 +85,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Column(
                       children: [
                         Container(
-                          height: 55.h,
-                          width: 55.w,
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 10.w,
+                            vertical: 10.h,
+                          ),
                           decoration: BoxDecoration(
                             color: Theme.of(context).colorScheme.primary,
                             borderRadius: BorderRadius.circular(12.r),
@@ -216,7 +218,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     onTap: () => login(),
                     child: Container(
                       width: double.infinity,
-                      height: 58.h,
+                      padding: EdgeInsets.symmetric(vertical: 16.h),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12.r),
                         color: Theme.of(context).colorScheme.primary,
@@ -286,7 +288,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Text(
                           S.of(context).or_continue_with,
                           style: TextStyle(
-                            fontSize: 14.sp,
+                            fontSize: 12.sp,
                             fontWeight: FontWeight.bold,
                             color: Theme.of(
                               context,
@@ -296,7 +298,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       Expanded(
                         child: Divider(
-                          thickness: 1.h,
+                          thickness: 1.w,
                           color: Theme.of(
                             context,
                           ).colorScheme.primary.withValues(alpha: 0.2),
@@ -346,8 +348,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       }
                     },
                     child: Container(
-                      width: 345.w,
-                      height: 58.h,
+                      width: double.infinity,
+                      padding: EdgeInsets.symmetric(vertical: 14.h),
                       decoration: BoxDecoration(
                         color: Theme.of(
                           context,
@@ -386,7 +388,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     color: Theme.of(
                                       context,
                                     ).colorScheme.primary,
-                                    fontWeight: FontWeight.w500,
+                                    fontWeight: FontWeight.w600,
                                   ),
                                 ),
                               ],

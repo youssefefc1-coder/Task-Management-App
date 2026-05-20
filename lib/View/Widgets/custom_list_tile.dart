@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:task_management_app/Extensions/priority_extension.dart';
 import 'package:task_management_app/Model/task_model.dart';
 import 'package:task_management_app/Services/notification_service.dart';
-import 'package:task_management_app/View/Screens/edit_task_screen.dart';
+import 'package:task_management_app/View/Screens/Task%20Screens/edit_task_screen.dart';
 import 'package:task_management_app/ViewModel/task_provider.dart';
 import 'package:task_management_app/generated/l10n.dart';
 
@@ -136,14 +136,18 @@ class CustomListTile extends StatelessWidget {
                 borderRadius: BorderRadius.circular(4.r),
               ),
               child: Center(
-                child: Text(
-                  task.priority.localizedName(context),
-                  style: TextStyle(
-                    fontSize: 12.sp,
-                    fontWeight: FontWeight.bold,
-                    color: Theme.brightnessOf(context) == Brightness.light
-                        ? Theme.of(context).colorScheme.onSecondary
-                        : Theme.of(context).colorScheme.tertiary,
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(
+                    task.priority.localizedName(context),
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.brightnessOf(context) == Brightness.light
+                          ? Theme.of(context).colorScheme.onSecondary
+                          : Theme.of(context).colorScheme.tertiary,
+                    ),
                   ),
                 ),
               ),

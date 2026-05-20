@@ -294,9 +294,9 @@ class S {
     return Intl.message('Good Night', name: 'good_night', desc: '', args: []);
   }
 
-  /// `Hello`
+  /// `Hello,`
   String get hello {
-    return Intl.message('Hello', name: 'hello', desc: '', args: []);
+    return Intl.message('Hello,', name: 'hello', desc: '', args: []);
   }
 
   /// `No Tasks Yet`

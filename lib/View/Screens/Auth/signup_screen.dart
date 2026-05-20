@@ -72,7 +72,7 @@ class _SignupScreenState extends State<SignupScreen> {
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: Padding(
-          padding: const EdgeInsets.all(24),
+          padding: EdgeInsets.symmetric(vertical: 24.h, horizontal: 24.w),
           child: SingleChildScrollView(
             child: Form(
               key: _formkey,
@@ -93,7 +93,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       SizedBox(width: 6.w),
                       Container(
                         width: 40.w,
-                        height: 40.h,
+                        padding: EdgeInsets.symmetric(vertical: 8.h),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.r),
                           color: Theme.of(context).colorScheme.primary,
@@ -324,7 +324,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     },
                     child: Container(
                       width: double.infinity,
-                      height: 55.h,
+                      padding: EdgeInsets.symmetric(vertical: 15.h),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12.r),
                         color: Theme.of(context).colorScheme.primary,
@@ -383,14 +383,14 @@ class _SignupScreenState extends State<SignupScreen> {
                     children: [
                       Expanded(
                         child: Divider(
-                          thickness: 1,
+                          thickness: 1.w,
                           color: Theme.of(
                             context,
                           ).colorScheme.primary.withValues(alpha: 0.4),
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        padding: EdgeInsets.symmetric(horizontal: 16.w),
                         child: Text(
                           S.of(context).or_continue_with,
                           style: TextStyle(
@@ -398,12 +398,13 @@ class _SignupScreenState extends State<SignupScreen> {
                               context,
                             ).colorScheme.primary.withValues(alpha: 0.4),
                             fontWeight: FontWeight.w500,
+                            fontSize: 12.sp,
                           ),
                         ),
                       ),
                       Expanded(
                         child: Divider(
-                          thickness: 1,
+                          thickness: 1.w,
                           color: Theme.of(
                             context,
                           ).colorScheme.primary.withValues(alpha: 0.4),
@@ -454,8 +455,8 @@ class _SignupScreenState extends State<SignupScreen> {
                       }
                     },
                     child: Container(
-                      width: 345.w,
-                      height: 58.h,
+                      width: double.infinity,
+                      padding: EdgeInsets.symmetric(vertical: 15.h),
                       decoration: BoxDecoration(
                         color: Theme.of(
                           context,

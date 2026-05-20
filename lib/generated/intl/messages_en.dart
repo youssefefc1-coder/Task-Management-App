@@ -81,7 +81,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "good_night": MessageLookupByLibrary.simpleMessage("Good Night"),
     "google": MessageLookupByLibrary.simpleMessage("Google"),
     "health": MessageLookupByLibrary.simpleMessage("Health"),
-    "hello": MessageLookupByLibrary.simpleMessage("Hello"),
+    "hello": MessageLookupByLibrary.simpleMessage("Hello,"),
     "high": MessageLookupByLibrary.simpleMessage("High"),
     "invalid_credential": MessageLookupByLibrary.simpleMessage(
       "Incorrect email or password.",

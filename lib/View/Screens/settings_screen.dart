@@ -74,7 +74,7 @@ class SettingsScreen extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(24.0),
+        padding: EdgeInsets.symmetric(vertical: 24.h, horizontal: 24.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -88,8 +88,8 @@ class SettingsScreen extends StatelessWidget {
             ),
             SizedBox(height: 12.h),
             Container(
-              height: 70.h,
               width: double.infinity,
+              padding: EdgeInsets.symmetric(vertical: 8.h),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12.r),
                 border: Border.all(
@@ -108,7 +108,7 @@ class SettingsScreen extends StatelessWidget {
                 ],
               ),
               child: Padding(
-                padding: const EdgeInsetsDirectional.only(start: 14),
+                padding: EdgeInsetsDirectional.only(start: 14.w),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -169,8 +169,8 @@ class SettingsScreen extends StatelessWidget {
             ),
             SizedBox(height: 12.h),
             Container(
-              height: 70.h,
               width: double.infinity,
+              padding: EdgeInsets.symmetric(vertical: 8.h),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12.r),
                 border: Border.all(
@@ -189,7 +189,7 @@ class SettingsScreen extends StatelessWidget {
                 ],
               ),
               child: Padding(
-                padding: const EdgeInsetsDirectional.only(start: 14),
+                padding: EdgeInsetsDirectional.only(start: 14.w),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -248,8 +248,8 @@ class SettingsScreen extends StatelessWidget {
                 );
               },
               child: Container(
-                height: 70.h,
                 width: double.infinity,
+                padding: EdgeInsets.symmetric(vertical: 8.h),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12.r),
                   border: Border.all(
@@ -317,8 +317,8 @@ class SettingsScreen extends StatelessWidget {
                 );
               },
               child: Container(
-                height: 70.h,
                 width: double.infinity,
+                padding: EdgeInsets.symmetric(vertical: 8.h),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12.r),
                   border: Border.all(
@@ -383,8 +383,8 @@ class SettingsScreen extends StatelessWidget {
             GestureDetector(
               onTap: () {},
               child: Container(
-                height: 70.h,
                 width: double.infinity,
+                padding: EdgeInsets.symmetric(vertical: 8.h),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12.r),
                   border: Border.all(
@@ -458,7 +458,10 @@ class SettingsScreen extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(24.r),
                       ),
-                      contentPadding: EdgeInsets.all(24),
+                      contentPadding: EdgeInsets.symmetric(
+                        vertical: 24.h,
+                        horizontal: 24.w,
+                      ),
                       content: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -500,7 +503,11 @@ class SettingsScreen extends StatelessWidget {
                           GestureDetector(
                             onTap: () async {
                               await AuthServices().signout();
-                              Navigator.pushReplacementNamed(context, '/login');
+                              Navigator.pushNamedAndRemoveUntil(
+                                context,
+                                '/login',
+                                (route) => false,
+                              );
                             },
                             child: Container(
                               width: double.infinity,
@@ -567,8 +574,8 @@ class SettingsScreen extends StatelessWidget {
                   },
                 );
               },
-              height: 60.h,
               minWidth: double.infinity,
+              padding: EdgeInsets.symmetric(vertical: 16.h),
               color: Theme.of(context).colorScheme.primary,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12.r),

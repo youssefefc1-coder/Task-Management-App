@@ -83,7 +83,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "good_night": MessageLookupByLibrary.simpleMessage("تصبح على خير"),
     "google": MessageLookupByLibrary.simpleMessage("جوجل"),
     "health": MessageLookupByLibrary.simpleMessage("الصحة"),
-    "hello": MessageLookupByLibrary.simpleMessage("مرحبًا"),
+    "hello": MessageLookupByLibrary.simpleMessage("مرحبا،"),
     "high": MessageLookupByLibrary.simpleMessage("عالي"),
     "invalid_credential": MessageLookupByLibrary.simpleMessage(
       "البريد الإلكتروني أو كلمة المرور غير صحيحة.",

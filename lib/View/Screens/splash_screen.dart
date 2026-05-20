@@ -25,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
     User? user = FirebaseAuth.instance.currentUser;
     if (mounted) {
-      if (user != null) {
+      if (user != null && user.emailVerified) {
         context.read<TaskProvider>().listenToTasks(user.uid);
         await context.read<UserDataProvider>().getUser(user.uid);
         Navigator.pushReplacementNamed(context, "/main");
