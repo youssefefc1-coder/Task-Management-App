@@ -5,15 +5,19 @@ import 'package:task_management_app/View/Widgets/custom_list_tile.dart';
 import 'package:task_management_app/ViewModel/task_provider.dart';
 import 'package:task_management_app/generated/l10n.dart';
 
-class UncompletedTasksScreen extends StatelessWidget {
-  const UncompletedTasksScreen({super.key});
+class DisplayTasksScreen extends StatelessWidget {
+  const DisplayTasksScreen({super.key, required this.isCompleted});
+  final bool isCompleted;
 
   @override
   Widget build(BuildContext context) {
     var tasks = context
         .watch<TaskProvider>()
         .tasks
-        .where((element) => element.isDone == false)
+        .where(
+          (element) =>
+              isCompleted ? element.isDone == true : element.isDone == false,
+        )
         .toList();
     return Scaffold(
       appBar: AppBar(
@@ -21,17 +25,16 @@ class UncompletedTasksScreen extends StatelessWidget {
         toolbarHeight: 65.h,
         leading: Padding(
           padding: const EdgeInsetsDirectional.only(start: 25),
-          child: GestureDetector(
-            onTap: () => Navigator.pop(context),
-            child: Icon(
+          child: IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: Icon(
               Icons.arrow_back_ios,
               color: Theme.of(context).colorScheme.primary,
-              size: 25.sp,
             ),
           ),
         ),
         title: Text(
-          S.of(context).uncompleted_tasks,
+          S.of(context).completed_tasks,
           style: TextStyle(
             fontSize: 20.sp,
             fontWeight: FontWeight.bold,
@@ -49,7 +52,7 @@ class UncompletedTasksScreen extends StatelessWidget {
       body: tasks.isEmpty
           ? Center(
               child: Text(
-                S.of(context).no_uncompleted_tasks,
+                S.of(context).no_completed_tasks,
                 style: TextStyle(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w400,
@@ -57,21 +60,21 @@ class UncompletedTasksScreen extends StatelessWidget {
                 ),
               ),
             )
-          : Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: SingleChildScrollView(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  physics: BouncingScrollPhysics(),
-                  itemCount: tasks.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(top: 12, bottom: 5),
-                      child: CustomListTile(task: tasks[index]),
-                    );
-                  },
-                ),
-              ),
+          : ListView.builder(
+              shrinkWrap: true,
+              physics: BouncingScrollPhysics(),
+              itemCount: tasks.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.only(
+                    top: 12,
+                    bottom: 5,
+                    left: 24,
+                    right: 24,
+                  ),
+                  child: CustomListTile(task: tasks[index]),
+                );
+              },
             ),
     );
   }

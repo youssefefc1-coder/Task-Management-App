@@ -437,27 +437,35 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                           );
                         }
 
-                        final newTaskId = await task.addTask(
-                          FirebaseAuth.instance.currentUser!.uid,
-                          TaskModel(
-                            title: titleController.text,
-                            description: descriptionController.text,
-                            deadline: finalDeadline,
-                            priority: _selectedPriority,
-                            category: _selectedCategory,
-                          ),
-                        );
-
-                        if (context.read<NotificationProvider>().isEnabled) {
-                          await NotificationService.scheduleDeadlineAlert(
+                        try {
+                          final newTaskId = await task.addTask(
+                            FirebaseAuth.instance.currentUser!.uid,
                             TaskModel(
-                              id: newTaskId,
                               title: titleController.text,
+                              description: descriptionController.text,
                               deadline: finalDeadline,
+                              priority: _selectedPriority,
+                              category: _selectedCategory,
+                            ),
+                          );
+
+                          if (context.read<NotificationProvider>().isEnabled) {
+                            await NotificationService.scheduleDeadlineAlert(
+                              TaskModel(
+                                id: newTaskId,
+                                title: titleController.text,
+                                deadline: finalDeadline,
+                              ),
+                            );
+                          }
+                          Navigator.pop(context);
+                        } catch (e) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(S.of(context).task_add_fail_err),
                             ),
                           );
                         }
-                        Navigator.pop(context);
                       }
                     },
                     child: Container(

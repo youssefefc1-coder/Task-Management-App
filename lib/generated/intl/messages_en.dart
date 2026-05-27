@@ -156,6 +156,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "study": MessageLookupByLibrary.simpleMessage("Study"),
     "system": MessageLookupByLibrary.simpleMessage("System"),
     "system_default": MessageLookupByLibrary.simpleMessage("System (Default)"),
+    "task_add_fail_err": MessageLookupByLibrary.simpleMessage(
+      "Failed to create task , Please try again later.",
+    ),
     "task_name": MessageLookupByLibrary.simpleMessage("TASK NAME"),
     "task_name_empty_er": MessageLookupByLibrary.simpleMessage(
       "Task Name can\'t be Empty",
@@ -168,6 +171,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "task_notification_title": MessageLookupByLibrary.simpleMessage(
       "⏰ Deadline in 1 hour",
+    ),
+    "task_update_fail_err": MessageLookupByLibrary.simpleMessage(
+      "Failed to update task , Please try again later.",
     ),
     "time": MessageLookupByLibrary.simpleMessage("TIME"),
     "too_many_requests": MessageLookupByLibrary.simpleMessage(

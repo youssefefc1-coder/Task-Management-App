@@ -160,6 +160,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "study": MessageLookupByLibrary.simpleMessage("الدراسة"),
     "system": MessageLookupByLibrary.simpleMessage("النظام"),
     "system_default": MessageLookupByLibrary.simpleMessage("النظام (افتراضي)"),
+    "task_add_fail_err": MessageLookupByLibrary.simpleMessage(
+      "فشل انشاء المهمة، يرجى المحاولة مرة أخرى لاحقًا.",
+    ),
     "task_name": MessageLookupByLibrary.simpleMessage("اسم المهمة"),
     "task_name_empty_er": MessageLookupByLibrary.simpleMessage(
       "اسم المهمة لا يمكن أن يكون فارغًا",
@@ -172,6 +175,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "task_notification_title": MessageLookupByLibrary.simpleMessage(
       "⏰ الموعد النهائي خلال ساعة واحدة",
+    ),
+    "task_update_fail_err": MessageLookupByLibrary.simpleMessage(
+      "فشل تحديث المهمة، يرجى المحاولة مرة أخرى لاحقًا.",
     ),
     "time": MessageLookupByLibrary.simpleMessage("الوقت"),
     "too_many_requests": MessageLookupByLibrary.simpleMessage(

@@ -487,7 +487,9 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                           Navigator.pop(context);
                         } catch (e) {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text("Failed to update task")),
+                            SnackBar(
+                              content: Text(S.of(context).task_update_fail_err),
+                            ),
                           );
                         }
                       }

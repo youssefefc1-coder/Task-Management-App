@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:task_management_app/Model/user_model.dart';
 import 'package:task_management_app/Model/task_model.dart';
+import 'package:task_management_app/View/Screens/Task%20Screens/display_tasks_screen.dart';
 import 'package:task_management_app/View/Widgets/category_filter_chip.dart';
 import 'package:task_management_app/View/Widgets/custom_list_tile.dart';
 import 'package:task_management_app/View/Widgets/stat_card.dart';
@@ -111,9 +112,12 @@ class _MainScreenState extends State<MainScreen> {
                         children: [
                           Expanded(
                             child: GestureDetector(
-                              onTap: () => Navigator.pushNamed(
+                              onTap: () => Navigator.push(
                                 context,
-                                '/completed_tasks',
+                                MaterialPageRoute(
+                                  builder: (_) =>
+                                      DisplayTasksScreen(isCompleted: true),
+                                ),
                               ),
                               child: StatCard(
                                 label: S.of(context).done,
@@ -129,9 +133,12 @@ class _MainScreenState extends State<MainScreen> {
 
                           Expanded(
                             child: GestureDetector(
-                              onTap: () => Navigator.pushNamed(
+                              onTap: () => Navigator.push(
                                 context,
-                                '/uncompleted_tasks',
+                                MaterialPageRoute(
+                                  builder: (_) =>
+                                      DisplayTasksScreen(isCompleted: false),
+                                ),
                               ),
 
                               child: StatCard(

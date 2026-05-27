@@ -5,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:task_management_app/Theme/app_theme.dart';
 import 'package:task_management_app/View/Screens/Task%20Screens/add_task_screen.dart';
-import 'package:task_management_app/View/Screens/Task%20Screens/completed_tasks_screen.dart';
 import 'package:task_management_app/Services/notification_service.dart';
 import 'package:task_management_app/View/Screens/Auth/login_screen.dart';
 import 'package:task_management_app/View/Screens/Auth/reset_pass_screen.dart';
@@ -14,7 +13,6 @@ import 'package:task_management_app/View/Screens/main_screen.dart';
 import 'package:task_management_app/View/Screens/settings_screen.dart';
 import 'package:task_management_app/View/Screens/splash_screen.dart';
 import 'package:task_management_app/View/Screens/Task%20Screens/task_screen.dart';
-import 'package:task_management_app/View/Screens/Task%20Screens/uncompleted_tasks_screen.dart';
 import 'package:task_management_app/ViewModel/locale_provider.dart';
 import 'package:task_management_app/ViewModel/notification_provider.dart';
 import 'package:task_management_app/ViewModel/task_provider.dart';
@@ -81,8 +79,6 @@ class MyApp extends StatelessWidget {
           '/task': (context) => TaskScreen(),
           '/add_task': (context) => AddTaskScreen(),
           '/settings': (context) => SettingsScreen(),
-          '/completed_tasks': (context) => CompletedTasksScreen(),
-          '/uncompleted_tasks': (context) => UncompletedTasksScreen(),
         },
         initialRoute: '/splash',
       ),

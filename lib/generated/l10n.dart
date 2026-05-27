@@ -554,6 +554,26 @@ class S {
     return Intl.message('Update Task', name: 'update_task', desc: '', args: []);
   }
 
+  /// `Failed to create task , Please try again later.`
+  String get task_add_fail_err {
+    return Intl.message(
+      'Failed to create task , Please try again later.',
+      name: 'task_add_fail_err',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to update task , Please try again later.`
+  String get task_update_fail_err {
+    return Intl.message(
+      'Failed to update task , Please try again later.',
+      name: 'task_update_fail_err',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Settings`
   String get settings {
     return Intl.message('Settings', name: 'settings', desc: '', args: []);

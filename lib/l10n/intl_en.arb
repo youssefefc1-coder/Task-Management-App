@@ -69,6 +69,8 @@
     "category" : "CATEGORY",
     "create_task" : "Create Task",
     "update_task" : "Update Task",
+    "task_add_fail_err" : "Failed to create task , Please try again later.",
+    "task_update_fail_err" : "Failed to update task , Please try again later.",
     "settings" : "Settings",
     "account" : "Account",
     "name" : "Name",
