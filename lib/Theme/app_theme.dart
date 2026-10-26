@@ -1,143 +1,148 @@
 import 'package:flutter/material.dart';
+import 'package:task_management_app/Theme/app_colors.dart';
 
 class AppTheme {
   static final lightTheme = ThemeData(
     brightness: Brightness.light,
-    scaffoldBackgroundColor: Colors.white,
+    scaffoldBackgroundColor: AppColors.secondaryColor,
 
     textSelectionTheme: TextSelectionThemeData(
-      cursorColor: Color(0xff021526),
-      selectionColor: Color(0xff021526),
-      selectionHandleColor: Color(0xff021526),
+      cursorColor: AppColors.primaryColor,
+      selectionColor: AppColors.primaryColor,
+      selectionHandleColor: AppColors.primaryColor,
     ),
 
     colorScheme: ColorScheme.light(
-      primary: Color(0xff021526),
-      secondary: Color(0xffFFFFFF),
-      onPrimary: Color(0xffFFEDD5),
-      onSecondary: Color(0xffC2410C),
-      tertiary: Color(0xffFBBF24),
-      onTertiary: Color(0xff78350F),
+      primary: AppColors.primaryColor,
+      secondary: AppColors.secondaryColor,
+      onPrimary: AppColors.onPrimary,
+      onSecondary: AppColors.onSecondary,
+      tertiary: AppColors.tertiary,
+      onTertiary: AppColors.onTertiary,
     ),
     inputDecorationTheme: InputDecorationTheme(
-      prefixIconColor: Color(0xff021526).withValues(alpha: 0.4),
-      suffixIconColor: Color(0xff021526).withValues(alpha: 0.4),
+      prefixIconColor: AppColors.primaryColor.withValues(alpha: 0.4),
+      suffixIconColor: AppColors.primaryColor.withValues(alpha: 0.4),
       border: OutlineInputBorder(
-        borderSide: BorderSide(color: Color(0xff021526)),
+        borderSide: BorderSide(color: AppColors.primaryColor),
       ),
       enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: Color(0xff021526)),
+        borderSide: BorderSide(color: AppColors.primaryColor),
       ),
       focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: Color(0xff021526)),
+        borderSide: BorderSide(color: AppColors.primaryColor),
       ),
       errorBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.red),
+        borderSide: BorderSide(color: AppColors.errorColor),
       ),
       focusedErrorBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.red),
+        borderSide: BorderSide(color: AppColors.errorColor),
       ),
-      errorStyle: TextStyle(color: Colors.red),
+      errorStyle: TextStyle(color: AppColors.errorColor),
     ),
 
     datePickerTheme: DatePickerThemeData(
-      backgroundColor: Colors.white,
-      headerBackgroundColor: Colors.white,
-      headerForegroundColor: Color(0xff021526),
+      backgroundColor: AppColors.secondaryColor,
+      headerBackgroundColor: AppColors.secondaryColor,
+      headerForegroundColor: AppColors.primaryColor,
       dayBackgroundColor: WidgetStateProperty.resolveWith((state) {
         if (state.contains(WidgetState.selected)) {
-          return Color(0xff021526);
+          return AppColors.primaryColor;
         } else {
           return Colors.transparent;
         }
       }),
       dayForegroundColor: WidgetStateProperty.resolveWith((state) {
         if (state.contains(WidgetState.selected)) {
-          return Colors.white;
+          return AppColors.secondaryColor;
         } else {
-          return Color(0xff021526);
+          return AppColors.primaryColor;
         }
       }),
     ),
 
     timePickerTheme: TimePickerThemeData(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.secondaryColor,
       cancelButtonStyle: ButtonStyle(
-        textStyle: WidgetStatePropertyAll(TextStyle(color: Color(0xff021526))),
+        textStyle: WidgetStatePropertyAll(
+          TextStyle(color: AppColors.primaryColor),
+        ),
       ),
       confirmButtonStyle: ButtonStyle(
-        textStyle: WidgetStatePropertyAll(TextStyle(color: Color(0xff021526))),
+        textStyle: WidgetStatePropertyAll(
+          TextStyle(color: AppColors.primaryColor),
+        ),
       ),
       hourMinuteTextColor: WidgetStateColor.resolveWith((state) {
         if (state.contains(WidgetState.selected)) {
-          return Colors.white;
+          return AppColors.secondaryColor;
         } else {
-          return Color(0xff021526);
+          return AppColors.primaryColor;
         }
       }),
       hourMinuteColor: WidgetStateColor.resolveWith((state) {
         if (state.contains(WidgetState.selected)) {
-          return Color(0xff021526);
+          return AppColors.primaryColor;
         } else {
-          return Colors.white;
+          return AppColors.secondaryColor;
         }
       }),
       hourMinuteShape: RoundedRectangleBorder(
         borderRadius: BorderRadiusGeometry.circular(10),
-        side: BorderSide(color: Color(0xff021526), width: 1.5),
+        side: BorderSide(color: AppColors.primaryColor, width: 1.5),
       ),
-      dialBackgroundColor: Colors.white,
-      dialHandColor: Color(0xff021526),
+      dialBackgroundColor: AppColors.secondaryColor,
+      dialHandColor: AppColors.primaryColor,
       dialTextColor: WidgetStateColor.resolveWith((state) {
         if (state.contains(WidgetState.selected)) {
-          return Colors.white;
+          return AppColors.secondaryColor;
         } else {
-          return Color(0xff021526);
+          return AppColors.primaryColor;
         }
       }),
       dayPeriodColor: WidgetStateColor.resolveWith((state) {
         if (state.contains(WidgetState.selected)) {
-          return Color(0xff021526);
+          return AppColors.primaryColor;
         } else {
-          return Colors.white;
+          return AppColors.secondaryColor;
         }
       }),
 
       dayPeriodTextColor: WidgetStateColor.resolveWith((state) {
         if (state.contains(WidgetState.selected)) {
-          return Colors.white;
+          return AppColors.secondaryColor;
         } else {
-          return Color(0xff021526);
+          return AppColors.primaryColor;
         }
       }),
     ),
 
     chipTheme: ChipThemeData(
-      selectedColor: Color(0xff021526),
-      backgroundColor: Color(0xffFFFFFF),
+      selectedColor: AppColors.primaryColor,
+      backgroundColor: AppColors.secondaryColor,
     ),
   );
 
   static final darkTheme = ThemeData(
     brightness: Brightness.dark,
-    scaffoldBackgroundColor: Color(0xff021526),
+    scaffoldBackgroundColor: AppColors.primaryColor,
     textSelectionTheme: TextSelectionThemeData(
-      cursorColor: Colors.white,
-      selectionColor: Colors.white,
-      selectionHandleColor: Colors.white,
+      cursorColor: AppColors.secondaryColor,
+      selectionColor: AppColors.secondaryColor,
+      selectionHandleColor: AppColors.secondaryColor,
     ),
 
     colorScheme: ColorScheme.dark(
-      primary: Color(0xffFFFFFF),
-      secondary: Color(0xff021526),
+      primary: AppColors.secondaryColor,
+      secondary: AppColors.primaryColor,
       onPrimary: Color(0xffFFEDD5),
-      onSecondary: Color(0xffC2410C),
-      tertiary: Color(0xffFBBF24),
-      onTertiary: Color(0xff78350F),
+      onSecondary: AppColors.onSecondary,
+      tertiary: AppColors.tertiary,
+      onTertiary: AppColors.onTertiary,
     ),
     inputDecorationTheme: InputDecorationTheme(
-      prefixIconColor: Color(0xffFFFFFF).withValues(alpha: 0.4),
-      suffixIconColor: Color(0xffFFFFFF).withValues(alpha: 0.4),
+      prefixIconColor: AppColors.secondaryColor.withValues(alpha: 0.4),
+      suffixIconColor: AppColors.secondaryColor.withValues(alpha: 0.4),
       border: OutlineInputBorder(
         borderSide: BorderSide(color: Color(0xff6B7280)),
       ),
@@ -148,94 +153,98 @@ class AppTheme {
         borderSide: BorderSide(color: Color(0xff6B7280)),
       ),
       errorBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.red),
+        borderSide: BorderSide(color: AppColors.errorColor),
       ),
       focusedErrorBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.red),
+        borderSide: BorderSide(color: AppColors.errorColor),
       ),
-      errorStyle: TextStyle(color: Colors.red),
+      errorStyle: TextStyle(color: AppColors.errorColor),
     ),
 
     datePickerTheme: DatePickerThemeData(
-      backgroundColor: Color(0xff021526),
-      headerBackgroundColor: Color(0xff021526),
-      headerForegroundColor: Colors.white,
+      backgroundColor: AppColors.primaryColor,
+      headerBackgroundColor: AppColors.primaryColor,
+      headerForegroundColor: AppColors.secondaryColor,
       dayBackgroundColor: WidgetStateProperty.resolveWith((state) {
         if (state.contains(WidgetState.selected)) {
-          return Colors.white;
+          return AppColors.secondaryColor;
         } else {
-          return Color(0xff021526);
+          return AppColors.primaryColor;
         }
       }),
       todayForegroundColor: WidgetStateProperty.resolveWith((states) {
         if (states.contains(WidgetState.selected)) {
-          return const Color(0xff021526);
+          return AppColors.primaryColor;
         }
-        return Colors.white;
+        return AppColors.secondaryColor;
       }),
       dayForegroundColor: WidgetStateProperty.resolveWith((state) {
         if (state.contains(WidgetState.selected)) {
-          return Color(0xff021526);
+          return AppColors.primaryColor;
         }
-        return Colors.white;
+        return AppColors.secondaryColor;
       }),
     ),
 
     timePickerTheme: TimePickerThemeData(
-      backgroundColor: Color(0xff021526),
+      backgroundColor: AppColors.primaryColor,
       cancelButtonStyle: ButtonStyle(
-        textStyle: WidgetStatePropertyAll(TextStyle(color: Colors.white)),
+        textStyle: WidgetStatePropertyAll(
+          TextStyle(color: AppColors.secondaryColor),
+        ),
       ),
       confirmButtonStyle: ButtonStyle(
-        textStyle: WidgetStatePropertyAll(TextStyle(color: Colors.white)),
+        textStyle: WidgetStatePropertyAll(
+          TextStyle(color: AppColors.secondaryColor),
+        ),
       ),
       hourMinuteTextColor: WidgetStateColor.resolveWith((state) {
         if (state.contains(WidgetState.selected)) {
-          return Color(0xff021526);
+          return AppColors.primaryColor;
         } else {
-          return Colors.white;
+          return AppColors.secondaryColor;
         }
       }),
       hourMinuteColor: WidgetStateColor.resolveWith((state) {
         if (state.contains(WidgetState.selected)) {
-          return Colors.white;
+          return AppColors.secondaryColor;
         } else {
-          return Color(0xff021526);
+          return AppColors.primaryColor;
         }
       }),
       hourMinuteShape: RoundedRectangleBorder(
         borderRadius: BorderRadiusGeometry.circular(10),
-        side: BorderSide(color: Colors.white, width: 1.5),
+        side: BorderSide(color: AppColors.secondaryColor, width: 1.5),
       ),
-      dialBackgroundColor: Color(0xff021526),
-      dialHandColor: Colors.white,
+      dialBackgroundColor: AppColors.primaryColor,
+      dialHandColor: AppColors.secondaryColor,
       dialTextColor: WidgetStateColor.resolveWith((state) {
         if (state.contains(WidgetState.selected)) {
-          return Color(0xff021526);
+          return AppColors.primaryColor;
         } else {
-          return Colors.white;
+          return AppColors.secondaryColor;
         }
       }),
       dayPeriodColor: WidgetStateColor.resolveWith((state) {
         if (state.contains(WidgetState.selected)) {
-          return Colors.white;
+          return AppColors.secondaryColor;
         } else {
-          return Color(0xff021526);
+          return AppColors.primaryColor;
         }
       }),
 
       dayPeriodTextColor: WidgetStateColor.resolveWith((state) {
         if (state.contains(WidgetState.selected)) {
-          return Color(0xff021526);
+          return AppColors.primaryColor;
         } else {
-          return Colors.white;
+          return AppColors.secondaryColor;
         }
       }),
     ),
 
     chipTheme: ChipThemeData(
-      selectedColor: Color(0xffFFFFFF),
-      backgroundColor: Color(0xff021526),
+      selectedColor: AppColors.secondaryColor,
+      backgroundColor: AppColors.primaryColor,
     ),
   );
 }
